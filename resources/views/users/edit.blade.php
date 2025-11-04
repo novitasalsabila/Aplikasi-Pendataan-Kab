@@ -1,0 +1,69 @@
+<x-app-layout>
+    <div class="max-w-3xl mx-auto py-8 px-6">
+        <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-100">✏️ Edit Pengguna</h2>
+
+        <form action="{{ route('users.update', $user) }}" method="POST" class="space-y-5 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+            @csrf
+            @method('PUT')
+
+            <div>
+                <label class="block font-medium mb-1">Nama</label>
+                <input type="text" name="name" value="{{ old('name', $user->name) }}" required class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label class="block font-medium mb-1">Email</label>
+                <input type="email" name="email" value="{{ old('email', $user->email) }}" required class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label class="block font-medium mb-1">NoTelepon</label>
+                <input type="phone" name="phone" value="{{ old('phone', $user->phone) }}" required class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label class="block font-medium mb-1">Jabatan Pengguna</label>
+                <input type="position" name="position" value="{{ old('position', $user->position) }}" required class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-medium mb-1">Password (kosongkan jika tidak diubah)</label>
+                    <input type="password" name="password" class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Konfirmasi Password</label>
+                    <input type="password" name="password_confirmation" class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+
+            <div>
+                <label class="block font-medium mb-1">Role</label>
+                <select name="role" required class="w-full border rounded p-2 dark:bg-gray-700">
+                    @foreach ($roles as $role)
+                        <option value="{{ $role }}" {{ $user->role === $role ? 'selected' : '' }}>
+                            {{ ucfirst($role) }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div>
+                <label class="block font-medium mb-1">OPD</label>
+                <select name="department_id" class="w-full border rounded p-2 dark:bg-gray-700">
+                    <option value="">-- Tidak Ada --</option>
+                    @foreach ($departments as $dept)
+                        <option value="{{ $dept->id }}" {{ $user->department_id == $dept->id ? 'selected' : '' }}>
+                            {{ $dept->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="flex justify-end space-x-3">
+                <a href="{{ route('users.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Kembali</a>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Perbarui</button>
+            </div>
+        </form>
+    </div>
+</x-app-layout>

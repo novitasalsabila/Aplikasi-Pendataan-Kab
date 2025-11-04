@@ -1,0 +1,97 @@
+<x-app-layout>
+    <div class="max-w-7xl mx-auto py-8 px-6">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">
+                Daftar Aplikasi
+            </h1>
+
+            {{-- Tombol tambah hanya untuk admin dan diskominfo --}}
+            @if(auth()->user()->role !== 'opd')
+                <a href="{{ route('applications.create') }}"
+                    class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition">
+                    + Tambah Aplikasi
+                </a>
+            @endif
+        </div>
+
+        <!-- Alert sukses -->
+        @if (session('success'))
+            <div class="mb-4 bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Tabel Data -->
+        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
+            <table class="min-w-full text-sm text-gray-700 dark:text-gray-300">
+                <thead class="bg-gray-50 dark:bg-gray-900">
+                    <tr>
+                        <th class="px-4 py-3 text-left">No</th>
+                        <th class="px-4 py-3 text-left">Nama</th>
+                        <th class="px-4 py-3 text-left">Kategori</th>
+                        <th class="px-4 py-3 text-left">Sensitivitas</th>
+                        <th class="px-4 py-3 text-left">OPD</th>
+                        <th class="px-4 py-3 text-left">Developer</th>
+                        <th class="px-4 py-3 text-left">Server</th>
+                        <th class="px-4 py-3 text-left">Status</th>
+                        <th class="px-4 py-3 text-left">Terakhir Update</th>
+                        <th class="px-4 py-3 text-center">Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                    @forelse ($applications as $index => $app)
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                            <td class="px-4 py-3">{{ $index + 1 }}</td>
+                            <td class="px-4 py-3 font-medium">{{ $app->name }}</td>
+                            <td class="px-4 py-3 capitalize">{{ $app->category }}</td>
+                            <td class="px-4 py-3 capitalize">{{ $app->data_sensitivity }}</td>
+                            <td class="px-4 py-3">{{ $app->department->name ?? '-' }}</td>
+                            <td class="px-4 py-3">{{ $app->developer->name ?? '-' }}</td>
+                            <td class="px-4 py-3">{{ $app->server->hostname ?? '-' }}</td>
+                            <td class="px-4 py-3 capitalize">{{ $app->status }}</td>
+                            <td class="px-4 py-3">
+                                {{ $app->last_update ? \Carbon\Carbon::parse($app->last_update)->format('d M Y') : '-' }}
+                            </td>
+
+                            <!-- Kolom Aksi -->
+                            <td class="px-4 py-3 text-center space-x-2">
+                                <a href="{{ route('applications.show', $app->id) }}"
+                                   class="text-blue-600 hover:text-blue-700 font-semibold">
+                                   Lihat
+                                </a>
+
+                                {{-- Tombol Edit & Hapus hanya untuk admin/diskominfo --}}
+                                @if(auth()->user()->role !== 'opd')
+                                    <a href="{{ route('applications.edit', $app->id) }}"
+                                       class="text-yellow-600 hover:text-yellow-700 font-semibold">
+                                       Edit
+                                    </a>
+
+                                    <form action="{{ route('applications.destroy', $app->id) }}" method="POST"
+                                          class="inline"
+                                          onsubmit="return confirm('Yakin ingin menghapus {{ $app->name }}?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                                class="text-red-600 hover:text-red-700 font-semibold">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="10" class="text-center py-4 text-gray-500 dark:text-gray-400">
+                                Belum ada data aplikasi.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</x-app-layout>
