@@ -60,11 +60,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // ==========================================================
 // ROLE: DISKOMINFO (Akses teknis terbatas)
 // ==========================================================
-Route::middleware(['auth', 'role:discominfo'])->group(function () {
+Route::middleware(['auth', 'role:diskominfo'])->group(function () {
+    Route::get('applications', [ApplicationController::class, 'index'])->name('applications.index');
+    Route::get('applications/{application}', [ApplicationController::class, 'show'])->name('applications.show');
     Route::resource('application_logs', ApplicationLogController::class)->except(['destroy']);
     Route::resource('application_findings', ApplicationFindingController::class)->only(['index', 'show', 'create', 'store']);
-    Route::get('applications', [ApplicationController::class, 'index'])->name('applications.index');
-
     Route::resource('application_documents', ApplicationDocumentController::class)->only(['index']);
     Route::get('application_documents/{id}/download', [ApplicationDocumentController::class, 'download'])
         ->name('application_documents.download');

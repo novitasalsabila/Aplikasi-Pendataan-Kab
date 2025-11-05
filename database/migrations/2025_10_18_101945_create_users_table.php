@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('password');
             
             // 🔽 Tambahan kolom untuk sistem pendataan aplikasi
-            $table->enum('role', ['admin', 'discominfo', 'opd'])->default('opd');
+            $table->enum('role', ['admin', 'diskominfo', 'opd'])->default('opd');
             $table->foreignId('department_id')->nullable()->constrained('departments')->nullOnDelete();
 
             $table->rememberToken();

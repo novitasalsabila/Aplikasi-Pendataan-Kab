@@ -8,34 +8,34 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  mixed  ...$roles
-     * @return mixed
-     */
     public function handle(Request $request, Closure $next, ...$roles)
     {
         $user = Auth::user();
 
-        // Jika belum login
+        // Kalau belum login
         if (!$user) {
             return redirect()->route('login');
         }
 
-        // Admin selalu punya akses penuh
-        if ($user->role === 'admin') {
+        $role = strtolower(trim($user->role));
+
+        // Admin = akses penuh
+        if ($role === 'admin') {
             return $next($request);
         }
 
-        // Cek apakah role user termasuk di daftar yang diizinkan
-        if (in_array(strtolower($user->role), array_map('strtolower', $roles))) {
+        // Diskominfo: perlakuan khusus, boleh akses semua "application" routes
+        if ($role === 'diskominfo' && str_starts_with($request->path(), 'applications')) {
             return $next($request);
         }
 
-        // Jika role tidak sesuai, tampilkan halaman error 403
+        // Kalau role cocok dengan yang diizinkan
+        $normalizedRoles = array_map(fn($r) => strtolower(trim($r)), $roles);
+        if (in_array($role, $normalizedRoles)) {
+            return $next($request);
+        }
+
+        // Kalau tidak cocok
         abort(403, 'Anda tidak memiliki akses ke halaman ini.');
     }
 }

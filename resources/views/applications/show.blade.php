@@ -1,62 +1,122 @@
 <x-app-layout>
-    <div class="max-w-4xl mx-auto py-8 px-6">
+    <div class="max-w-5xl mx-auto py-8 px-6 space-y-8">
 
         <!-- Header -->
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Detail Aplikasi</h1>
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                Detail Aplikasi
+            </h1>
             <a href="{{ route('applications.index') }}"
-               class="bg-gray-500 text-white px-3 py-1.5 rounded-lg shadow hover:bg-gray-600 transition text-sm">
-               Kembali
+               class="bg-gray-600 text-white px-4 py-2 rounded-lg text-sm shadow hover:bg-gray-700 transition">
+                ← Kembali
             </a>
         </div>
 
-        <!-- Card Utama -->
-        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-5 space-y-5">
-
-            <!-- Nama & Kategori -->
-            <div class="flex justify-between items-center mb-2">
+        <!-- Informasi Utama -->
+        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 space-y-4">
+            <div class="flex justify-between items-center">
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-100">{{ $application->name }}</h2>
-                <span class="px-3 py-0.5 bg-blue-100 text-blue-800 rounded-full text-xs font-medium capitalize">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full text-xs font-medium capitalize">
                     {{ $application->category }}
                 </span>
             </div>
 
-            <!-- Grid Informasi Aplikasi -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700 dark:text-gray-300 text-sm">
-                <div class="flex justify-between"><span class="font-medium">Sensitivitas:</span> <span>{{ $application->data_sensitivity }}</span></div>
-                <div class="flex justify-between"><span class="font-medium">OPD:</span> <span>{{ $application->department->name ?? '-' }}</span></div>
-                <div class="flex justify-between"><span class="font-medium">Status:</span> <span class="capitalize">{{ $application->status }}</span></div>
-                <div class="flex justify-between"><span class="font-medium">Terakhir Update:</span> <span>{{ $application->last_update ? \Carbon\Carbon::parse($application->last_update)->format('d M Y') : '-' }}</span></div>
-                <div class="flex justify-between"><span class="font-medium">Developer:</span> <span>{{ $application->developer->name ?? 'Tidak tersedia' }}</span></div>
-                <div class="flex justify-between"><span class="font-medium">Server:</span> <span>{{ $application->server->hostname ?? 'Tidak tersedia' }}</span></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700 dark:text-gray-300">
+                <p><strong>Sensitivitas:</strong> {{ ucfirst($application->data_sensitivity) }}</p>
+                <p><strong>Status:</strong> {{ ucfirst($application->status) }}</p>
+                <p><strong>Developer:</strong> {{ $application->developer->name ?? '-' }}</p>
+                <p><strong>OPD:</strong> {{ $application->department->name ?? '-' }}</p>
+                <p><strong>Server:</strong> {{ $application->server->hostname ?? '-' }}</p>
+                <p><strong>Update Terakhir:</strong> {{ $application->last_update ? \Carbon\Carbon::parse($application->last_update)->format('d M Y') : '-' }}</p>
             </div>
 
-            <!-- Deskripsi Aplikasi -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-3 text-gray-700 dark:text-gray-300 text-sm whitespace-pre-line">
-                <span class="font-medium">Deskripsi Aplikasi:</span>
-                <p class="mt-1">{{ $application->description ?? 'Tidak ada deskripsi tersedia.' }}</p>
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 text-sm text-gray-700 dark:text-gray-300">
+                <strong>Deskripsi:</strong>
+                <p class="mt-2 whitespace-pre-line">{{ $application->description ?? 'Tidak ada deskripsi tersedia.' }}</p>
             </div>
 
-            <!-- Tombol Aksi -->
             @if(auth()->user()->role !== 'opd')
-                <div class="flex space-x-2 mt-4 text-sm">
+                <div class="flex space-x-2">
                     <a href="{{ route('applications.edit', $application->id) }}"
-                       class="bg-yellow-500 text-white px-3 py-1.5 rounded-lg shadow hover:bg-yellow-600 transition">
-                        Edit
+                       class="bg-yellow-500 text-white px-3 py-1.5 rounded-lg shadow hover:bg-yellow-600 transition text-sm">
+                        ✏️ Edit
                     </a>
-
                     <form action="{{ route('applications.destroy', $application->id) }}" method="POST"
                           onsubmit="return confirm('Yakin ingin menghapus {{ $application->name }}?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                                class="bg-red-500 text-white px-3 py-1.5 rounded-lg shadow hover:bg-red-600 transition">
-                            Hapus
+                                class="bg-red-500 text-white px-3 py-1.5 rounded-lg shadow hover:bg-red-600 transition text-sm">
+                            🗑️ Hapus
                         </button>
                     </form>
                 </div>
             @endif
-
         </div>
+
+        <!-- Log Pengembangan -->
+        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-100">
+                🧰 Log Pengembangan
+            </h2>
+
+            @if($application->logs->isEmpty())
+                <p class="text-gray-500 dark:text-gray-400 text-sm">Belum ada log pengembangan.</p>
+            @else
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm border divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-900">
+                            <tr>
+                                <th class="px-4 py-2 text-left">Tanggal</th>
+                                <th class="px-4 py-2 text-left">Deskripsi</th>
+                                <th class="px-4 py-2 text-left">Dibuat Oleh</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                            @foreach($application->logs as $log)
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <td class="px-4 py-2">{{ \Carbon\Carbon::parse($log->date)->format('d M Y') }}</td>
+                                    <td class="px-4 py-2">{{ $log->description }}</td>
+                                    <td class="px-4 py-2">{{ $log->user->name ?? '-' }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+
+        <!-- Temuan -->
+        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+            <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-100">
+                ⚠️ Temuan Keamanan / Bug
+            </h2>
+
+            @if($application->findings->isEmpty())
+                <p class="text-gray-500 dark:text-gray-400 text-sm">Tidak ada temuan untuk aplikasi ini.</p>
+            @else
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm border divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-900">
+                            <tr>
+                                <th class="px-4 py-2 text-left">Tanggal</th>
+                                <th class="px-4 py-2 text-left">Kategori</th>
+                                <th class="px-4 py-2 text-left">Deskripsi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                            @foreach($application->findings as $finding)
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <td class="px-4 py-2">{{ \Carbon\Carbon::parse($finding->created_at)->format('d M Y') }}</td>
+                                    <td class="px-4 py-2 capitalize">{{ $finding->category ?? '-' }}</td>
+                                    <td class="px-4 py-2">{{ $finding->description ?? '-' }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+
     </div>
 </x-app-layout>

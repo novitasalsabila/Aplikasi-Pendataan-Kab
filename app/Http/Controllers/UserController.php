@@ -24,7 +24,7 @@ class UserController extends Controller
     public function create()
     {
         $departments = Department::all();
-        $roles = ['admin', 'discominfo', 'opd'];
+        $roles = ['admin', 'diskominfo', 'opd'];
         return view('users.create', compact('departments', 'roles'));
     }
 
@@ -39,7 +39,7 @@ class UserController extends Controller
             'phone' => 'nullable|string|max:30',
             'position' => 'nullable|string|max:100',
             'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|in:admin,discominfo,opd',
+            'role' => 'required|in:admin,diskominfo,opd',
             'department_id' => 'nullable|exists:departments,id',
         ]);
 
@@ -57,7 +57,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $departments = Department::all();
-        $roles = ['admin', 'discominfo', 'opd'];
+        $roles = ['admin', 'diskominfo', 'opd'];
         return view('users.edit', compact('user', 'departments', 'roles'));
     }
 
@@ -71,7 +71,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' . $user->id,
             'phone' => 'nullable|string|max:30',
             'position' => 'nullable|string|max:100',
-            'role' => 'required|in:admin,discominfo,opd',
+            'role' => 'required|in:admin,diskominfo,opd',
             'department_id' => 'nullable|exists:departments,id',
             'password' => 'nullable|string|min:6|confirmed',
         ]);

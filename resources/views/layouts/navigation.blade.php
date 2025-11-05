@@ -36,7 +36,7 @@
                             {{ __('Pengguna') }}
                         </x-nav-link>
 
-                    @elseif(auth()->user()->role === 'discominfo')
+                    @elseif(auth()->user()->role === 'diskominfo')
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
@@ -130,7 +130,7 @@
                 <x-responsive-nav-link :href="route('application_findings.index')">Temuan</x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('users.index')">Pengguna</x-responsive-nav-link>
 
-            @elseif(auth()->user()->role === 'discominfo')
+            @elseif(auth()->user()->role === 'diskominfo')
                 <x-responsive-nav-link :href="route('dashboard')">Dashboard</x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('applications.index')">Aplikasi Dikerjakan</x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('application_logs.index')">Log Pengembangan</x-responsive-nav-link>
