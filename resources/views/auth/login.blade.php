@@ -1,61 +1,79 @@
 <x-guest-layout>
-    <div class="w-full max-w-lg bg-white p-10 rounded-2xl shadow-xl"> {{-- ubah max-w-md jadi max-w-lg --}}
-        <h2 class="text-3xl font-bold text-center text-gray-800 mb-2">
-            Selamat Datang 👋
-        </h2>
-        <p class="text-center text-gray-500 mb-8">
-            Silakan masuk untuk melanjutkan
-        </p>
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
 
-            <!-- Email -->
-            <div class="mb-4">
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
-                    :value="old('email')" required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <img src="{{ asset('images/Logo-Kabupaten-Bantul.png') }}" 
+            alt="Logo Kabupaten Bantul"
+            class="mx-auto w-24 h-auto md:w-32 lg:w-40 object-contain" />
+
+        <h1 class="text-xl md:text-2xl font-bold text-gray-900 text-center" font-poppins>
+            Sistem Manajemen Aplikasi
+        </h1>
+
+
+        <!-- Email Address -->
+        <div>
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" placeholder="Masukkan Email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <!-- Password -->
+        <div class="mt-4 relative">
+            <x-input-label for="password" :value="__('Password')" />
+            <div class="relative">
+                <x-text-input id="password" placeholder="Masukkan Sandi" class="block mt-1 w-full"
+                            type="password"
+                            name="password"
+                            required autocomplete="current-password" />
+            
+            <!-- Ikon Mata -->
+                <img src="{{ asset('icons/eye.svg') }}" 
+                alt="Show Password" 
+                id="togglePassword"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer opacity-70 hover:opacity-100" />
             </div>
+            
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
 
-            <!-- Password -->
-            <div class="mb-4">
-                <x-input-label for="password" :value="__('Password')" />
-                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password"
-                    required autocomplete="current-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
+        <!-- Remember Me -->
+        <div class="block mt-4">
+            <label for="remember_me" class="inline-flex items-center">
+                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-100 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
+                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Ingat saya') }}</span>
+            </label>
+        </div>
 
-            <!-- Remember Me -->
-            <div class="flex items-center justify-between mb-6">
-                <label for="remember_me" class="flex items-center">
-                    <input id="remember_me" type="checkbox"
-                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
-                        name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Ingat saya') }}</span>
-                </label>
-
-                @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}"
-                        class="text-sm text-indigo-600 hover:text-indigo-800">
-                        Lupa password?
-                    </a>
-                @endif
-            </div>
-
-            <!-- Tombol -->
-                    <x-primary-button
-                        class="w-full justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition ease-in-out duration-150">
-                        {{ __('Masuk') }}
-                    </x-primary-button>
-
-            <!-- Link daftar -->
-            <p class="text-center text-sm text-gray-600 mt-6">
-                Belum punya akun?
-                <a href="{{ route('register') }}" class="text-indigo-600 hover:underline">
-                    Daftar sekarang
+        <div class="flex items-center justify-end mt-4 mb-2">
+            @if (Route::has('password.request'))
+                <a class="no-underline text-sm text-gray-700 dark:text-red-400 hover:text-gray-900 dark:hover:text-red-500 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
+                    {{ __('Lupa Sandi Anda?') }}
                 </a>
-            </p>
-        </form>
-    </div>
+            @endif
+        </div>
+
+        <x-primary-button size="md" class="w-full">
+                {{ __('Masuk') }}
+        </x-primary-button>
+    </form>
+
+    <!-- Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+
+        togglePassword.addEventListener('click', function () {
+            const isPassword = passwordInput.getAttribute('type') === 'password';
+            passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+            this.src = isPassword 
+                ? '{{ asset('icons/eye-off.svg') }}'  // ganti dengan ikon mata tertutup jika ada
+                : '{{ asset('icons/eye.svg') }}';
+        });
+    });
+    </script>
 </x-guest-layout>
