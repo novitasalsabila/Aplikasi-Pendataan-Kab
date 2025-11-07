@@ -86,18 +86,22 @@
             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Menu Diskominfo</p>
 
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                <img src="{{ asset('icons/dashboard.svg') }}" alt="Dashboard" class="w-5 h-5">
                 <i class="fa-solid fa-gauge"></i> {{ __('Dashboard') }}
             </x-nav-link>
 
             <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')">
+                <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi Dikerjakan" class="w-5 h-5">
                 <i class="fa-solid fa-layer-group"></i> {{ __('Aplikasi Dikerjakan') }}
             </x-nav-link>
 
             <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('application_logs.*')">
+                <img src="{{ asset('icons/activity.svg') }}" alt="Log Pengembangan" class="w-5 h-5">
                 <i class="fa-solid fa-code"></i> {{ __('Log Pengembangan') }}
             </x-nav-link>
 
             <x-nav-link :href="route('application_findings.index')" :active="request()->routeIs('application_findings.*')">
+                <img src="{{ asset('icons/warning.svg') }}" alt="Temuan" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Temuan') }}
             </x-nav-link>
 
