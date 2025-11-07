@@ -1,164 +1,145 @@
-
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                    </a>
-                </div>
-
-                <!-- Navigation Links (Role-Based) -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @if(auth()->user()->role === 'admin')
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')">
-                            {{ __('Aplikasi') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('developers.index')" :active="request()->routeIs('developers.*')">
-                            {{ __('Developers') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('departments.index')" :active="request()->routeIs('departments.*')">
-                            {{ __('OPD') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('application_logs.*')">
-                            {{ __('Log Pengembangan') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('application_findings.index')" :active="request()->routeIs('application_findings.*')">
-                            {{ __('Temuan') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
-                            {{ __('Pengguna') }}
-                        </x-nav-link>
-
-                    @elseif(auth()->user()->role === 'diskominfo')
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')">
-                            {{ __('Aplikasi Dikerjakan') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('application_logs.*')">
-                            {{ __('Log Pengembangan') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('application_findings.index')" :active="request()->routeIs('application_findings.*')">
-                            {{ __('Temuan') }}
-                        </x-nav-link>
-
-                    @elseif(auth()->user()->role === 'opd')
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')">
-                            {{ __('Aplikasi OPD') }}
-                        </x-nav-link>
-                    @endif
-                </div>
-            </div>
-
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium 
-                            rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 
-                            dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                          clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <!-- Profile -->
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Logout -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
-            </div>
-
-            <!-- Hamburger Menu -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 
-                               hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 
-                               focus:outline-none transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex"
-                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden"
-                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
+<nav 
+    x-ref="sidebar"
+    class="
+        {{-- MOBILE: Fixed menimpa seluruh layar, w-64, h-screen --}}
+        fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-xl border-r border-gray-100 h-screen
+        flex flex-col justify-between transition-transform duration-300 ease-in-out
+        
+        {{-- DESKTOP: Tetap w-64, relative, full height (w-64 = 256px) --}}
+        md:relative md:flex-shrink-0 md:translate-x-0 md:w-64 md:h-full-md
+    "
+    {{-- Mengontrol Transisi Sidebar (Meluncur dari Kiri ke Kanan) --}}
+    :class="{ 
+        'translate-x-0': open, 
+        '-translate-x-full': !open && isMobile,
+        'shadow-2xl': open && isMobile // Tambahkan shadow tebal di mobile saat terbuka
+    }"
+    @click.away="if(isMobile) open = false" 
+>
+     <!-- Header Sidebar (Logo + Tombol X) -->
+     <div class="flex items-center justify-between px-2 py-4 border-b border-gray-100">
+        <div class="flex items-center gap-3">
+            <img src="{{ asset('images/Logo-Kabupaten-Bantul.png') }}" class="w-8 h-auto" alt="Logo">
+            <span class="font-semibold text-gray-800 text-lg">Pendataan Aplikasi</span>
         </div>
+        
+        {{-- Tombol X untuk menutup (Hanya di Mobile) --}}
+        <button 
+            @click="open = false" 
+            class="p-2 rounded-md hover:bg-gray-100 transition md:hidden"
+        >
+            {{-- Close Icon X --}}
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            @if(auth()->user()->role === 'admin')
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">Dashboard</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('applications.index')">Aplikasi</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('developers.index')">Developers</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('departments.index')">OPD</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('application_logs.index')">Log Pengembangan</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('application_findings.index')">Temuan</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('users.index')">Pengguna</x-responsive-nav-link>
 
-            @elseif(auth()->user()->role === 'diskominfo')
-                <x-responsive-nav-link :href="route('dashboard')">Dashboard</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('applications.index')">Aplikasi Dikerjakan</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('application_logs.index')">Log Pengembangan</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('application_findings.index')">Temuan</x-responsive-nav-link>
+    <!-- Navigasi Utama -->
+    <div class="flex-1 overflow-y-auto px-3 py-4 text-sm h-screen">
+        @if(Auth::check() && auth()->user()->role === 'admin')
+            
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Menu Admin</p>
+            
+            {{-- Tambahkan @click="if(isMobile) open = false" agar menu tertutup setelah klik di mobile --}}
+            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
+                @click="if(isMobile) open = false">
+                <img src="{{ asset('icons/dashboard.svg') }}" alt="Dashboard" class="w-5 h-5">
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">Dashboard</span>
+            </x-nav-link>
 
-            @elseif(auth()->user()->role === 'opd')
-                <x-responsive-nav-link :href="route('dashboard')">Dashboard</x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('applications.index')">Aplikasi OPD</x-responsive-nav-link>
-            @endif
-        </div>
+            <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
+                @click="if(isMobile) open = false">
+                <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi" class="w-5 h-5">
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">Aplikasi Saya</span>
+            </x-nav-link>
 
-        <!-- Responsive Settings -->
-        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
+            <x-nav-link :href="route('developers.index')" :active="request()->routeIs('developers.*')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
+                @click="if(isMobile) open = false">
+                <img src="{{ asset('icons/developer.svg') }}" alt="Pengembang" class="w-5 h-5">
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">Pengembang</span>
+            </x-nav-link>
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">Profile</x-responsive-nav-link>
-                <form method="POST" action="{{ route('logout') }}">
+            <x-nav-link :href="route('departments.index')" :active="request()->routeIs('departments.*')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
+                @click="if(isMobile) open = false">
+                <img src="{{ asset('icons/opd.svg') }}" alt="OPD" class="w-5 h-5">
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">OPD / Department</span>
+            </x-nav-link>
+
+            <x-nav-link :href="route('application_findings.index')" :active="request()->routeIs('application_findings.*')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
+                @click="if(isMobile) open = false">
+                <img src="{{ asset('icons/warning.svg') }}" alt="Temuan" class="w-5 h-5">
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">Temuan / Bug</span>
+            </x-nav-link>
+
+            <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
+                @click="if(isMobile) open = false">
+                <img src="{{ asset('icons/user.svg') }}" alt="Pengguna" class="w-5 h-5">
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">Pengguna</span>
+            </x-nav-link>
+        @elseif(auth()->user()->role === 'diskominfo')
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Menu Diskominfo</p>
+
+            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                <i class="fa-solid fa-gauge"></i> {{ __('Dashboard') }}
+            </x-nav-link>
+
+            <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')">
+                <i class="fa-solid fa-layer-group"></i> {{ __('Aplikasi Dikerjakan') }}
+            </x-nav-link>
+
+            <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('application_logs.*')">
+                <i class="fa-solid fa-code"></i> {{ __('Log Pengembangan') }}
+            </x-nav-link>
+
+            <x-nav-link :href="route('application_findings.index')" :active="request()->routeIs('application_findings.*')">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Temuan') }}
+            </x-nav-link>
+
+        @elseif(auth()->user()->role === 'opd')
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Menu OPD</p>
+
+            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                <img src="{{ asset('icons/dashboard.svg') }}" alt="Dashboard" class="w-5 h-5">
+                <span>Dashboard</span>
+            </x-nav-link>
+
+            <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')">
+                <img src="{{ asset('icons/aplikasi.svg') }}" alt="Dashboard" class="w-5 h-5">
+                <span>Aplikasi Saya</span>
+            </x-nav-link>   
+        @endif
+    </div>
+
+    <!-- Profil User -->
+    <div class="border-t border-gray-100 p-4">
+        <div class="flex items-center justify-between gap-3">
+            <a href="{{ Auth::check() ? route('profile.edit') : '#' }}" class="flex items-center gap-3 group no-underline">
+                 @if(Auth::check())
+                    <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('images/profile-picture.png') }}" 
+                        class="w-9 h-9 rounded-full object-cover border border-gray-200" alt="User">
+                    <div>
+                        <p class="text-xs font-semibold text-gray-800 group-hover:text-blue-600 transition mt-2 mb-1">{{ Auth::user()->name }}</p>
+                        <p class="text-xs text-gray-500">{{ Auth::user()->role }}</p>
+                    </div>
+                @else
+                    <p class="text-sm text-gray-500">Guest</p>
+                @endif
+            </a>
+            @if(Auth::check())
+                <form method="POST" action="{{ route('logout') }}" id="logout-form">
                     @csrf
-                    <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault(); this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
+                    <button type="submit" id="logout-button" title="Logout" class="p-2 rounded-md bg-blue-50 hover:bg-blue-100 transition">
+                         {{-- Logout Icon --}}
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    </button>
                 </form>
-            </div>
+            @endif
         </div>
     </div>
 </nav>
