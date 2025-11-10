@@ -109,13 +109,13 @@
                         title: 'Konfirmasi Log Out',
                         text: "Apakah Anda yakin ingin keluar?",
                         showCancelButton: true,
-                        confirmButtonColor: '#1d4ed8', // Warna biru Tailwind (indigo-600)
-                        cancelButtonColor: '#d33',
+                        confirmButtonColor: '#000000', // Warna biru Tailwind (indigo-600)
+                        cancelButtonColor: '#E6E7EB',
                         confirmButtonText: 'Ya, Keluar',
                         cancelButtonText: 'Batal',
                         customClass: {
                             confirmButton: 'px-6 py-2 rounded-lg w-32',
-                            cancelButton: 'px-6 py-2 rounded-lg w-32 ml-2'
+                            cancelButton: 'px-6 py-2 rounded-lg w-32 ml-2 text-gray-600'
                         }
                     }).then((result) => {
                         if (result.isConfirmed) {
