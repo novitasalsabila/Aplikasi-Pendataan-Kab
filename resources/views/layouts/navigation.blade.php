@@ -105,6 +105,11 @@
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Temuan') }}
             </x-nav-link>
 
+            <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
+                <img src="{{ asset('icons/warning.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Versi Aplikasi') }}
+            </x-nav-link>
+
         @elseif(auth()->user()->role === 'opd')
             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Menu OPD</p>
 
