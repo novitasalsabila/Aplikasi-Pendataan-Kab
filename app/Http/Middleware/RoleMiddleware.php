@@ -25,9 +25,11 @@ class RoleMiddleware
         }
 
         // Diskominfo: perlakuan khusus, boleh akses semua "application" routes
-        if ($role === 'diskominfo' && str_starts_with($request->path(), 'applications')) {
-            return $next($request);
+// Diskominfo: boleh akses semua route yang diawali dengan "application"
+        if ($role === 'diskominfo' && str_starts_with($request->path(), 'application')) {
+             return $next($request);
         }
+
 
         // Kalau role cocok dengan yang diizinkan
         $normalizedRoles = array_map(fn($r) => strtolower(trim($r)), $roles);
