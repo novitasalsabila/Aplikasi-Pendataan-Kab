@@ -87,8 +87,6 @@ class ApplicationController extends Controller
         ]);
     }
 
-        Application::create($validated);
-
         return redirect()->route('applications.index')
             ->with('success', '✅ Data aplikasi berhasil ditambahkan.');
     }

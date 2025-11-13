@@ -20,7 +20,10 @@
                     Manajemen Aplikasi
                 </h1>
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
-                    {{ __('Daftar aplikasi yang dikelola ') }}  {{ auth()->user()->department->name }}
+                    {{ __('Daftar aplikasi yang dikelola ') }} 
+                    @if(auth()->user()->role !== 'admin')
+                     {{ ' oleh ' . (auth()->user()->department->name ?? 'Tidak ada departemen') }}
+              @endif
                 </p>
             </div>
         </div>
