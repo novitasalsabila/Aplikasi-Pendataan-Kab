@@ -69,6 +69,27 @@
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">OPD / Department</span>
             </x-nav-link>
 
+            <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('applications.*')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
+                @click="if(isMobile) open = false">
+                <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi" class="w-5 h-5">
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">Server</span>
+            </x-nav-link>
+
+            <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
+                @click="if(isMobile) open = false">
+                <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi" class="w-5 h-5">
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">Pengguna</span>
+            </x-nav-link>
+
+            <x-nav-link :href="route('developers.index')" :active="request()->routeIs('applications.*')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
+                @click="if(isMobile) open = false">
+                <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi" class="w-5 h-5">
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">Log Pengembangan</span>
+            </x-nav-link>
+
             <x-nav-link :href="route('application_findings.index')" :active="request()->routeIs('application_findings.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
@@ -80,8 +101,10 @@
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
                 <img src="{{ asset('icons/user.svg') }}" alt="Pengguna" class="w-5 h-5">
-                <span class="font-medium text-gray-700 group-hover:text-blue-600">Pengguna</span>
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">Integrasi</span>
             </x-nav-link>
+
+            
         @elseif(auth()->user()->role === 'diskominfo')
             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Menu Diskominfo</p>
 
