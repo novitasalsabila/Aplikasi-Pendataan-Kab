@@ -7,6 +7,8 @@ use App\Models\Department;
 use App\Models\Developer;
 use App\Models\Server;
 use Illuminate\Http\Request;
+use App\Models\ApplicationBackup;
+use Carbon\Carbon;
 
 class ApplicationController extends Controller
 {
@@ -71,6 +73,19 @@ class ApplicationController extends Controller
             'status' => 'required|in:aktif,nonaktif,maintenance',
             'last_update' => 'nullable|date',
         ]);
+            // Simpan data aplikasi
+    $application = Application::create($validated);
+
+    // Jika admin/diskominfo → buat catatan backup otomatis
+    if (in_array($user->role, ['admin', 'diskominfo'])) {
+        ApplicationBackup::create([
+            'application_id'   => $application->id,
+            'backup_date'      => Carbon::now(),
+            'backup_type'      => 'manual', // bisa kamu ubah jadi 'harian', 'mingguan', dll sesuai kebutuhan
+            'storage_location' => 'local-storage/backup-' . $application->id, // contoh lokasi penyimpanan
+            'verified_st'      => 'tidak',
+        ]);
+    }
 
         Application::create($validated);
 
@@ -119,6 +134,19 @@ class ApplicationController extends Controller
         ]);
 
         $application->update($validated);
+            // Jika admin atau diskominfo → catat backup otomatis
+    if (in_array($user->role, ['admin', 'diskominfo'])) {
+    ApplicationBackup::updateOrCreate(
+    ['application_id' => $application->id], // cari berdasarkan ID aplikasi
+    [
+        'backup_date'      => Carbon::now(),
+        'backup_type'      => 'manual',
+        'storage_location' => 'local-storage/update-backup-' . $application->id,
+        'verified_st'      => 'tidak',
+    ]
+);
+
+    }
 
         return redirect()->route('applications.index')
             ->with('success', 'Data aplikasi berhasil diperbarui.');
@@ -134,7 +162,7 @@ class ApplicationController extends Controller
         if ($user->role === 'opd') {
             abort(403, 'OPD tidak dapat memperbarui aplikasi.');
         }
-        
+
         $application->delete();
 
         return redirect()->route('applications.index')
