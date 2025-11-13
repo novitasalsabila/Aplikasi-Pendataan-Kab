@@ -19,12 +19,19 @@
                 <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">
                     Manajemen Aplikasi
                 </h1>
+<<<<<<< HEAD
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
                     {{ __('Daftar aplikasi yang dikelola ') }} 
                     @if(auth()->user()->role !== 'admin')
                      {{ ' oleh ' . (auth()->user()->department->name ?? 'Tidak ada departemen') }}
               @endif
                 </p>
+=======
+                {{ __('Daftar aplikasi yang dikelola ') }} 
+                    @if(auth()->user()->role !== 'admin')
+                     {{ ' oleh ' . (auth()->user()->department->name ?? 'Tidak ada departemen') }}
+                    @endif
+>>>>>>> e3db7f5 (Update tampilan index & navigation)
             </div>
         </div>
 

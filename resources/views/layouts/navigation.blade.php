@@ -87,6 +87,12 @@
                 <img src="{{ asset('icons/user.svg') }}" alt="Pengguna" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Pengguna</span>
             </x-nav-link>
+
+            <x-nav-link :href="route('application_backups.index')" :active="request()->routeIs('application_backups.*')">
+                <img src="{{ asset('icons/database.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Backups') }}
+            </x-nav-link>
+
         @elseif(auth()->user()->role === 'diskominfo')
             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Menu Diskominfo</p>
 
@@ -115,7 +121,7 @@
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Versi Aplikasi') }}
             </x-nav-link>
 
-            <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
+            <x-nav-link :href="route('application_backups.index')" :active="request()->routeIs('application_backups.*')">
                 <img src="{{ asset('icons/database.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Backups') }}
             </x-nav-link>
@@ -132,7 +138,7 @@
                 <img src="{{ asset('icons/aplikasi.svg') }}" alt="Dashboard" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Saya') }}
             </x-nav-link>
-            <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
+            <x-nav-link :href="route('application_backups.index')" :active="request()->routeIs('application_versions.*')">
                 <img src="{{ asset('icons/version.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Versi Aplikasi') }}
             </x-nav-link>   
