@@ -2,24 +2,9 @@
     <div class="max-w-7xl mx-auto py-8 px-6">
 
         <!-- Header -->
-<<<<<<< HEAD
-        <div class="flex justify-between items-center mb-6">
-            <div>
-            <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">
-                Manajemen Aplikasi
-            </h1>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
-                Daftar seluruh aplikasi yang dikelola Pemkab
-            </p>
-            </div>
-
-            {{-- Tombol tambah hanya untuk admin dan diskominfo --}}
-            @if(auth()->user()->role !== 'opd')
-=======
         <div class="relative mb-6 md:mt-0 sm:mt-20">
             <!-- Tombol kanan atas -->
            @if(auth()->user()->role !== 'opd')
->>>>>>> e96f52f587663a7ec957cc8947a03cca41bc3009
                 <a href="{{ route('applications.create') }}"
                     class="absolute top-0 right-0 bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition no-underline flex items-center gap-2">
                     <img src="{{ asset('icons/plus.svg') }}" alt="Tambah"
@@ -34,19 +19,13 @@
                 <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">
                     Manajemen Aplikasi
                 </h1>
-<<<<<<< HEAD
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
-                    {{ __('Daftar aplikasi yang dikelola ') }} 
-                    @if(auth()->user()->role !== 'admin')
-                     {{ ' oleh ' . (auth()->user()->department->name ?? 'Tidak ada departemen') }}
-              @endif
-                </p>
-=======
                 {{ __('Daftar aplikasi yang dikelola ') }} 
                     @if(auth()->user()->role !== 'admin')
                      {{ ' oleh ' . (auth()->user()->department->name ?? 'Tidak ada departemen') }}
                     @endif
->>>>>>> e3db7f5 (Update tampilan index & navigation)
+                </p>
+
             </div>
         </div>
 
@@ -110,15 +89,15 @@
             <table class="min-w-full text-xs text-gray-700 dark:text-gray-300">
                 <thead class="bg-gray-50 dark:bg-gray-900">
                     <tr>
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD
                         <th class="px-4 py-3 text-left">No</th>
-                        <th class="px-4 py-3 text-left">Nama Aplikasi</th>
-=======
+                        <th class="px-4 py-3 text-left">Nama Aplikasi</th> -->
+
                         <th class="px-3 py-3 text-left w-12">No</th>
                         <th class="px-4 py-3 text-left">Nama</th>
                         <th class="px-4 py-3 text-left">Kategori</th>
                         <th class="px-4 py-3 text-left">Sensitivitas</th>
->>>>>>> e96f52f587663a7ec957cc8947a03cca41bc3009
+
                         <th class="px-4 py-3 text-left">OPD</th>
                         <th class="px-4 py-3 text-left">Kategori</th>
                         <th class="px-4 py-3 text-left">Sensitivitas Data</th>
@@ -155,13 +134,6 @@
                                 {{ $app->last_update ? \Carbon\Carbon::parse($app->last_update)->format('d M Y') : '-' }}
                             </td>
 
-<<<<<<< HEAD
-                            <!-- Kolom Aksi -->
-                            <!-- <td class="px-4 py-3 text-center space-x-2">
-                                <a href="{{ route('applications.show', $app->id) }}"
-                                   class="text-blue-600 hover:text-blue-700 font-semibold">
-                                   Lihat
-=======
                         <!-- Kolom Aksi -->
                         <td class="px-3 py-3 text-center">
                             <div class="flex items-center justify-center divide-x divide-gray-300">
@@ -179,7 +151,6 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" 
                                             d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                     </svg>
->>>>>>> e96f52f587663a7ec957cc8947a03cca41bc3009
                                 </a>
 
                                 {{-- Tombol Edit & Hapus hanya untuk admin/diskominfo --}}
@@ -225,7 +196,7 @@
                                             </svg>
                                         </button>
                                     </form>
-<<<<<<< HEAD
+
                                 @endif
                             </td> -->
                             <td class="px-4 py-3 text-center space-x-3">
@@ -270,7 +241,7 @@
     @endif
 </td>
 
-=======
+
                                     <!-- Modal Konfirmasi -->
                                         <div id="confirmModal-{{ $app->id }}" 
                                             class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden items-center justify-center z-50">
