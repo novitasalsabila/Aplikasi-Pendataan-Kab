@@ -111,8 +111,13 @@
             </x-nav-link>
 
             <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
-                <img src="{{ asset('icons/warning.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/version.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Versi Aplikasi') }}
+            </x-nav-link>
+
+            <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
+                <img src="{{ asset('icons/database.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Backups') }}
             </x-nav-link>
 
         @elseif(auth()->user()->role === 'opd')
@@ -120,15 +125,15 @@
 
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 <img src="{{ asset('icons/dashboard.svg') }}" alt="Dashboard" class="w-5 h-5">
-                <span>Dashboard</span>
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Dashboard') }}
             </x-nav-link>
 
             <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')">
                 <img src="{{ asset('icons/aplikasi.svg') }}" alt="Dashboard" class="w-5 h-5">
-                <span>Aplikasi Saya</span>
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Saya') }}
             </x-nav-link>
             <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
-                <img src="{{ asset('icons/warning.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/version.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Versi Aplikasi') }}
             </x-nav-link>   
         @endif
@@ -139,8 +144,9 @@
         <div class="flex items-center justify-between gap-3">
             <a href="{{ Auth::check() ? route('profile.edit') : '#' }}" class="flex items-center gap-3 group no-underline">
                  @if(Auth::check())
-                    <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('images/profile-picture.png') }}" 
-                        class="w-9 h-9 rounded-full object-cover border border-gray-200" alt="User">
+                    {{-- <img src="{{ Auth::user()->profile_photo ? asset('storage/' . Auth::user()->profile_photo) : asset('images/profile-picture.png') }}" 
+                        class="w-9 h-9 rounded-full object-cover border border-gray-200" alt="User"> --}}
+                    <x-avatar :name="auth()->user()->name" size="9" />
                     <div>
                         <p class="text-xs font-semibold text-gray-800 group-hover:text-blue-600 transition mt-2 mb-1">{{ Auth::user()->name }}</p>
                         <p class="text-xs text-gray-500">{{ Auth::user()->role }}</p>

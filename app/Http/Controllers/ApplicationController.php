@@ -89,7 +89,7 @@ class ApplicationController extends Controller
         $application->update($validated);
 
         return redirect()->route('applications.index')
-            ->with('success', '✏️ Data aplikasi berhasil diperbarui.');
+            ->with('success', 'Data aplikasi berhasil diperbarui.');
     }
 
     /**
@@ -100,7 +100,7 @@ class ApplicationController extends Controller
         $application->delete();
 
         return redirect()->route('applications.index')
-            ->with('success', '🗑️ Data aplikasi berhasil dihapus.');
+            ->with('success', 'Data aplikasi berhasil dihapus.');
     }
         public function show($id)
     {

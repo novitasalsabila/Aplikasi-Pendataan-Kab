@@ -1,11 +1,34 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto py-8 px-6">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">📊 Riwayat Log Aplikasi</h1>
+        {{-- <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">Riwayat Log Aplikasi</h1>
             <a href="{{ route('application_logs.create') }}"
                class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">
                 + Tambah Log
             </a>
+        </div> --}}
+
+        <div class="relative mb-6 md:mt-0 sm:mt-20">
+            <!-- Tombol kanan atas -->
+           @if(auth()->user()->role == 'diskominfo')
+                <a href="{{ route('application_logs.create') }}"
+                    class="absolute top-0 right-0 bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition no-underline flex items-center gap-2">
+                    <img src="{{ asset('icons/plus.svg') }}" alt="Tambah"
+                        class="w-5 h-5 filter invert brightness-0">
+                    <span>Tambah Log</span>
+                </a>
+            @endif
+
+
+            <!-- Kiri: Judul dan deskripsi -->
+            <div>
+                <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">
+                    Riwayat Log Aplikasi
+                </h1>
+                <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
+                    {{ __('Log aplikasi yang dikelola ') }}  {{ auth()->user()->department->name }}
+                </p>
+            </div>
         </div>
 
         @if (session('success'))
@@ -14,11 +37,11 @@
             </div>
         @endif
 
-        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
+        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-x-auto">
             <table class="min-w-full text-sm text-gray-700 dark:text-gray-300">
                 <thead class="bg-gray-50 dark:bg-gray-900">
                     <tr>
-                        <th class="px-4 py-3">No</th>
+                        <th class="px-3 py-3">No</th>
                         <th class="px-4 py-3">Aplikasi</th>
                         <th class="px-4 py-3">Judul</th>
                         <th class="px-4 py-3">Jenis Perubahan</th>
@@ -32,7 +55,7 @@
                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                     @forelse ($logs as $index => $log)
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-                            <td class="px-4 py-3">{{ $index + 1 }}</td>
+                            <td class="px-3 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $log->application->name ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->title }}</td>
                             <td class="px-4 py-3 capitalize">{{ $log->change_type }}</td>
@@ -47,15 +70,65 @@
                                     {{ ucfirst($log->approved_st) }}
                                 </span>
                             </td>
-                            <td class="px-4 py-3 text-center space-x-2">
-                                <a href="{{ route('application_logs.edit', $log->id) }}"
-                                   class="text-yellow-600 hover:text-yellow-700 font-semibold">Edit</a>
-                                <form action="{{ route('application_logs.destroy', $log->id) }}" method="POST"
-                                      class="inline"
-                                      onsubmit="return confirm('Yakin ingin menghapus log ini?')">
-                                    @csrf @method('DELETE')
-                                    <button class="text-red-600 hover:text-red-700 font-semibold">Hapus</button>
-                                </form>
+                            <td class="px-3 py-3 text-center">
+                                <div class="flex items-center justify-center divide-x divide-gray-300"></div>
+                                    <a href="{{ route('application_logs.edit', $log->id) }}"
+                                    class="text-yellow-600 hover:text-yellow-700 font-semibold">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
+                                                stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                <path stroke-linecap="round" stroke-linejoin="round" 
+                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652
+                                                    L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18
+                                                    l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z
+                                                    M19.5 7.125 16.862 4.487M18 14v4.75
+                                                    A2.25 2.25 0 0 1 15.75 21H5.25
+                                                    A2.25 2.25 0 0 1 3 18.75V8.25
+                                                    A2.25 2.25 0 0 1 5.25 6H10" />
+                                            </svg>
+                                    </a>
+                                    <form  
+                                        action="{{ route('application_logs.destroy', $log->id) }}" method="POST"
+                                        class="inline"
+                                        onsubmit="return confirm('Yakin ingin menghapus log ini?')">
+                                        @csrf @method('DELETE')
+                                        <button type="button" 
+                                                onclick="openModal('{{ $log->id }}')" 
+                                                class="text-red-600 hover:text-red-700 font-semibold inline-flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
+                                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" 
+                                                        d="m14.74 9-.346 9m-4.788 0L9.26 9
+                                                        m9.968-3.21c.342.052.682.107 1.022.166
+                                                        m-1.022-.165L18.16 19.673
+                                                        a2.25 2.25 0 0 1-2.244 2.077H8.084
+                                                        a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79
+                                                        m14.456 0a48.108 48.108 0 0 0-3.478-.397
+                                                        m-12 .562c.34-.059.68-.114 1.022-.165
+                                                        m0 0a48.11 48.11 0 0 1 3.478-.397
+                                                        m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201
+                                                        a51.964 51.964 0 0 0-3.32 0
+                                                        c-1.18.037-2.09 1.022-2.09 2.201v.916
+                                                        m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                </svg>
+                                            </button>
+                                    </form>
+                                    <!-- Modal Konfirmasi -->
+                                    <div id="confirmModal-{{ $log->id }}" 
+                                        class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden items-center justify-center z-50">
+                                        <div class="bg-white rounded-xl shadow-lg p-6 w-auto text-center">
+                                        <h4 class="text-md font-semibold mb-2">Konfirmasi Hapus Log Aplikasi</h4>
+                                        <p class="text-lg text-gray-600 mb-5">Apakah kamu ingin menghapus Log aplikasi <strong>{{ $log->application->name ?? '-'  }}</strong>?</p>
+                                        <div class="flex justify-center gap-2">
+                                        <button onclick="confirmDelete('{{ $log->id }}')" 
+                                            class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium">
+                                            Ya, Hapus
+                                        </button>
+                                        <button onclick="closeModal('{{ $log->id }}')" 
+                                            class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg text-sm font-medium">
+                                            Batal
+                                        </button>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @empty

@@ -20,7 +20,7 @@
                     Manajemen Aplikasi
                 </h1>
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
-                    {{ __('Daftar aplikasi yang dikelola ') }} {{ Auth::user()->role }}
+                    {{ __('Daftar aplikasi yang dikelola ') }}  {{ auth()->user()->department->name }}
                 </p>
             </div>
         </div>
