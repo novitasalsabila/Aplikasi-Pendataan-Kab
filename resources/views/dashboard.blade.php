@@ -160,7 +160,7 @@
             />
 
             <x-stat-card 
-                color="green"
+                color="yellow"
                 title="Aktif"
                 :value="$activeApps"
                 detail="Log pengembangan tercatat"
