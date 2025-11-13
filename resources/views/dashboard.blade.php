@@ -15,6 +15,41 @@
 
         {{-- ADMIN: Jumlah Aplikasi per OPD --}}
         @if(auth()->user()->role === 'admin' && isset($appsPerDepartment))
+            {{-- STATISTIK (Grid 3 kolom) --}}
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 md:mt-0 sm:mt-20">
+            {{-- Total Aplikasi --}}
+            <x-stat-card 
+                color="blue"
+                title="Total Aplikasi"
+                :value="$totalApps"
+                detail="test"
+                icon="aplikasi"
+            />
+
+            <x-stat-card 
+                color="green"
+                title="OPD/Dinas"
+                :value="$activeApps"
+                detail="Perangkat daerah terdaftar"
+                icon="building"
+            />
+
+            <x-stat-card 
+                color="red"
+                title="Server & Pengguna"
+                :value="$activeApps"
+                detail="test"
+                icon="warning"
+            />
+
+            <x-stat-card 
+                color="green"
+                title="Temuan"
+                :value="$activeApps"
+                detail="test"
+                icon="trending-up"
+            />
+        </div>
             <x-dashboard-section title="📊 Jumlah Aplikasi per OPD">
                 <x-table>
                     <x-slot name="head">
@@ -37,7 +72,7 @@
         @if(auth()->user()->role === 'diskominfo')
         <h1 class="font-bold text-xl text-gray-800 leading-tight md:mt-0 sm:mt-20">
                     {{ __('Dashboard') }}
-                    {{ Auth::user()->role }}
+                    {{ auth()->user()->department->name }}
             </h1>
             <p class="text-sm text-gray-500 mt-0">Manajemen Aplikasi Dinas Anda</p>
             {{-- KONTEN --}
@@ -104,9 +139,10 @@
 
         {{-- OPD: Aplikasi Milik Sendiri --}}
         @if(auth()->user()->role === 'opd')
-            <h1 class="font-bold text-xl text-gray-800 leading-tight">
+            <h1 class="font-bold text-xl text-gray-800 leading-tight md:mt-0 sm:mt-20">
                     {{ __('Dashboard') }}
-                    {{ Auth::user()->role }}
+                    {{ auth()->user()->department->name }}
+
             </h1>
             <p class="text-sm text-gray-500 mt-0">Manajemen Aplikasi Dinas Anda</p>
             {{-- KONTEN --}}
