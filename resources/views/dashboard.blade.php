@@ -1,60 +1,76 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto py-8 px-6 space-y-6">
-       <div class="mb-2"> 
+       <!-- <div class="mb-2"> 
     <h1 class="text-4xl font-extrabold text-gray-900 dark:text-gray-100">
         Daftar Aplikasi
     </h1>  
-</div> 
+</div>  -->
 
-<div class="mb-4">  
+<!-- <div class="mb-4">  
     <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-300">
         Ringkasan Sistem Manajemen Aplikasi Pemkab
     </h2> 
-</div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+</div> -->
+        <!-- <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <x-stat-card color="blue" title="Total Aplikasi" :value="$totalApps" />
             <x-stat-card color="green" title="OPD/Dinas" :value="$activeApps" />
             <x-stat-card color="red" title="Server & Pengguna" :value="$inactiveApps" />
             <x-stat-card color="yellow" title="Temuan Bug" :value="$findingsCount" />
-        </div>
+        </div> -->
 
         {{-- ADMIN: Jumlah Aplikasi per OPD --}}
         @if(auth()->user()->role === 'admin' && isset($appsPerDepartment))
-<div>
+        <h1 class="font-bold text-xl text-gray-800 leading-tight md:mt-0 sm:mt-20">
+                    {{ __('Dashboard Admin') }}
+            </h1>
+            <p class="text-sm text-gray-500 mt-0">Manajemen Aplikasi OPD</p>
+            {{-- KONTEN --}
+        <div class="space-y-6 transition-all duration-300">
+
+        {{-- STATISTIK (Grid 3 kolom) --}}
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+            {{-- Total Aplikasi --}}
+            <x-stat-card 
+                color="blue"
+                title="Aplikasi Saya"
+                :value="$totalApps"
+                detail="Semua aplikasi OPD terdaftar"
+                icon="aplikasi"
+            />
+
+            <x-stat-card 
+                color="green"
+                title="Aktif"
+                :value="$activeApps"
+                detail="Log pengembangan tercatat"
+                icon="activity"
+            />
+
+            <x-stat-card 
+                color="red"
+                title="Temuan"
+                :value="$findingsCount"
+                detail="Perlu ditindak lanjut"
+                icon="warning"
+            />
+
+            <x-stat-card 
+                color="green"
+                title="Status Keseluruhan"
+                :value="$inactiveApps"
+                detail="Aplikasi berjalan normal"
+                icon="trending-up"
+            />
+        </div>
             <div class="flex gap-6"> 
+    
     {{-- Bagian kiri --}}
-    <!-- <div class="w-1/2">
-        <x-dashboard-section title="📊 Aktivitas Terbaru">
-            <x-table>
-                <x-slot name="head">
-                    <tr>
-                        <th>Nama OPD</th>
-                        <th>Jumlah Aplikasi</th>
-                    </tr>
-                </x-slot>
-                @foreach($appsPerDepartment as $dept)
-                    <tr>
-                        <td>{{ $dept->name }}</td>
-                        <td>{{ $dept->applications_count }}</td>
-                    </tr>
-                @endforeach
-            </x-table>
-        </x-dashboard-section>
-    </div> -->
     <div class="w-1/2">
     <x-dashboard-section title="📊 Aktivitas Terbaru">
         <x-table>
             <x-slot name="head">
-                <tr>
-                    <th>Penambahan Fitur Laporan Absensi</th> 
-                </tr>
+                
             </x-slot>
-
-            <!-- <tr>
-                <td>1</td>
-                <td>Penambahan Fitur Laporan Absensi</td>
-                <td>10 November 2025</td>
-            </tr> -->
             
         </x-table>
     </x-dashboard-section>
@@ -179,7 +195,7 @@
         @if(auth()->user()->role === 'opd')
             <h1 class="font-bold text-xl text-gray-800 leading-tight md:mt-0 sm:mt-20">
                     {{ __('Dashboard') }}
-                    {{ auth()->user()->department->name }}
+                    {{ auth()->user()->department->name ?? 'Tidak ada OPD' }}
 
             </h1>
             <p class="text-sm text-gray-500 mt-0">Manajemen Aplikasi Dinas Anda</p>
