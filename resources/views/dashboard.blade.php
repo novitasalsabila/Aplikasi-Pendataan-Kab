@@ -1,73 +1,4 @@
 <x-app-layout>
-<<<<<<< HEAD
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {{-- <div class="flex justify-end">
-            <p class="text-sm text-gray-600 dark:text-gray-400 italic">
-                Selamat datang, <span class="font-semibold text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</span>
-            </p>
-        </div>     --}}
-        {{-- Statistik Umum
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <x-stat-card color="blue" title="Total Aplikasi" :value="$totalApps" />
-            <x-stat-card color="green" title="Aktif" :value="$activeApps" />
-            <x-stat-card color="red" title="Nonaktif" :value="$inactiveApps" />
-            <x-stat-card color="yellow" title="Temuan Keamanan" :value="$findingsCount" />
-        </div> --}}
-
-        {{-- ADMIN: Jumlah Aplikasi per OPD --}}
-        @if(auth()->user()->role === 'admin' && isset($appsPerDepartment))
-            {{-- STATISTIK (Grid 3 kolom) --}}
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 md:mt-0 sm:mt-20">
-            {{-- Total Aplikasi --}}
-            <x-stat-card 
-                color="blue"
-                title="Total Aplikasi"
-                :value="$totalApps"
-                detail="test"
-                icon="aplikasi"
-            />
-
-            <x-stat-card 
-                color="green"
-                title="OPD/Dinas"
-                :value="$activeApps"
-                detail="Perangkat daerah terdaftar"
-                icon="building"
-            />
-
-            <x-stat-card 
-                color="red"
-                title="Server & Pengguna"
-                :value="$activeApps"
-                detail="test"
-                icon="warning"
-            />
-
-            <x-stat-card 
-                color="green"
-                title="Temuan"
-                :value="$activeApps"
-                detail="test"
-                icon="trending-up"
-            />
-        </div>
-            <x-dashboard-section title="📊 Jumlah Aplikasi per OPD">
-                <x-table>
-                    <x-slot name="head">
-                        <tr>
-                            <th>Nama OPD</th>
-                            <th>Jumlah Aplikasi</th>
-                        </tr>
-                    </x-slot>
-                    @foreach($appsPerDepartment as $dept)
-                        <tr>
-                            <td>{{ $dept->name }}</td>
-                            <td>{{ $dept->applications_count }}</td>
-                        </tr>
-                    @endforeach
-                </x-table>
-            </x-dashboard-section>
-=======
     <div class="max-w-7xl mx-auto py-8 px-6 space-y-6">
        <div class="mb-2"> 
     <h1 class="text-4xl font-extrabold text-gray-900 dark:text-gray-100">
@@ -173,7 +104,6 @@
 </div>
 
             
->>>>>>> f015f322e7ce2c78f6c82c184051a6fb960bc34f
         @endif
 
         {{-- DISKOMINFO: Aplikasi yang Dikerjakan --}}
