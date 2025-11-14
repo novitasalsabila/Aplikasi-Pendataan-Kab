@@ -95,16 +95,11 @@
                         <th class="px-4 py-3 text-left">Nama Aplikasi</th> -->
 
                         <th class="px-3 py-3 text-left w-12">No</th>
-                        <th class="px-4 py-3 text-left">Nama</th>
-                        <th class="px-4 py-3 text-left">Kategori</th>
-                        <th class="px-4 py-3 text-left">Sensitivitas</th>
-
+                        <th class="px-4 py-3 text-left">Nama Aplikasi</th>
                         <th class="px-4 py-3 text-left">OPD</th>
                         <th class="px-4 py-3 text-left">Kategori</th>
                         <th class="px-4 py-3 text-left">Sensitivitas Data</th>
                         <th class="px-4 py-3 text-left">Status</th>
-                        <!-- <th class="px-4 py-3 text-left">Developer</th> -->
-                        <!-- <th class="px-4 py-3 text-left">Server</th> -->
                         <th class="px-4 py-3 text-left">Terakhir Update</th>
                         <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
@@ -202,16 +197,6 @@
                             </td> 
                         
                             <td class="px-4 py-3 text-center space-x-3">
-    <!-- Tombol Lihat -->
-    <a href="{{ route('applications.show', $app->id) }}"
-       class="inline-block hover:scale-110 transition-transform">
-        <svg xmlns="http://www.w3.org/2000/svg" 
-             fill="currentColor" viewBox="0 0 24 24"
-             class="w-5 h-5 text-gray-800 hover:text-gray-600 inline">
-            <path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7Zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Z"/>
-            <circle cx="12" cy="12" r="2.5" fill="white"/>
-        </svg>
-    </a>
 
     {{-- Tombol Edit & Hapus hanya untuk admin/diskominfo --}}
     @if(auth()->user()->role !== 'opd')
