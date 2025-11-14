@@ -198,7 +198,8 @@
                                     </form>
 
                                 @endif
-                            </td> -->
+                            </td> 
+                        
                             <td class="px-4 py-3 text-center space-x-3">
     <!-- Tombol Lihat -->
     <a href="{{ route('applications.show', $app->id) }}"
@@ -259,11 +260,9 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endif
+                                        </div>         
                                 </div>
                             </td>
->>>>>>> e96f52f587663a7ec957cc8947a03cca41bc3009
                         </tr>
                     @empty
                         <tr>
