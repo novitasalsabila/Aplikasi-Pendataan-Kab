@@ -126,9 +126,9 @@
         @if(auth()->user()->role === 'diskominfo')
         <h1 class="font-bold text-xl text-gray-800 leading-tight md:mt-0 sm:mt-20">
                     {{ __('Dashboard') }}
-                    {{ auth()->user()->department->name }}
+                    {{ auth()->user()->department->name ?? 'Tidak ada OPD' }}
             </h1>
-            <p class="text-sm text-gray-500 mt-0">Manajemen Aplikasi Dinas Anda</p>
+            <p class="text-sm text-gray-500 mt-0">Daftar seluruh aplikasi yang dikelola Pemkab</p>
             {{-- KONTEN --}
         <div class="space-y-6 transition-all duration-300">
 
