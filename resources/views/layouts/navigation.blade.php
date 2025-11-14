@@ -76,7 +76,7 @@
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Server</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')" 
+            <x-nav-link :href="route('users.index')" :active="request()->routeIs('applications.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
                 <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi" class="w-5 h-5">
