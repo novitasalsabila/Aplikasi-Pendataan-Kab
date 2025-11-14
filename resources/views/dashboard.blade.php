@@ -1,4 +1,5 @@
 <x-app-layout>
+<<<<<<< HEAD
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {{-- <div class="flex justify-end">
             <p class="text-sm text-gray-600 dark:text-gray-400 italic">
@@ -66,6 +67,113 @@
                     @endforeach
                 </x-table>
             </x-dashboard-section>
+=======
+    <div class="max-w-7xl mx-auto py-8 px-6 space-y-6">
+       <div class="mb-2"> 
+    <h1 class="text-4xl font-extrabold text-gray-900 dark:text-gray-100">
+        Daftar Aplikasi
+    </h1>  
+</div> 
+
+<div class="mb-4">  
+    <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-300">
+        Ringkasan Sistem Manajemen Aplikasi Pemkab
+    </h2> 
+</div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <x-stat-card color="blue" title="Total Aplikasi" :value="$totalApps" />
+            <x-stat-card color="green" title="OPD/Dinas" :value="$activeApps" />
+            <x-stat-card color="red" title="Server & Pengguna" :value="$inactiveApps" />
+            <x-stat-card color="yellow" title="Temuan Bug" :value="$findingsCount" />
+        </div>
+
+        {{-- ADMIN: Jumlah Aplikasi per OPD --}}
+        @if(auth()->user()->role === 'admin' && isset($appsPerDepartment))
+<div>
+            <div class="flex gap-6"> 
+    {{-- Bagian kiri --}}
+    <!-- <div class="w-1/2">
+        <x-dashboard-section title="📊 Aktivitas Terbaru">
+            <x-table>
+                <x-slot name="head">
+                    <tr>
+                        <th>Nama OPD</th>
+                        <th>Jumlah Aplikasi</th>
+                    </tr>
+                </x-slot>
+                @foreach($appsPerDepartment as $dept)
+                    <tr>
+                        <td>{{ $dept->name }}</td>
+                        <td>{{ $dept->applications_count }}</td>
+                    </tr>
+                @endforeach
+            </x-table>
+        </x-dashboard-section>
+    </div> -->
+    <div class="w-1/2">
+    <x-dashboard-section title="📊 Aktivitas Terbaru">
+        <x-table>
+            <x-slot name="head">
+                <tr>
+                    <th>Penambahan Fitur Laporan Absensi</th> 
+                </tr>
+            </x-slot>
+
+            <!-- <tr>
+                <td>1</td>
+                <td>Penambahan Fitur Laporan Absensi</td>
+                <td>10 November 2025</td>
+            </tr> -->
+            
+        </x-table>
+    </x-dashboard-section>
+</div>
+
+
+    {{-- Bagian kanan --}}
+    <div class="w-1/2">
+        <x-dashboard-section title="📈 Temuan Terbaru">
+            <p>Isi konten di sini, misalnya log aktivitas atau grafik bar chart.</p>
+        </x-dashboard-section>
+    </div>
+</div>
+
+    {{-- Log Aktivitas Terakhir --}}
+       <x-dashboard-section title="Distribusi Aplikasi per OPD">
+    @php
+        // Contoh data: bisa diganti dengan data real dari database
+        $data = [
+            ['opd' => 'Dinas Pendidikan', 'jumlah' => 40],
+            ['opd' => 'Dinas Kesehatan', 'jumlah' => 25],
+            ['opd' => 'Dinas Pertanian', 'jumlah' => 20],
+            ['opd' => 'Dinas Perhubungan', 'jumlah' => 15],
+        ];
+
+        $total = collect($data)->sum('jumlah');
+    @endphp
+
+    @forelse ($data as $item)
+        @php
+            $persen = ($total > 0) ? round(($item['jumlah'] / $total) * 100, 1) : 0;
+        @endphp
+
+        <div class="mb-4">
+            <div class="flex justify-between mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <span>{{ $item['opd'] }}</span>
+                <span>{{ $persen }}%</span>
+            </div>
+            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                <div class="bg-blue-500 h-3 rounded-full" style="width: {{ $persen }}%"></div>
+            </div>
+        </div>
+    @empty
+        <p class="text-gray-500 dark:text-gray-400">Belum ada data OPD.</p>
+    @endforelse
+</x-dashboard-section>
+</div>
+
+            
+>>>>>>> f015f322e7ce2c78f6c82c184051a6fb960bc34f
         @endif
 
         {{-- DISKOMINFO: Aplikasi yang Dikerjakan --}}
