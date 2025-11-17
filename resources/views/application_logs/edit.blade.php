@@ -1,6 +1,36 @@
 <x-app-layout>
-    <div class="max-w-4xl mx-auto py-8 px-6">
-        <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-100">✏️ Edit Log Aplikasi</h2>
+    <div class="max-w-4xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
+       <div class="flex items-start gap-3">
+    {{-- Tombol panah kembali --}}
+    <button type="button"
+            onclick="history.back()"
+            class="mt-1 inline-flex items-center justify-center p-1
+                   text-gray-700 hover:text-gray-900
+                   dark:text-gray-200 dark:hover:text-white
+                   rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2" 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
+        </svg>
+    </button>
+
+    {{-- Judul + teks bawah --}}
+    <div>
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+            Tambah Log Pengembangan Aplikasi
+        </h2>
+        <p class="text-sm text-gray-500">
+            {{ __('Lengkapi informasi aplikasi di bawah ini.') }}
+        </p>
+    </div>
+</div>
 
         <form action="{{ route('application_logs.update', $log->id) }}" method="POST"
               class="space-y-5 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
