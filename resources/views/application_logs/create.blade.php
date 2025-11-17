@@ -38,7 +38,7 @@
 
             {{-- Aplikasi --}}
             <div>
-                <label class="block font-medium mb-1">Aplikasi</label>
+                <label class="block font-medium mb-1">Nama Aplikasi</label>
                 <select name="application_id" required
                         class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
                     <option value="">-- Pilih Aplikasi --</option>
@@ -51,12 +51,20 @@
 
             {{-- Judul --}}
             <div>
-                <label class="block font-medium mb-1">Judul</label>
+                <label class="block font-medium mb-1">Judul Perubahan</label>
                 <input type="text" name="title" required
                        placeholder="Contoh: Penambahan fitur laporan bulanan"
                        class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
             </div>
 
+            {{-- Deskripsi --}}
+            <div>
+                <label class="block font-medium mb-1">Deskripsi</label>
+                <textarea name="description" rows="4"
+                          placeholder="Contoh: Memperbaiki error validasi data user pada halaman registrasi."
+                          class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+            
             {{-- Jenis Perubahan --}}
             <div>
                 <label class="block font-medium mb-1">Jenis Perubahan</label>
@@ -78,19 +86,11 @@
                            class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div>
-                    <label class="block font-medium mb-1">Tanggal</label>
+                    <label class="block font-medium mb-1">Tanggal Perubahan</label>
                     <input type="date" name="date"
                            class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
                     <p class="text-xs text-gray-500 mt-1">Contoh: 2025-10-20</p>
                 </div>
-            </div>
-
-            {{-- Deskripsi --}}
-            <div>
-                <label class="block font-medium mb-1">Deskripsi</label>
-                <textarea name="description" rows="4"
-                          placeholder="Contoh: Memperbaiki error validasi data user pada halaman registrasi."
-                          class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500"></textarea>
             </div>
 
             {{-- Reviewer & Status Persetujuan --}}
@@ -115,7 +115,7 @@
                     <p class="text-xs text-gray-500 mt-1">Contoh: Pilih “Pending” jika masih menunggu verifikasi.</p>
                 </div>
             </div>
-            
+
             {{-- Tombol --}}
             <div class="flex justify-end space-x-3">
                 <a href="{{ route('application_logs.index') }}"
