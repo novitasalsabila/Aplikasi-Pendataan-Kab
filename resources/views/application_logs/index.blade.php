@@ -25,9 +25,12 @@
                 <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">
                     Riwayat Log Aplikasi
                 </h1>
-                <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
-                    {{ __('Log aplikasi yang dikelola ') }}  {{ auth()->user()->department->name }}
-                </p>
+@if(auth()->user()->role === 'opd')
+    <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
+        Log aplikasi yang dikelola 
+        {{ auth()->user()->department->name ?? 'Tidak ada departemen' }}
+    </p>
+@endif
             </div>
         </div>
 
