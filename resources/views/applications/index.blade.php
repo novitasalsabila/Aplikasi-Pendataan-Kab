@@ -31,6 +31,8 @@
         </div>
 
         <!-- Search dan Filter -->
+<!-- Search + Filter dalam 1 kotak -->
+<div class="p-4 bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700 mb-6">
         <div class="flex flex-col sm:flex-row sm:items-center mb-6 gap-3 w-full">
             <!-- Form Search & Filter -->
             <form action="{{ route('applications.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
@@ -78,6 +80,7 @@
                 </div>
             </form>
         </div>
+</div>
         <!-- Alert sukses -->
         @if (session('success'))
             <div class="mb-4 bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded">

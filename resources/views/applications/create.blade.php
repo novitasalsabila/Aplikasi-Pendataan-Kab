@@ -11,7 +11,6 @@
                 <input type="text" name="name" required
                        class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
             </div>
-
             <div>
                 <label class="block font-medium mb-1">Deskripsi</label>
                 <textarea name="description" rows="3"
@@ -77,6 +76,7 @@
                         <option value="nonaktif">Nonaktif</option>
                         <option value="maintenance">Maintenance</option>
                     </select>
+                    
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Terakhir Update</label>
@@ -93,4 +93,5 @@
             </div>
         </form>
     </div>
+    
 </x-app-layout>
