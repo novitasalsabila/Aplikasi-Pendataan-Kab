@@ -5,7 +5,6 @@
         <form action="{{ route('applications.store') }}" method="POST"
               class="space-y-5 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
             @csrf
-
             <div>
                 <label class="block font-medium mb-1">Nama Aplikasi</label>
                 <input type="text" name="name" required
