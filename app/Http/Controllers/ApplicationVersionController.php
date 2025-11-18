@@ -13,7 +13,21 @@ class ApplicationVersionController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
+
+    // Jika role OPD → tampilkan hanya versi aplikasi milik departemen OPD
+    if ($user->role === 'opd') {
+        $versions = ApplicationVersion::with('application')
+            ->whereHas('application', function ($q) use ($user) {
+                $q->where('department_id', $user->department_id);
+            })
+            ->latest()
+            ->get();
+    } 
+    // Selain OPD → tampilkan semua
+    else {
         $versions = ApplicationVersion::with('application')->latest()->get();
+    }
         return view('application_versions.index', compact('versions'));
     }
 
