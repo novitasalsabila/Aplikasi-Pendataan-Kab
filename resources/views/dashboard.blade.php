@@ -124,11 +124,11 @@
 
         {{-- DISKOMINFO: Aplikasi yang Dikerjakan --}}
         @if(auth()->user()->role === 'diskominfo')
-        <h1 class="font-bold text-xl text-gray-800 leading-tight md:mt-0 sm:mt-20">
+        <h1 class="font-bold text-2xl text-gray-800 leading-tight md:mt-0 sm:mt-20">
                     {{ __('Dashboard') }}
                     {{ auth()->user()->department->name ?? 'Tidak ada OPD' }}
             </h1>
-            <p class="text-sm text-gray-500 mt-0">Daftar seluruh aplikasi yang dikelola Pemkab</p>
+            <p class="text-md text-gray-500 mt-0">Daftar seluruh aplikasi yang dikelola Pemkab</p>
             {{-- KONTEN --}
         <div class="space-y-6 transition-all duration-300">
 
@@ -147,8 +147,16 @@
                 color="green"
                 title="Aktif"
                 :value="$activeApps"
-                detail="Log pengembangan tercatat"
+                detail="Aplikasi berjalan normal"
                 icon="activity"
+            />
+
+            <x-stat-card 
+                color="yellow"
+                title="Non Aktif"
+                :value="$inactiveApps"
+                detail="Aplikasi tidak aktif"
+                icon="square-x"
             />
 
             <x-stat-card 
@@ -157,14 +165,6 @@
                 :value="$findingsCount"
                 detail="Perlu ditindak lanjut"
                 icon="warning"
-            />
-
-            <x-stat-card 
-                color="green"
-                title="Status Keseluruhan"
-                :value="$inactiveApps"
-                detail="Aplikasi berjalan normal"
-                icon="trending-up"
             />
         </div>
             <x-dashboard-section title="Aplikasi yang Sedang Dikerjakan">
@@ -193,12 +193,12 @@
 
         {{-- OPD: Aplikasi Milik Sendiri --}}
         @if(auth()->user()->role === 'opd')
-            <h1 class="font-bold text-xl text-gray-800 leading-tight md:mt-0 sm:mt-20">
+            <h1 class="font-bold text-2xl text-gray-800 leading-tight md:mt-0 sm:mt-20">
                     {{ __('Dashboard') }}
                     {{ auth()->user()->department->name ?? 'Tidak ada OPD' }}
 
             </h1>
-            <p class="text-sm text-gray-500 mt-0">Manajemen Aplikasi Dinas Anda</p>
+            <p class="text-md text-gray-500 mt-0">Manajemen Aplikasi Dinas Anda</p>
             {{-- KONTEN --}}
         <div class="space-y-6 transition-all duration-300">
 
@@ -214,11 +214,19 @@
             />
 
             <x-stat-card 
-                color="yellow"
+                color="green"
                 title="Aktif"
                 :value="$activeApps"
-                detail="Log pengembangan tercatat"
+                detail="Aplikasi berjalan normal"
                 icon="activity"
+            />
+            
+            <x-stat-card 
+                color="yellow"
+                title="Non Aktif"
+                :value="$inactiveApps"
+                detail="Aplikasi tidak aktif"
+                icon="trending-up"
             />
 
             <x-stat-card 
@@ -227,14 +235,6 @@
                 :value="$findingsCount"
                 detail="Perlu ditindak lanjut"
                 icon="warning"
-            />
-
-            <x-stat-card 
-                color="green"
-                title="Status Keseluruhan"
-                :value="$inactiveApps"
-                detail="Aplikasi berjalan normal"
-                icon="trending-up"
             />
         </div>
             <x-dashboard-section title="Aplikasi OPD Anda">
