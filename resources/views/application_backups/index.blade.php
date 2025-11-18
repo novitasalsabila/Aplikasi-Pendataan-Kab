@@ -37,11 +37,15 @@
                         <th class="px-4 py-3 text-left">Tipe Backup</th>
                         <th class="px-4 py-3 text-left">Lokasi Penyimpanan</th>
                         <th class="px-4 py-3 text-left">Terverifikasi</th>
+                        {{-- Kolom Aksi hanya untuk admin --}}
+                        @if (auth()->user()?->role === 'admin')
+                            <th class="px-4 py-3 text-left">Aksi</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                     @forelse ($backups as $index => $b)
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition align-top">
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3 font-medium">{{ $b->application->name ?? '-' }}</td>
                             <td class="px-4 py-3">{{ \Carbon\Carbon::parse($b->backup_date)->format('d M Y H:i') }}</td>
@@ -73,6 +77,28 @@
                                         Tidak
                                     </span>
                                 @endif
+                            </td>
+                            <td class="px-4 py-2 flex items-center justify-center">
+                                {{-- Tombol Edit (icon pensil) --}}
+                                <a href="{{ route('application_backups.edit', $b->id) }}"
+                                class="inline-flex items-center justify-center p-1.5 rounded
+                                        text-yellow-500 hover:text-yellow-600 hover:bg-yellow-50
+                                        transition"
+                                title="Edit temuan">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.5"
+                                        class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652
+                                            L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18
+                                            l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z
+                                            M19.5 7.125 16.862 4.487M18 14v4.75
+                                            A2.25 2.25 0 0 1 15.75 21H5.25
+                                            A2.25 2.25 0 0 1 3 18.75V8.25
+                                            A2.25 2.25 0 0 1 5.25 6H10" />
+                                    </svg>
+                                </a>
                             </td>
                         </tr>
                     @empty
