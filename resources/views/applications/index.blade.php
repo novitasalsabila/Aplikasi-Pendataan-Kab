@@ -223,4 +223,18 @@
             </table>
         </div>
     </div>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.querySelector('input[name="search"]');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            if (this.value === '') {
+                this.form.submit(); 
+            }
+        });
+    }
+});
+</script>
+
 </x-app-layout>

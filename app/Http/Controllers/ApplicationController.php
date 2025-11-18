@@ -17,19 +17,41 @@ class ApplicationController extends Controller
     {
     $user = auth()->user();
 
+    // ambil nilai filter
+    $search   = request('search');
+    $status   = request('status');
+    $kategori = request('kategori');
+
     // Kalau role OPD → hanya tampilkan aplikasi milik departemennya sendiri
     if ($user->role === 'opd') {
-        $applications = Application::with(['department', 'developer', 'server'])
-            ->where('department_id', $user->department_id)
-            ->latest()
-            ->get();
+        $query = Application::with(['department', 'developer', 'server'])
+            ->where('department_id', $user->department_id);
     } 
-    // Kalau bukan OPD (admin / diskominfo) → tampilkan semua
+    // Kalau bukan OPD → tampilkan semua
     else {
-        $applications = Application::with(['department', 'developer', 'server'])
-            ->latest()
-            ->get();
+        $query = Application::with(['department', 'developer', 'server']);
     }
+
+    // --- Filter Search ---
+    if ($search) {
+        $query->where(function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%")
+              ->orWhere('description', 'like', "%{$search}%");
+        });
+    }
+
+    // --- Filter Status ---
+    if ($status) {
+        $query->where('status', $status);
+    }
+
+    // --- Filter Kategori ---
+    if ($kategori) {
+        $query->where('category', $kategori);
+    }
+
+    // Eksekusi
+    $applications = $query->latest()->get();
 
     return view('applications.index', compact('applications'));
     }

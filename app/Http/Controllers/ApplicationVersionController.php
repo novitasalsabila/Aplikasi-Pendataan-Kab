@@ -13,7 +13,21 @@ class ApplicationVersionController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
+
+    // Jika role OPD → tampilkan hanya versi aplikasi milik departemen OPD
+    if ($user->role === 'opd') {
+        $versions = ApplicationVersion::with('application')
+            ->whereHas('application', function ($q) use ($user) {
+                $q->where('department_id', $user->department_id);
+            })
+            ->latest()
+            ->get();
+    } 
+    // Selain OPD → tampilkan semua
+    else {
         $versions = ApplicationVersion::with('application')->latest()->get();
+    }
         return view('application_versions.index', compact('versions'));
     }
 
@@ -47,6 +61,23 @@ class ApplicationVersionController extends Controller
     /**
      * Tampilkan form edit versi aplikasi.
      */
+    public function show($id)
+{
+    $user = auth()->user();
+
+    // Ambil versi + relasi aplikasi
+    $version = ApplicationVersion::with('application')->findOrFail($id);
+
+    // OPD hanya boleh melihat versi aplikasi miliknya
+    if ($user->role === 'opd') {
+        if ($version->application->department_id !== $user->department_id) {
+            abort(403, 'Anda tidak memiliki akses ke versi aplikasi ini.');
+        }
+    }
+
+    return view('application_versions.show', compact('version'));
+}
+
     public function edit(ApplicationVersion $application_version)
     {
         $applications = Application::orderBy('name')->get();
