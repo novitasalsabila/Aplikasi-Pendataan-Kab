@@ -69,7 +69,7 @@
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">OPD / Department</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('applications.*')" 
+            <x-nav-link :href="route('servers.index')" :active="request()->routeIs('applications.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
                 <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi" class="w-5 h-5">
@@ -83,7 +83,7 @@
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Pengguna</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('developers.index')" :active="request()->routeIs('applications.*')" 
+            <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('applications.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
                 <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi" class="w-5 h-5">
@@ -102,15 +102,15 @@
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Versi Aplikasi') }}
             </x-nav-link>
 
-            <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" 
+            <x-nav-link :href="route('application_integrations.index')" :active="request()->routeIs('users.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
-                <img src="{{ asset('icons/user.svg') }}" alt="Pengguna" class="w-5 h-5">
+                <img src="{{ asset('icons/user.svg') }}" alt="Aplikasi integrations" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Integrasi</span>
             </x-nav-link>
 
              <x-nav-link :href="route('application_backups.index')" :active="request()->routeIs('application_backups.*')">
-                <img src="{{ asset('icons/database.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/database.svg') }}" alt="Aplikasi Backups" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Backups') }}
             </x-nav-link>
 
