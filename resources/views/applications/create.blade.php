@@ -70,7 +70,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block font-medium mb-1">Status</label>
-                    <select name="status" required class="w-full border rounded p-2 dark:bg-gray-700">
+                    <select name="status" required class="w-full border rounded p-2 dark:bg-gray-700">               
                         <option value="aktif">Aktif</option>
                         <option value="nonaktif">Nonaktif</option>
                         <option value="maintenance">Maintenance</option>
@@ -92,5 +92,4 @@
             </div>
         </form>
     </div>
-    
 </x-app-layout>

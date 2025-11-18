@@ -21,7 +21,7 @@
                 </h1>
 
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
-                    {{ __('Daftar aplikasi yang dikelola ') }} 
+                    {{ __('Daftar seluruh aplikasi yang dikelola pemkab ') }} 
                     @if(auth()->user()->role !== 'admin')
                      {{ ' oleh ' . (auth()->user()->department->name ?? 'Tidak ada departemen') }}
               @endif
