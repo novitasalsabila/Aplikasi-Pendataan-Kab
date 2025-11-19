@@ -10,7 +10,7 @@
                 </a>
             <!-- Kiri: Judul dan deskripsi -->
             <div>
-                <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">
+                <h1 class="text-xl font-bold text-gray-800">
                     Temuan/Bug/Keamanan
                 </h1>
 
@@ -27,9 +27,9 @@
             </div>
         @endif
 
-        <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow-md rounded-lg">
-            <table class="min-w-full table-fixed text-sm text-gray-700 dark:text-gray-300">
-                <thead class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100">
+        <div class="overflow-x-auto bg-whit shadow-md rounded-lg">
+            <table class="min-w-full table-fixed text-sm text-gray-700">
+                <thead class="bg-gray-100 text-gray-800">
                     <tr>
                         <th class="px-3 py-3 text-center">No</th>
                         <th class="px-4 py-3 text-center">Aplikasi</th>
@@ -45,7 +45,7 @@
                 </thead>
                 <tbody>
                     @forelse ($findings as $index => $f)
-                        <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900 align-top">
+                        <tr class="border-b border-gray-200 hover:bg-gray-50 align-top">
                             <td class="px-3 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $f->application->name ?? '-' }}</td>
                             <td class="px-4 py-3">{{ Str::limit($f->description, 100) }}</td>
