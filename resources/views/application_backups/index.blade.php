@@ -10,11 +10,11 @@
                 </a> --}}
             <!-- Kiri: Judul dan deskripsi -->
             <div>
-                <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-0">
+                <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-0">
                     Riwayat Backup Aplikasi
                 </h1>
 
-                <p class="text-md text-gray-500 w-3/4 sm:w-auto">
+                <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
                     {{ __('Catatan bug dan verifikasi data') }} 
                 </p>
 
@@ -27,9 +27,9 @@
             </div>
         @endif
 
-        <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full text-sm text-gray-700 dark:text-gray-300">
-                <thead class="bg-gray-50 dark:bg-gray-900">
+        <div class="overflow-x-auto bg-white shadow-md rounded-lg overflow-hidden">
+            <table class="min-w-full text-sm text-gray-700">
+                <thead class="bg-gray-100">
                     <tr>
                         <th class="px-4 py-3 text-left">No</th>
                         <th class="px-4 py-3 text-left">Aplikasi</th>
@@ -38,14 +38,14 @@
                         <th class="px-4 py-3 text-left">Lokasi Penyimpanan</th>
                         <th class="px-4 py-3 text-left">Terverifikasi</th>
                         {{-- Kolom Aksi hanya untuk admin --}}
-                        @if (auth()->user()?->role === 'admin')
+                        @if (auth()->user()?->role === 'admin' || auth()->user()->role === 'diskominfo')
                             <th class="px-4 py-3 text-left">Aksi</th>
                         @endif
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                <tbody class="divide-y divide-gray-100">
                     @forelse ($backups as $index => $b)
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition align-top">
+                        <tr class="hover:bg-gray-50 transition align-top">
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3 font-medium">{{ $b->application->name ?? '-' }}</td>
                             <td class="px-4 py-3">{{ \Carbon\Carbon::parse($b->backup_date)->format('d M Y H:i') }}</td>
