@@ -1,13 +1,5 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto py-8 px-6">
-        {{-- <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">Riwayat Log Aplikasi</h1>
-            <a href="{{ route('application_logs.create') }}"
-               class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">
-                + Tambah Log
-            </a>
-        </div> --}}
-
         <div class="relative mb-6 md:mt-0 sm:mt-20">
             <!-- Tombol kanan atas -->
            @if(auth()->user()->role == 'diskominfo')
@@ -22,15 +14,19 @@
 
             <!-- Kiri: Judul dan deskripsi -->
             <div>
-                <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">
-                    Riwayat Log Aplikasi
+                <h1 class="text-xl font-bold text-gray-800 mb-0">
+                    Log Pengembangan Aplikasi
                 </h1>
-@if(auth()->user()->role === 'opd')
-    <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
-        Log aplikasi yang dikelola 
-        {{ auth()->user()->department->name ?? 'Tidak ada departemen' }}
-    </p>
-@endif
+            @if(auth()->user()->role === 'opd')
+                <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
+                    Catatan perubahan dan pengembangan aplikasi 
+                    {{ auth()->user()->department->name}}
+                </p>
+            @else
+                <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
+                    Catatan perubahan dan pengembangan aplikasi 
+                </p>
+            @endif
             </div>
         </div>
 
@@ -40,9 +36,9 @@
             </div>
         @endif
 
-        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-x-auto">
-            <table class="min-w-full text-sm text-gray-700 dark:text-gray-300">
-                <thead class="bg-gray-50 dark:bg-gray-900">
+        <div class="bg-white shadow-md rounded-lg overflow-x-auto">
+            <table class="min-w-full text-sm text-gray-700">
+                <thead class="bg-gray-100">
                     <tr>
                         <th class="px-3 py-3">No</th>
                         <th class="px-4 py-3">Aplikasi</th>
@@ -55,9 +51,9 @@
                         <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody class="divide-y divide-gray-200">
                     @forelse ($logs as $index => $log)
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                        <tr class="hover:bg-gray-50 transition">
                             <td class="px-3 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $log->application->name ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->title }}</td>
@@ -66,7 +62,7 @@
                             <td class="px-4 py-3">{{ $log->date ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->reviewer->name ?? '-' }}</td>
                             <td class="px-4 py-3">
-                                <span class="px-2 py-1 rounded text-white text-xs
+                                <span class="px-2 py-1 rounded text-white text-xs font-semibold
                                     @if($log->approved_st == 'approved') bg-green-600
                                     @elseif($log->approved_st == 'rejected') bg-red-600
                                     @else bg-yellow-500 @endif">
@@ -156,7 +152,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="9" class="text-center py-4 text-gray-500 dark:text-gray-400">
+                            <td colspan="9" class="text-center py-4 text-gray-500">
                                 Belum ada data log aplikasi.
                             </td>
                         </tr>

@@ -6,8 +6,7 @@
                     onclick="history.back()"
                     class="mt-1 inline-flex items-center justify-center p-1
                         text-gray-700 hover:text-gray-900
-                        dark:text-gray-200 dark:hover:text-white
-                        rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                        rounded-full hover:bg-gray-100 transition">
                     <svg xmlns="http://www.w3.org/2000/svg" 
                         width="24" 
                         height="24" 
@@ -23,7 +22,7 @@
 
             {{-- Judul + teks bawah --}}
             <div>
-                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-0">
+                <h2 class="text-2xl font-bold text-gray-800 mb-0">
                     Tambah Log Pengembangan Aplikasi
                 </h2>
                 <p class="text-sm text-gray-500">
@@ -33,14 +32,14 @@
         </div>
 
         <form action="{{ route('application_logs.store') }}" method="POST"
-              class="space-y-5 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+              class="space-y-5 bg-white shadow-md rounded-lg p-6">
             @csrf
 
             {{-- Aplikasi --}}
             <div>
                 <label class="block font-medium mb-1">Nama Aplikasi</label>
                 <select name="application_id" required
-                        class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
                     <option value="">-- Pilih Aplikasi --</option>
                     @foreach ($applications as $app)
                         <option value="{{ $app->id }}">{{ $app->name }}</option>
@@ -54,7 +53,7 @@
                 <label class="block font-medium mb-1">Judul Perubahan</label>
                 <input type="text" name="title" required
                        placeholder="Contoh: Penambahan fitur laporan bulanan"
-                       class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                       class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
             </div>
 
             {{-- Deskripsi --}}
@@ -62,14 +61,14 @@
                 <label class="block font-medium mb-1">Deskripsi</label>
                 <textarea name="description" rows="4"
                           placeholder="Contoh: Memperbaiki error validasi data user pada halaman registrasi."
-                          class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500"></textarea>
+                          class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500"></textarea>
             </div>
             
             {{-- Jenis Perubahan --}}
             <div>
                 <label class="block font-medium mb-1">Jenis Perubahan</label>
                 <select name="change_type" required
-                        class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
                     <option value="penambahan">Penambahan</option>
                     <option value="perbaikan">Perbaikan</option>
                     <option value="penghapusan">Penghapusan</option>
@@ -83,12 +82,12 @@
                 <div>
                     <label class="block font-medium mb-1">Versi</label>
                     <input type="text" name="version" placeholder="Contoh: v2.3.1"
-                           class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                           class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Tanggal Perubahan</label>
                     <input type="date" name="date"
-                           class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                           class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
                     <p class="text-xs text-gray-500 mt-1">Contoh: 2025-10-20</p>
                 </div>
             </div>
@@ -97,7 +96,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block font-medium mb-1">Reviewer</label>
-                    <select name="reviewed_by" class="w-full border rounded p-2 dark:bg-gray-700">
+                    <select name="reviewed_by" class="w-full border rounded p-2">
                         <option value="">-- Pilih Reviewer --</option>
                         @foreach ($reviewers as $rev)
                             <option value="{{ $rev->id }}">{{ $rev->name }}</option>
@@ -107,7 +106,7 @@
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Status Persetujuan</label>
-                    <select name="approved_st" class="w-full border rounded p-2 dark:bg-gray-700">
+                    <select name="approved_st" class="w-full border rounded p-2">
                         <option value="pending">Pending</option>
                         <option value="approved">Approved</option>
                         <option value="rejected">Rejected</option>
