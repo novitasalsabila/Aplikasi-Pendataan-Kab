@@ -15,40 +15,48 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        // 🔹 Filter aplikasi sesuai role
-        $applications = Application::query();
+    // 🔹 Filter aplikasi sesuai role
+    $applications = Application::query();
 
-        if ($user->role === 'opd') {
-            $applications->where('department_id', $user->department_id);
-        } elseif ($user->role === 'diskominfo') {
-            $applications->where('developer_id', $user->id);
-        }
+    if ($user->role === 'opd') {
+        // OPD hanya lihat aplikasi miliknya
+        $applications->where('department_id', $user->department_id);
 
-        // 📊 Statistik umum
-        $totalApps = $applications->count();
-        $activeApps = (clone $applications)->where('status', 'aktif')->count();
-        $inactiveApps = (clone $applications)->where('status', 'nonaktif')->count();
+    } elseif ($user->role === 'diskominfo') {
+        // DISKOMINFO → lihat semua aplikasi (TIDAK difilter)
+    }
 
-        // 🐞 Temuan keamanan
-        $findings = ApplicationFinding::query();
-        if ($user->role === 'opd') {
-            $findings->whereHas('application', fn($q) => $q->where('department_id', $user->department_id));
-        } elseif ($user->role === 'diskominfo') {
-            $findings->whereHas('application', fn($q) => $q->where('developer_id', $user->id));
-        }
-        $findingsCount = $findings->count();
+    // 📊 Statistik umum
+    $totalApps = $applications->count();
+    $activeApps = (clone $applications)->where('status', 'aktif')->count();
 
-        // 🧾 Log aktivitas
-        $recentLogs = ApplicationLog::query()
-            ->when($user->role === 'opd', fn($q) =>
-                $q->whereHas('application', fn($a) => $a->where('department_id', $user->department_id))
+    // Status nonaktif versi lengkap
+    $inactiveApps = (clone $applications)
+        ->whereIn('status', ['nonaktif', 'non_aktif', 'non aktif'])
+        ->count();
+
+    // 🐞 Temuan keamanan
+    $findings = ApplicationFinding::query();
+
+    if ($user->role === 'opd') {
+        $findings->whereHas('application', fn($q) =>
+            $q->where('department_id', $user->department_id)
+        );
+    }
+    // DISKOMINFO → tidak difilter, semua temuan tampil
+    $findingsCount = $findings->count();
+
+    // 🧾 Log aktivitas
+    $recentLogs = ApplicationLog::query()
+        ->when($user->role === 'opd', fn($q) =>
+            $q->whereHas('application', fn($a) =>
+                $a->where('department_id', $user->department_id)
             )
-            ->when($user->role === 'diskominfo', fn($q) =>
-                $q->whereHas('application', fn($a) => $a->where('developer_id', $user->id))
-            )
-            ->latest()
-            ->take(10)
-            ->get();
+        )
+        // DISKOMINFO → lihat semua log
+        ->latest()
+        ->take(10)
+        ->get();
 
         // 🏢 Admin: tambahan data per OPD
         $appsPerDepartment = $user->role === 'admin'
