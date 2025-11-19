@@ -86,7 +86,7 @@
             <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('applications.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
-                <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/LogPengembang.svg') }}" alt="Aplikasi" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Log Pengembangan</span>
             </x-nav-link>
 
@@ -97,11 +97,6 @@
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Temuan / Bug</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
-                <img src="{{ asset('icons/warning.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
-                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Versi Aplikasi') }}
-            </x-nav-link>
-
             <x-nav-link :href="route('application_integrations.index')" :active="request()->routeIs('users.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
@@ -109,11 +104,15 @@
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Integrasi</span>
             </x-nav-link>
 
-             <x-nav-link :href="route('application_backups.index')" :active="request()->routeIs('application_backups.*')">
+            <x-nav-link :href="route('application_backups.index')" :active="request()->routeIs('application_backups.*')">
                 <img src="{{ asset('icons/database.svg') }}" alt="Aplikasi Backups" class="w-5 h-5">
-                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Backups') }}
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Backup') }}
             </x-nav-link>
 
+            <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
+                <img src="{{ asset('icons/versiaplikasi.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Versi Aplikasi') }}
+            </x-nav-link>
             
         @elseif(auth()->user()->role === 'diskominfo')
             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Menu Diskominfo</p>
