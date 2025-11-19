@@ -75,7 +75,7 @@
                                 {{-- Tombol Edit (icon pensil) --}}
                                 <a href="{{ route('application_backups.edit', $b->id) }}"
                                 class="inline-flex items-center justify-center p-1.5 rounded
-                                        text-yellow-500 hover:text-yellow-600 hover:bg-yellow-50
+                                        text-yellow-500 hover:text-yellow-600 font-semibold
                                         transition"
                                 title="Edit temuan">
                                     <svg xmlns="http://www.w3.org/2000/svg"
