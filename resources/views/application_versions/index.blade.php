@@ -51,7 +51,9 @@
                             <td class="px-4 py-2">{{ $ver->application->name ?? '-' }}</td>
                             <td class="px-4 py-2 font-semibold">{{ $ver->version_code }}</td>
                             <td class="px-4 py-2">
-                                {{ $ver->release_date ? \Carbon\Carbon::parse($ver->release_date)->format('d M Y') : '-' }}
+                                {{ $ver->release_date
+                                    ? \Carbon\Carbon::parse($ver->release_date)->format('Y-m-d')
+                                    : '-' }}
                             </td>
                             <td class="px-4 py-2">{{ Str::limit($ver->changelog, 50) ?? '-' }}</td>
                             @if(auth()->user()->role === 'diskominfo')
