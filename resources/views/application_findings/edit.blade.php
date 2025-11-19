@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="max-w-4xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
-               <div class="flex items-start gap-3">
+        <div class="flex items-start gap-3">
             {{-- Tombol panah kembali --}}
             <button type="button"
                     onclick="history.back()"
