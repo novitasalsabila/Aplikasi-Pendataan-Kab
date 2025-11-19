@@ -1,17 +1,10 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto py-8 px-6">
         <div class="relative mb-6 md:mt-0 sm:mt-20">
-            {{-- <!-- Tombol kanan atas -->
-                <a href="{{ route('application_findings.create') }}"
-                    class="absolute top-0 right-0 bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition no-underline flex items-center gap-2">
-                    <img src="{{ asset('icons/plus.svg') }}" alt="Tambah"
-                        class="w-5 h-5 filter invert brightness-0">
-                    <span>Cadangkan Aplikasi</span>
-                </a> --}}
             <!-- Kiri: Judul dan deskripsi -->
             <div>
-                <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-0">
-                    Riwayat Backup Aplikasi
+                <h1 class="text-xl font-bold text-gray-800 mb-0">
+                    Riwayat Cadangan Aplikasi
                 </h1>
 
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
@@ -33,8 +26,8 @@
                     <tr>
                         <th class="px-4 py-3 text-left">No</th>
                         <th class="px-4 py-3 text-left">Aplikasi</th>
-                        <th class="px-4 py-3 text-left">Waktu Backup</th>
-                        <th class="px-4 py-3 text-left">Tipe Backup</th>
+                        <th class="px-4 py-3 text-left">Waktu Pencadangan</th>
+                        <th class="px-4 py-3 text-left">Tipe Pencadangan</th>
                         <th class="px-4 py-3 text-left">Lokasi Penyimpanan</th>
                         <th class="px-4 py-3 text-left">Terverifikasi</th>
                         {{-- Kolom Aksi hanya untuk admin --}}
