@@ -23,7 +23,7 @@
     </style>
 </head>
 
-<body class="font-poppins antialiased bg-gray-100 dark:bg-gray-900 h-full">
+<body class="font-poppins antialiased bg-gray-50 dark:bg-gray-900 h-full">
     
     {{-- CONTAINER UTAMA --}}
     <div class="min-h-screen flex overflow-hidden"
