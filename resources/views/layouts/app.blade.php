@@ -23,7 +23,7 @@
     </style>
 </head>
 
-<body class="font-poppins antialiased bg-gray-50 dark:bg-gray-900 h-full">
+<body class="font-poppins antialiased bg-gray-50 h-full">
     
     {{-- CONTAINER UTAMA --}}
     <div class="min-h-screen flex overflow-hidden"
@@ -84,7 +84,7 @@
             
             @isset($header)
                 {{-- Header di Desktop (menggunakan $header slot) --}}
-                <header class="bg-white dark:bg-gray-800 shadow px-6 py-4 hidden md:block">
+                <header class="bg-white shadow px-6 py-4 hidden md:block">
                     {{ $header }}
                 </header>
                 {{-- Padding atas khusus untuk mobile karena ada fixed header --}}
