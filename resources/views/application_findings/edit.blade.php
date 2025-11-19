@@ -102,7 +102,7 @@
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Tanggal Tindak Lanjut</label>
+                <label class="block font-medium mb-1">Tanggal Ditemukan</label>
                 <input type="date" name="follow_up_date"
                        value="{{ old('follow_up_date', $finding->follow_up_date) }}"
                        class="w-full border rounded p-2">
