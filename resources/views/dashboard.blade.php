@@ -109,12 +109,12 @@
                 <span>{{ $item['opd'] }}</span>
                 <span>{{ $persen }}%</span>
             </div>
-            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+            <div class="w-full bg-gray-200 rounded-full h-3">
                 <div class="bg-blue-500 h-3 rounded-full" style="width: {{ $persen }}%"></div>
             </div>
         </div>
     @empty
-        <p class="text-gray-500 dark:text-gray-400">Belum ada data OPD.</p>
+        <p class="text-gray-500">Belum ada data OPD.</p>
     @endforelse
 </x-dashboard-section>
 </div>
@@ -262,9 +262,9 @@
         {{-- Log Aktivitas Terakhir --}}
         <x-dashboard-section title="Aktivitas 1 Minggu Terakhir">
             @forelse ($recentLogs as $log)
-                <p class="text-gray-700 dark:text-gray-300 mb-2">• {{ $log->description ?? 'Tidak ada deskripsi log' }}</p>
+                <p class="text-gray-700 mb-2">• {{ $log->description ?? 'Tidak ada deskripsi log' }}</p>
             @empty
-                <p class="text-gray-500 dark:text-gray-400 text-sm">Belum ada aktivitas tercatat.</p>
+                <p class="text-gray-500 text-sm">Belum ada aktivitas tercatat.</p>
             @endforelse
         </x-dashboard-section>
     </div>
