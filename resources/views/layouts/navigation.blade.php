@@ -109,6 +109,16 @@
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Backup') }}
             </x-nav-link>
 
+            <x-nav-link :href="route('application_documents.index')" :active="request()->routeIs('application_documents.*')">
+                <img src="{{ asset('icons/Dokumen.svg') }}" alt="Dokumen" class="w-5 h-5">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Dokumen') }}
+            </x-nav-link>
+
+            <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('application_logs.*')">
+                <img src="{{ asset('icons/clock.svg') }}" alt="Log Aktivitas" class="w-5 h-5">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Log Aktivitas') }}
+            </x-nav-link>
+
             <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
                 <img src="{{ asset('icons/versiaplikasi.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Versi Aplikasi') }}
@@ -159,10 +169,13 @@
                 <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi Saya" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Saya') }}
             </x-nav-link>
+
             <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
                 <img src="{{ asset('icons/version.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Versi Aplikasi') }}
-            </x-nav-link>   
+            </x-nav-link>  
+            
+            
         @endif
     </div>
 
