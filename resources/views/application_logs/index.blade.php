@@ -62,13 +62,27 @@
                             <td class="px-4 py-3">{{ $log->date ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->reviewer->name ?? '-' }}</td>
                             <td class="px-4 py-3">
-                                <span class="px-2 py-1 rounded text-white text-xs font-semibold
-                                    @if($log->approved_st == 'approved') bg-green-600
-                                    @elseif($log->approved_st == 'rejected') bg-red-600
-                                    @else bg-yellow-500 @endif">
-                                    {{ ucfirst($log->approved_st) }}
+                                @php
+                                    $statusText = [
+                                        'approved' => 'Disetujui',
+                                        'pending' => 'Diproses',
+                                        'rejected' => 'Ditolak',
+                                    ][$log->approved_st] ?? $log->approved_st;
+                                @endphp
+                                <span class="px-3 py-1 rounded-md text-xs font-semibold
+                                    @if($log->approved_st == 'approved')
+                                        bg-green-100 text-green-700
+                                    @elseif($log->approved_st == 'rejected')
+                                        bg-red-100 text-red-700
+                                    @else
+                                        bg-yellow-100 text-yellow-700
+                                    @endif">
+
+                                    {{ $statusText }}
+
                                 </span>
                             </td>
+
                             <td class="px-3 py-3 text-center">
                                 <div class="flex items-center justify-center gap-2 divide-x divide-gray-300">
                                     {{-- Tombol Edit --}}

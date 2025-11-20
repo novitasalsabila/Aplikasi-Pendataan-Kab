@@ -107,11 +107,11 @@
                 <div>
                     <label class="block font-medium mb-1">Status Persetujuan</label>
                     <select name="approved_st" class="w-full border rounded p-2">
-                        <option value="pending">Pending</option>
-                        <option value="approved">Approved</option>
-                        <option value="rejected">Rejected</option>
+                        <option value="pending">Diproses</option>
+                        <option value="approved">Diterima</option>
+                        <option value="rejected">Ditolak</option>
                     </select>
-                    <p class="text-xs text-gray-500 mt-1">Contoh: Pilih “Pending” jika masih menunggu verifikasi.</p>
+                    <p class="text-xs text-gray-500 mt-1">Contoh: Pilih "Diproses" jika masih menunggu verifikasi.</p>
                 </div>
             </div>
 

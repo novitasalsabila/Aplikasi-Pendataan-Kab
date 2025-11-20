@@ -40,38 +40,33 @@
             <div>
                 <label class="block font-medium mb-1">Nama Aplikasi</label>
                 <select name="application_id" required
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"">
                     @foreach ($applications as $app)
                         <option value="{{ $app->id }}" @selected($log->application_id == $app->id)>
                             {{ $app->name }}
                         </option>
                     @endforeach
                 </select>
-                <p class="text-xs text-gray-500 mt-1">Contoh: Sistem Informasi Kepegawaian</p>
             </div>
 
             {{-- Judul --}}
             <div>
                 <label class="block font-medium mb-1">Judul Perubahan</label>
                 <input type="text" name="title" value="{{ $log->title }}" required
-                    placeholder="Contoh: Penambahan fitur laporan bulanan"
-                    class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"">
             </div>
 
             {{-- Jenis Perubahan --}}
             <div>
                 <label class="block font-medium mb-1">Jenis Perubahan</label>
                 <select name="change_type" required
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"">
                     @foreach (['penambahan', 'perbaikan', 'penghapusan', 'lainnya'] as $type)
                         <option value="{{ $type }}" @selected($log->change_type == $type)>
                             {{ ucfirst($type) }}
                         </option>
                     @endforeach
                 </select>
-                <p class="text-xs text-gray-500 mt-1">
-                    Contoh: Pilih “Perbaikan” jika memperbaiki bug pada modul.
-                </p>
             </div>
 
             {{-- Deskripsi --}}
@@ -79,7 +74,7 @@
                 <label class="block font-medium mb-1">Deskripsi</label>
                 <textarea name="description" rows="4"
                         placeholder="Contoh: Menambahkan validasi data baru dan memperbaiki error pada fitur login."
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">{{ $log->description }}</textarea>
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">{{ $log->description }}</textarea>
             </div>
 
             {{-- Versi dan Tanggal --}}
@@ -88,12 +83,12 @@
                     <label class="block font-medium mb-1">Versi</label>
                     <input type="text" name="version" value="{{ $log->version }}"
                         placeholder="Contoh: v2.3.1"
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"">
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Tanggal Perubahan</label>
                     <input type="date" name="date" value="{{ $log->date }}"
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"">
                 </div>
             </div>
 
@@ -101,7 +96,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block font-medium mb-1">Reviewer</label>
-                    <select name="reviewed_by" class="w-full border rounded p-2">
+                    <select name="reviewed_by" class="w-full border rounded p-2 text-sm text-gray-600"">
                         <option value="">-- Pilih Reviewer --</option>
                         @foreach ($reviewers as $rev)
                             <option value="{{ $rev->id }}" @selected($log->reviewed_by == $rev->id)>
@@ -109,20 +104,25 @@
                             </option>
                         @endforeach
                     </select>
-                    <p class="text-xs text-gray-500 mt-1">Contoh: Admin Sistem / Kepala Divisi</p>
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Status Persetujuan</label>
-                    <select name="approved_st" class="w-full border rounded p-2">
-                        @foreach (['pending', 'approved', 'rejected'] as $status)
-                            <option value="{{ $status }}" @selected($log->approved_st == $status)>
-                                {{ ucfirst($status) }}
+
+                    @php
+                        $statusMap = [
+                            'pending' => 'Diproses',
+                            'approved' => 'Disetujui',
+                            'rejected' => 'Ditolak',
+                        ];
+                    @endphp
+
+                    <select name="approved_st" class="w-full border rounded p-2 text-sm text-gray-600">
+                        @foreach ($statusMap as $value => $label)
+                            <option value="{{ $value }}" @selected($log->approved_st == $value)>
+                                {{ $label }}
                             </option>
                         @endforeach
                     </select>
-                    <p class="text-xs text-gray-500 mt-1">
-                        Contoh: Pilih “Approved” jika sudah disetujui oleh reviewer.
-                    </p>
                 </div>
             </div>
 
