@@ -12,7 +12,7 @@
             @endif
             <!-- Kiri: Judul dan deskripsi -->
             <div>
-                <h1 class="text-xl font-bold text-gray-800 mb-0">
+                <h1 class="text-2xl font-bold text-gray-800 mb-0">
                     Riwayat Versi Aplikasi
                 </h1>
 
