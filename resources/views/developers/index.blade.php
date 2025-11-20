@@ -17,6 +17,7 @@
             </a>
         </div>
 
+<<<<<<< HEAD
         <form action="{{ route('applications.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
 
                 <!-- Input + Tombol Search -->
@@ -44,11 +45,17 @@
 </form>
 
         <!-- Alert -->
+=======
+>>>>>>> 46dadb15de7d3bfb6bd0b2d2d1e280e2a9a82103
         @if (session('success'))
-            <div class="mb-4 bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded">
+            <div x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 2500)"
+                class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded mb-4">
                 {{ session('success') }}
             </div>
-        @endif
+        @endif  
 
         <!-- Table -->
         <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
