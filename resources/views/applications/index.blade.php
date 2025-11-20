@@ -16,17 +16,19 @@
 
             <!-- Kiri: Judul dan deskripsi -->
             <div>
-                <h1 class="text-xl font-bold text-gray-800 mb-0">
+                <h1 class="text-2xl font-bold text-gray-800 mb-0">
                     Manajemen Aplikasi
                 </h1>
 
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
-                    {{ __('Daftar seluruh aplikasi yang dikelola pemkab ') }} 
-                    @if(auth()->user()->role !== 'admin')
-                     {{ ' oleh ' . (auth()->user()->department->name ?? 'Tidak ada departemen') }}
-              @endif
-                </p>
+                    @if(auth()->user()->role == 'opd')
+                        {{ __('Daftar seluruh aplikasi') }}
+                        {{ auth()->user()->department->name ?? 'Tidak ada departemen' }}
 
+                    @else
+                        {{ __('Daftar seluruh aplikasi yang dikelola') }}
+                    @endif
+                </p>
             </div>
         </div>
 
