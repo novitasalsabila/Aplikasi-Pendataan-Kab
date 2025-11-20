@@ -128,7 +128,7 @@
                             <!-- <td class="px-4 py-3">{{ $app->developer->name ?? '-' }}</td> -->
                             <!-- <td class="px-4 py-3">{{ $app->server->hostname ?? '-' }}</td> -->
                             <td class="px-4 py-3">
-                                {{ $app->last_update ? \Carbon\Carbon::parse($app->last_update)->format('d M Y') : '-' }}
+                                {{ $app->last_update ? \Carbon\Carbon::parse($app->last_update)->format('Y-m-d') : '-' }}
                             </td>
 
                             <!-- Kolom Aksi -->
