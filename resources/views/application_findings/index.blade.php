@@ -10,7 +10,7 @@
                 </a>
             <!-- Kiri: Judul dan deskripsi -->
             <div>
-                <h1 class="text-xl font-bold text-gray-800 mb-0">
+                <h1 class="text-2xl font-bold text-gray-800 mb-0">
                     Temuan/Bug/Keamanan
                 </h1>
 
@@ -64,26 +64,82 @@
                             </td>
 
                             <td class="px-4 py-3 text-center align-middle">
-                                <span class="px-2 py-1 rounded text-sm font-medium
-                                    @if($f->severity == 'tinggi') text-red-600
-                                    @elseif($f->severity == 'sedang') text-yellow-500
-                                    @else text-blue-600 @endif">
-                                    {{ ucfirst($f->severity) }}
+                                @php
+                                    $severity = strtolower($f->severity);
+
+                                    $styles = [
+                                        'tinggi' => 'bg-red-100 text-red-600',
+                                        'sedang' => 'bg-yellow-100 text-yellow-600',
+                                        'rendah' => 'bg-blue-100 text-blue-600',
+                                    ];
+
+                                    $class = $styles[$severity] ?? 'bg-gray-100 text-gray-600';
+                                @endphp
+
+                                <span class="px-3 py-1 rounded-md text-sm font-semibold {{ $class }}">
+                                    {{ $severity }}
                                 </span>
                             </td>
+
 
                             <td class="px-4 py-3 align-middle">
                                 {{ ucfirst(str_replace('_', ' ', $f->source)) }}
                             </td>
 
                             <td class="px-4 py-3 text-center align-middle">
-                                <span class="inline-block px-3 py-1 rounded text-xs font-semibold text-white whitespace-nowrap
-                                    @if($f->status == 'open') bg-red-500
-                                    @elseif($f->status == 'in_progress') bg-yellow-400
-                                    @else bg-green-500 @endif">
-                                    {{ str_replace('_', ' ', ucfirst($f->status)) }}
+                                @php
+                                    $statusText = [
+                                        'open' => 'buka',
+                                        'in_progress' => 'proses',
+                                        'resolved' => 'selesai'
+                                    ][$f->status] ?? $f->status;
+                                @endphp
+                                <span class="inline-flex items-center gap-1 text-sm font-medium whitespace-nowrap
+                                    @if($f->status == 'open') text-red-600
+                                    @elseif($f->status == 'in_progress') text-yellow-600
+                                    @else text-green-600 @endif">
+
+                                    {{-- Ikon sesuai status --}}
+                                    @if($f->status == 'open')
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="w-4 h-4 lucide lucide-circle-x"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="m15 9-6 6"/>
+                                            <path d="m9 9 6 6"/>
+                                        </svg>
+
+                                    @elseif($f->status == 'in_progress')
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 6v6l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+
+                                    @else {{-- resolved --}}
+                                        <svg xmlns="http://www.w3.org/2000/svg" 
+                                            class="w-4 h-4 lucide lucide-circle-check"
+                                            viewBox="0 0 24 24" 
+                                            fill="none" 
+                                            stroke="currentColor" 
+                                            stroke-width="2" 
+                                            stroke-linecap="round" 
+                                            stroke-linejoin="round" 
+>
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <path d="m9 12 2 2 4-4"/>
+                                        </svg>
+                                    @endif
+
+                                    {{ $statusText }}
                                 </span>
                             </td>
+
 
                             <td class="px-4 py-3 align-middle">
                                 {{ $f->follow_up_action ?? '-' }}
