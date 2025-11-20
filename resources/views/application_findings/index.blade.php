@@ -18,14 +18,29 @@
                     {{ __('Catatan bug, kerentanan, dan masalah keamanan') }} 
                 </p>
 
+                {{-- Toast Notifikasi (statis, muncul di bawah judul) --}}
+@if (session('success'))
+    <div x-data="{ show: true }"
+         x-show="show"
+         x-transition
+         x-init="setTimeout(() => show = false, 2500)"
+         class="mt-3 bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div x-data="{ show: true }"
+         x-show="show"
+         x-transition
+         x-init="setTimeout(() => show = false, 2500)"
+         class="mt-3 bg-red-600 text-white px-4 py-2 rounded shadow">
+        {{ session('error') }}
+    </div>
+@endif
+
             </div>
         </div>
-
-        @if (session('success'))
-            <div class="bg-green-100 text-green-800 px-4 py-2 rounded mb-4">
-                {{ session('success') }}
-            </div>
-        @endif
 
         <div class="overflow-x-auto bg-white shadow-md rounded-lg">
             <table class="min-w-full table-fixed text-sm text-gray-700">
