@@ -16,7 +16,7 @@
 
             <!-- Kiri: Judul dan deskripsi -->
             <div>
-                <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">
+                <h1 class="text-xl font-bold text-gray-800 mb-0">
                     Manajemen Aplikasi
                 </h1>
 
@@ -32,7 +32,7 @@
 
         <!-- Search dan Filter -->
 <!-- Search + Filter dalam 1 kotak -->
-<div class="p-4 bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-200 dark:border-gray-700 mb-6">
+<div class="p-4 bg-white shadow-sm rounded-lg border border-gray-200 mb-6">
         <div class="flex flex-col sm:flex-row sm:items-center mb-6 gap-3 w-full">
             <!-- Form Search & Filter -->
             <form action="{{ route('applications.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
@@ -89,9 +89,9 @@
         @endif
 
         <!-- Tabel Data -->
-        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-x-auto">
-            <table class="min-w-full text-xs text-gray-700 dark:text-gray-300">
-                <thead class="bg-gray-50 dark:bg-gray-900">
+        <div class="bg-white shadow-md rounded-lg overflow-x-auto">
+            <table class="min-w-full text-xs text-gray-700">
+                <thead class="bg-gray-100">
                     <tr>
                         <th class="px-3 py-3 text-left w-12">No</th>
                         <th class="px-4 py-3 text-left">Nama Aplikasi</th>
@@ -104,9 +104,9 @@
                     </tr>
                 </thead>
 
-                <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                <tbody class="divide-y divide-gray-100">
                     @forelse ($applications as $index => $app)
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                        <tr class="hover:bg-gray-50 transition">
                             <td class="px-3 py-3 w-12">{{ $index + 1 }}</td>
                             <td class="px-4 py-3 font-medium">{{ $app->name }}</td>
                             <td class="px-4 py-3">{{ $app->department->name ?? '-' }}</td>
@@ -214,7 +214,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="10" class="text-center py-4 text-gray-500 dark:text-gray-400">
+                            <td colspan="10" class="text-center py-4 text-gray-500">
                                 Belum ada data aplikasi.
                             </td>
                         </tr>
