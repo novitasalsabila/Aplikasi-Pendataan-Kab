@@ -23,12 +23,15 @@
             </a>
         </div>
 
-        <!-- Alert -->
         @if (session('success'))
-            <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative shadow-sm">
+            <div x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 2500)"
+                class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded mb-4">
                 {{ session('success') }}
             </div>
-        @endif
+        @endif  
 
         <!-- Table -->
         <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
