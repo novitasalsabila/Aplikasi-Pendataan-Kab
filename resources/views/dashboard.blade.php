@@ -261,34 +261,36 @@
                             </tr>
                         </x-slot>
 
-                        @forelse($recentLogs as $log)
-                            <tr class="hover:bg-gray-50 transition">
-                                <td class="px-4 py-3 text-gray-800">{{ $log->application->name ?? '-' }}</td>
+                    @forelse($opdApplications as $app)
+                        <tr class="hover:bg-gray-50 transition">
 
-                                <td class="px-4 py-3">
-                                    @php $status = strtolower($log->application->status ?? '-'); @endphp
+                            <td class="px-4 py-3 text-gray-800">{{ $app->name }}</td>
 
-                                    @if($status === 'aktif')
-                                        <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Aktif</span>
-                                    @elseif($status === 'nonaktif')
-                                        <span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">Nonaktif</span>
-                                    @else
-                                        <span class="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium">-</span>
-                                    @endif
-                                </td>
+                            <td class="px-4 py-3">
+                                @php $status = strtolower($app->status); @endphp
 
-                                <td class="px-4 py-3 text-gray-800">
-                                    {{ $log->created_at ? $log->created_at->locale('id')->diffForHumans() : '-' }}
-                                </td>
+                                @if($status === 'aktif')
+                                    <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Aktif</span>
+                                @elseif(in_array($status, ['nonaktif', 'non_aktif', 'non aktif']))
+                                    <span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">Nonaktif</span>
+                                @else
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-medium">-</span>
+                                @endif
+                            </td>
 
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3" class="text-center text-gray-500 py-4">
-                                    Belum ada aplikasi yang terdaftar untuk OPD ini.
-                                </td>
-                            </tr>
-                        @endforelse
+                            <td class="px-4 py-3 text-gray-800">
+                                {{ $app->updated_at ? $app->updated_at->locale('id')->diffForHumans() : '-' }}
+                            </td>
+
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="text-center text-gray-500 py-4">
+                                Belum ada aplikasi yang terdaftar untuk OPD ini.
+                            </td>
+                        </tr>
+                    @endforelse
+
                     </x-table>
                 </x-dashboard-section>
 

@@ -58,6 +58,13 @@ class DashboardController extends Controller
         ->take(10)
         ->get();
 
+        $opdApplications = null;
+        if ($user->role === 'opd') {
+            $opdApplications = Application::where('department_id', $user->department_id)
+                                            ->orderBy('name')
+                                            ->get();
+        }
+
         // 🏢 Admin: tambahan data per OPD
         $appsPerDepartment = $user->role === 'admin'
             ? Department::withCount('applications')->get()
@@ -70,7 +77,8 @@ class DashboardController extends Controller
             'inactiveApps',
             'findingsCount',
             'recentLogs',
-            'appsPerDepartment'
+            'appsPerDepartment',
+            'opdApplications'
         ));
     }
 }
