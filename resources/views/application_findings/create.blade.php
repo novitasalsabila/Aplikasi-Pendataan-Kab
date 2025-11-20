@@ -50,15 +50,15 @@
                     <label class="block font-medium mb-1">Tipe Temuan</label>
                     <select name="type" required class="w-full border rounded p-2">
                         <option value="bug">Bug</option>
-                        <option value="vulnerability">Vulnerability</option>
-                        <option value="hack">Hack</option>
+                        <option value="vulnerability">Kerentanan</option>
+                        <option value="hack">Peretasan</option>
                         <option value="lainnya">Lainnya</option>
                     </select>
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Sumber</label>
                     <select name="source" required class="w-full border rounded p-2">
-                        <option value="user">User</option>
+                        <option value="user">Pengguna</option>
                         <option value="monitoring">Monitoring</option>
                         <option value="audit">Audit</option>
                         <option value="laporan_masyarakat">Laporan Masyarakat</option>
@@ -83,9 +83,9 @@
             <div>
                 <label class="block font-medium mb-1">Status</label>
                 <select name="status" class="w-full border rounded p-2">
-                    <option value="open">Open</option>
-                    <option value="in_progress">In Progress</option>
-                    <option value="resolved">Resolved</option>
+                    <option value="open">Buka</option>
+                    <option value="in_progress">Proses</option>
+                    <option value="resolved">Selesai</option>
                 </select>
             </div>
 

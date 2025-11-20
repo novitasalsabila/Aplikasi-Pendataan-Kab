@@ -53,8 +53,8 @@
                     <label class="block font-medium mb-1">Tipe Temuan</label>
                     <select name="type" required class="w-full border rounded p-2">
                         <option value="bug" {{ $finding->type == 'bug' ? 'selected' : '' }}>Bug</option>
-                        <option value="vulnerability" {{ $finding->type == 'vulnerability' ? 'selected' : '' }}>Vulnerability</option>
-                        <option value="hack" {{ $finding->type == 'hack' ? 'selected' : '' }}>Hack</option>
+                        <option value="vulnerability" {{ $finding->type == 'vulnerability' ? 'selected' : '' }}>Kerentanan</option>
+                        <option value="hack" {{ $finding->type == 'hack' ? 'selected' : '' }}>Peretasan</option>
                         <option value="lainnya" {{ $finding->type == 'lainnya' ? 'selected' : '' }}>Lainnya</option>
                     </select>
                 </div>
@@ -62,7 +62,7 @@
                 <div>
                     <label class="block font-medium mb-1">Sumber</label>
                     <select name="source" required class="w-full border rounded p-2">
-                        <option value="user" {{ $finding->source == 'user' ? 'selected' : '' }}>User</option>
+                        <option value="user" {{ $finding->source == 'user' ? 'selected' : '' }}>Pengguna</option>
                         <option value="monitoring" {{ $finding->source == 'monitoring' ? 'selected' : '' }}>Monitoring</option>
                         <option value="audit" {{ $finding->source == 'audit' ? 'selected' : '' }}>Audit</option>
                         <option value="laporan_masyarakat" {{ $finding->source == 'laporan_masyarakat' ? 'selected' : '' }}>Laporan Masyarakat</option>
@@ -88,9 +88,9 @@
             <div>
                 <label class="block font-medium mb-1">Status</label>
                 <select name="status" class="w-full border rounded p-2">
-                    <option value="open" {{ $finding->status == 'open' ? 'selected' : '' }}>Open</option>
-                    <option value="in_progress" {{ $finding->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                    <option value="resolved" {{ $finding->status == 'resolved' ? 'selected' : '' }}>Resolved</option>
+                    <option value="open" {{ $finding->status == 'open' ? 'selected' : '' }}>Buka</option>
+                    <option value="in_progress" {{ $finding->status == 'in_progress' ? 'selected' : '' }}>Proses</option>
+                    <option value="resolved" {{ $finding->status == 'resolved' ? 'selected' : '' }}>Selesai</option>
                 </select>
             </div>
 
