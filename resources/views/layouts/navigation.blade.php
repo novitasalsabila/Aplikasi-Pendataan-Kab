@@ -110,7 +110,7 @@
             </x-nav-link>
 
             <x-nav-link :href="route('application_metrics.index')" :active="request()->routeIs('application_metrics.*')">
-                <img src="{{ asset('icons/database.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/monitoring.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Monitoring') }}
             </x-nav-link>
 
@@ -125,7 +125,7 @@
             </x-nav-link>
 
             <x-nav-link :href="route('application_metrics.index')" :active="request()->routeIs('application_metrics.*')">
-                <img src="{{ asset('icons/database.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/LogPengembang.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Laporan') }}
             </x-nav-link>
 

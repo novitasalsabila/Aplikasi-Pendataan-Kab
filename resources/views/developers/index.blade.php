@@ -2,14 +2,46 @@
     <div class="max-w-7xl mx-auto py-8 px-6">
         <!-- Header -->
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">
-                👨‍💻 Daftar Pengembang
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">
+                Manajemen Pengembang
             </h1>
+            <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
+                Daftar pengembang aplikasi (internal, vendor, freelance)
+            </p>
+        </div>
+
             <a href="{{ route('developers.create') }}"
                class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">
                + Tambah Pengembang
             </a>
         </div>
+
+        <form action="{{ route('applications.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
+
+                <!-- Input + Tombol Search -->
+                <div class="relative flex-1">
+                    <input 
+                        type="text" 
+                        name="search"
+                        value="{{ request('search') }}"
+                        placeholder="Cari nama atau pengembang email"
+                        class="w-full truncate px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 overflow-hidden text-ellipsis whitespace-nowrap"
+                    />
+                    <!-- Tombol Search -->
+                    <button 
+                        type="submit"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 hover:text-blue-600 transition"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                            class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
+                        </svg>
+                    </button>
+                </div>
+</form>
 
         <!-- Alert -->
         @if (session('success'))
