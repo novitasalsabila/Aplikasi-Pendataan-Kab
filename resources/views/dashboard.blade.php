@@ -16,7 +16,7 @@
 
                 <x-stat-card 
                     color="blue"
-                    title="Aplikasi Saya"
+                    title="Total Aplikasi"
                     :value="$totalApps"
                     detail="Semua aplikasi OPD terdaftar"
                     icon="aplikasi"
@@ -24,7 +24,7 @@
 
                 <x-stat-card 
                     color="green"
-                    title="Aktif"
+                    title="OPD/Dinas"
                     :value="$activeApps"
                     detail="Log pengembangan tercatat"
                     icon="activity"
@@ -32,7 +32,7 @@
 
                 <x-stat-card 
                     color="red"
-                    title="Temuan"
+                    title="Server & Pengguna"
                     :value="$findingsCount"
                     detail="Perlu ditindak lanjut"
                     icon="warning"
@@ -40,7 +40,7 @@
 
                 <x-stat-card 
                     color="green"
-                    title="Status Keseluruhan"
+                    title="Temuan Kritis"
                     :value="$inactiveApps"
                     detail="Aplikasi berjalan normal"
                     icon="trending-up"
