@@ -116,21 +116,46 @@
                             <td class="px-3 py-3 w-12">{{ $index + 1 }}</td>
                             <td class="px-4 py-3 font-medium">{{ $app->name }}</td>
                             <td class="px-4 py-3">{{ $app->department->name ?? '-' }}</td>
-                            <!-- <td class="px-4 py-3 capitalize">{{ $app->category }}</td> -->
                              <td class="px-4 py-3 text-center">
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                                @php
+                                    $categoryColors = [
+                                        'web' => 'bg-blue-100 text-blue-800',
+                                        'mobile' => 'bg-purple-100 text-purple-800',
+                                    ];
+                                @endphp
+
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full
+                                    {{ $categoryColors[$app->category] ?? 'bg-gray-100 text-gray-800' }}">
                                     {{ $app->category }}
                                 </span>
                             </td>
-                            <!-- <td class="px-4 py-3 capitalize">{{ $app->data_sensitivity }}</td> -->
                             <td class="px-4 py-3 text-center">
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                @php
+                                    $sensitivityColors = [
+                                        'internal' => 'bg-yellow-100 text-yellow-800',
+                                        'publik' => 'bg-green-100 text-green-800',
+                                        'rahasia' => 'bg-red-100 text-red-800',
+                                    ];
+                                @endphp
+
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full
+                                    {{ $sensitivityColors[$app->data_sensitivity] ?? 'bg-gray-100 text-gray-800' }}">
                                     {{ $app->data_sensitivity }}
                                 </span>
                             </td>
-                            <td class="px-4 py-3 capitalize">{{ $app->status }}</td>
-                            <!-- <td class="px-4 py-3">{{ $app->developer->name ?? '-' }}</td> -->
-                            <!-- <td class="px-4 py-3">{{ $app->server->hostname ?? '-' }}</td> -->
+                            <td class="px-4 py-3 text-center">
+                                @php
+                                    $statusColors = [
+                                        'aktif' => 'bg-green-100 text-green-800',
+                                        'maintenance' => 'bg-yellow-100 text-yellow-800',
+                                    ];
+                                @endphp
+
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full
+                                    {{ $statusColors[$app->status] ?? 'bg-gray-100 text-gray-800' }}">
+                                    {{ $app->status }}
+                                </span>
+                            </td>
                             <td class="px-4 py-3">
                                 {{ $app->last_update ? \Carbon\Carbon::parse($app->last_update)->format('Y-m-d') : '-' }}
                             </td>
