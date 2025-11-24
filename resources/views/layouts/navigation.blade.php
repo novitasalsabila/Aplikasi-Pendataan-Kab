@@ -69,24 +69,24 @@
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">OPD / Department</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('servers.index')" :active="request()->routeIs('applications.*')" 
+            <x-nav-link :href="route('servers.index')" :active="request()->routeIs('servers.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
-                <img src="{{ asset('icons/server.svg') }}" alt="Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/server.svg') }}" alt="Server" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Server</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('users.index')" :active="request()->routeIs('applications.*')" 
+            <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
-                <img src="{{ asset('icons/user.svg') }}" alt="Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/user.svg') }}" alt="Pengguna" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Pengguna</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('applications.*')" 
+            <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('applications_logs.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
-                <img src="{{ asset('icons/LogPengembang.svg') }}" alt="Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/LogPengembang.svg') }}" alt="Log Pengembangan" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Log Pengembangan</span>
             </x-nav-link>
 
@@ -97,7 +97,7 @@
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Temuan / Bug</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('application_integrations.index')" :active="request()->routeIs('users.*')" 
+            <x-nav-link :href="route('application_integrations.index')" :active="request()->routeIs('application_integrations.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
                 @click="if(isMobile) open = false">
                 <img src="{{ asset('icons/integrasi.svg') }}" alt="Aplikasi integrations" class="w-5 h-5">
@@ -106,11 +106,11 @@
 
             <x-nav-link :href="route('application_backups.index')" :active="request()->routeIs('application_backups.*')">
                 <img src="{{ asset('icons/database.svg') }}" alt="Aplikasi Backups" class="w-5 h-5">
-                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Backup') }}
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Backup') }}
             </x-nav-link>
 
             <x-nav-link :href="route('application_metrics.index')" :active="request()->routeIs('application_metrics.*')">
-                <img src="{{ asset('icons/monitoring.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/monitoring.svg') }}" alt="Monitoring" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Monitoring') }}
             </x-nav-link>
 
@@ -125,7 +125,7 @@
             </x-nav-link>
 
             <x-nav-link :href="route('application_metrics.index')" :active="request()->routeIs('application_metrics.*')">
-                <img src="{{ asset('icons/LogPengembang.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/LogPengembang.svg') }}" alt="Laporan" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Laporan') }}
             </x-nav-link>
 
