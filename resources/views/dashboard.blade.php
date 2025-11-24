@@ -18,7 +18,7 @@
                     color="blue"
                     title="Total Aplikasi"
                     :value="$totalApps"
-                    detail="Semua aplikasi OPD terdaftar"
+                    detail="6 aktif . 1 maintenance"
                     icon="aplikasi"
                 />
 
@@ -26,24 +26,24 @@
                     color="green"
                     title="OPD/Dinas"
                     :value="$activeApps"
-                    detail="Log pengembangan tercatat"
-                    icon="activity"
+                    detail="Perangkat daerah tercatat"
+                    icon="building"
                 />
 
                 <x-stat-card 
                     color="red"
                     title="Server & Pengguna"
                     :value="$findingsCount"
-                    detail="Perlu ditindak lanjut"
-                    icon="warning"
+                    detail="5 penguna aktif"
+                    icon="server"
                 />
 
                 <x-stat-card 
                     color="green"
                     title="Temuan Kritis"
                     :value="$inactiveApps"
-                    detail="Aplikasi berjalan normal"
-                    icon="trending-up"
+                    detail="1 temuan terbuka"
+                    icon="warning"
                 />
             </div>
 
@@ -51,7 +51,7 @@
 
                 {{-- Bagian kiri --}}
                 <div class="w-1/2">
-                    <x-dashboard-section title="📊 Aktivitas Terbaru">
+                    <x-dashboard-section title="Aktivitas Terbaru">
                         <x-table>
                             <x-slot name="head"></x-slot>
                         </x-table>
@@ -60,7 +60,7 @@
 
                 {{-- Bagian kanan --}}
                 <div class="w-1/2">
-                    <x-dashboard-section title="📈 Temuan Terbaru">
+                    <x-dashboard-section title=" Temuan Terbaru">
                         <p>Isi konten di sini, misalnya log aktivitas atau grafik bar chart.</p>
                     </x-dashboard-section>
                 </div>
