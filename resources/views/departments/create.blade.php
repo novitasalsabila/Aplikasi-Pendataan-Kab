@@ -1,8 +1,8 @@
 <x-app-layout>
     <div class="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg">
-        <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-100">
-            ➕ Tambah Data OPD
-        </h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-0">
+                    Tambah Data OPD
+                </h2>
 
         <form action="{{ route('departments.store') }}" method="POST" class="space-y-5">
             @csrf
