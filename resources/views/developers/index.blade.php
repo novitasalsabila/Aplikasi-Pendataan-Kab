@@ -102,7 +102,7 @@
 
                                     {{-- Tombol Edit & Hapus hanya untuk admin/diskominfo --}}
                                     @if(auth()->user()->role !== 'opd')
-                                        <a href="{{ route('applications.edit', $dev->id) }}"
+                                        <a href="{{ route('developers.edit', $dev->id) }}"
                                             class="text-yellow-600 hover:text-yellow-700 font-semibold inline-flex items-center px-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
                                                 stroke-width="1.5" stroke="currentColor" class="size-5">
