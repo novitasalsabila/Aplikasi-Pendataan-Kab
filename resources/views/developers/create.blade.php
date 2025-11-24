@@ -31,19 +31,19 @@
                 </div>
             </div>
 
-        <form action="{{ route('developers.store') }}" method="POST" class="space-y-5 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+        <form action="{{ route('developers.store') }}" method="POST" class="space-y-5 bg-white shadow-md rounded-lg p-6">
             @csrf
 
             <div>
                 <label class="block font-medium mb-1">Nama</label>
                 <input type="text" name="name" required
-                       class="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+                       class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Tipe Pengembang</label>
                 <select name="developer_type" required
-                        class="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
                     <option value="">-- Pilih Tipe --</option>
                     @foreach ($types as $type)
                         <option value="{{ $type }}">{{ ucfirst($type) }}</option>
@@ -55,12 +55,12 @@
                 <div>
                     <label class="block font-medium mb-1">Email</label>
                     <input type="email" name="contact_email"
-                           class="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+                           class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Nomor Telepon</label>
                     <input type="text" name="contact_phone"
-                           class="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+                           class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
                 </div>
             </div>
 
