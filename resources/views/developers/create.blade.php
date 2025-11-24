@@ -22,20 +22,7 @@
                 </select>
             </div>
 
-            <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block font-medium mb-1">Nomor Kontrak</label>
-                    <input type="text" name="contract_number"
-                           class="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label class="block font-medium mb-1">Tanggal Kontrak</label>
-                    <input type="date" name="contract_date"
-                           class="w-full border rounded p-2 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-blue-500">
-                </div>
-            </div> -->
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block font-medium mb-1">Email</label>
                     <input type="email" name="contact_email"
