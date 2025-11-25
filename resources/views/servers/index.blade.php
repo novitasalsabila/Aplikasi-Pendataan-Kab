@@ -69,7 +69,7 @@
                         <th class="px-4 py-3 text-left font-semibold">No</th>
                         <th class="px-4 py-3 text-left font-semibold min-w-[180px]">Hostname</th>
                         <th class="px-4 py-3 text-left font-semibold">IP Address</th>
-                        <th class="px-4 py-3 text-left font-semibold">OS</th>
+                        <th class="px-4 py-3 text-left font-semibold min-w-[180px]">OS</th>
                         <th class="px-4 py-3 text-left font-semibold min-w-[220px]">Lokasi</th>
                         <th class="px-4 py-3 text-left font-semibold min-w-[180px]">Dikelola Oleh</th>
                         <th class="px-4 py-3 text-left font-semibold">Status</th>
@@ -87,7 +87,7 @@
                             </td>
 
                             <td class="px-4 py-3 text-gray-500">{{ $srv->ip_address }}</td>
-                            <td class="px-4 py-3 text-gray-500">{{ $srv->os ?? '-' }}</td>
+                            <td class="px-4 py-3 text-gray-500 min-w-[180px]">{{ $srv->os ?? '-' }}</td>
                             <td class="px-4 py-3 min-w-[220px] text-gray-500">{{ $srv->location ?? '-' }}</td>
                             <td class="px-4 py-3 min-w-[180px] text-gray-500">{{ $srv->managed_by ?? '-' }}</td>
 
