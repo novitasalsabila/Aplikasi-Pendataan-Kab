@@ -68,9 +68,9 @@
                 </div>
         </div>
 
-        <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-lg shadow">
+        <div class="overflow-x-auto bg-white rounded-lg shadow">
             <table class="w-full border-collapse">
-                <thead class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100">
+                <thead class="bg-gray-100 text-gray-800">
                     <tr>
                         <th class="px-4 py-2 text-left">No</th>
                         <th class="px-4 py-2 text-left">Nama</th>
@@ -84,7 +84,7 @@
                 </thead>
                 <tbody>
                     @forelse ($users as $index => $user)
-                        <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <tr class="border-b hover:bg-gray-50 ">
                             <td class="px-4 py-2">{{ $index + 1 }}</td>
                             <td class="px-4 py-2">{{ $user->name }}</td>
                             <td class="px-4 py-2">{{ $user->email }}</td>

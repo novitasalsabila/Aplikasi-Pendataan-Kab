@@ -3,7 +3,7 @@
 
         <!-- TAMBAH PENGGUNA BARU -->        
 
-        <form action="{{ route('users.store') }}" method="POST" class="space-y-5 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+        <form action="{{ route('users.store') }}" method="POST" class="space-y-5 bg-white shadow-md rounded-lg p-6">
             @csrf
 
              {{-- Judul + teks bawah --}}
@@ -20,33 +20,33 @@
                 <label class="block font-medium mb-1">Nama Lengkap *</label>
                 <input type="text" name="name" required 
                 placeholder="Nama Lengkap"
-                class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Email *</label>
                 <input type="email" name="email" required 
                 placeholder="admin@pemkab.go.id"
-                class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Nomor Telepon *</label>
                 <input type="phone" name="phone" required 
                 placeholder="08xxxxxxxxxx"
-                class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Jabatan *</label>
                 <input type="position" name="position" required 
                 placeholder="Contoh : Staf IT"
-                class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Role *</label>
-                <select name="role" required class="w-full border rounded p-2 dark:bg-gray-700">
+                <select name="role" required class="w-full border rounded p-2">
                     @foreach ($roles as $role)
                         <option value="{{ $role }}">{{ ucfirst($role) }}</option>
                     @endforeach
