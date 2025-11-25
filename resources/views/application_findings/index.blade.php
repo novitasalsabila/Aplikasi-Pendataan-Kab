@@ -11,7 +11,7 @@
             <!-- Kiri: Judul dan deskripsi -->
             <div>
                 <h1 class="text-2xl font-bold text-gray-800 mb-0">
-                    Temuan/Bug/Keamanan
+                    Temuan/Bug
                 </h1>
 
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
@@ -38,7 +38,35 @@
         {{ session('error') }}
     </div>
 @endif
+ <!-- Search + Filter dalam 1 kotak -->
+        <div class="p-4 bg-white shadow-sm rounded-lg border border-gray-200 mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-center mb-6 gap-3 w-full">
+                    <!-- Form Search & Filter -->
+                    <form action="{{ route('application_findings.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
 
+                        <!-- Input + Tombol Search -->
+                        <div class="relative flex-1">
+                            <input 
+                                type="text" 
+                                name="search"
+                                value="{{ request('search') }}"
+                                placeholder="Cari nama atau email pengguna"
+                                class="w-full truncate px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 overflow-hidden text-ellipsis whitespace-nowrap"/>
+                            <!-- Tombol Search -->
+                            <button 
+                                type="submit"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 hover:text-blue-600 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                                    class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
+                                </svg>
+                            </button>
+                        </div>         
+                    </form>
+                </div>
+        </div>
             </div>
         </div>
 
