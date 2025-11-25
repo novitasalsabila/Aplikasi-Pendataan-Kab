@@ -46,7 +46,7 @@
 
             <div>
                 <label class="block font-medium mb-1">Role *</label>
-                <select name="role" required class="w-full border rounded p-2">
+                <select name="role" required class="w-full border rounded p-2git">
                     @foreach ($roles as $role)
                         <option value="{{ $role }}" {{ $user->role === $role ? 'selected' : '' }}>
                             {{ ucfirst($role) }}
