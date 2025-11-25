@@ -10,11 +10,28 @@ class ServerController extends Controller
     /**
      * Tampilkan daftar semua server.
      */
-    public function index()
+    // public function index()
+    // {
+    //     $servers = Server::latest()->get();
+    //     return view('servers.index', compact('servers'));
+    // }
+    public function index(Request $request)
     {
-        $servers = Server::latest()->get();
+        $search = $request->search;
+
+        $servers = Server::when($search, function ($query) use ($search) {
+                $query->where('hostname', 'like', "%{$search}%")
+                    ->orWhere('ip_address', 'like', "%{$search}%")
+                    ->orWhere('os', 'like', "%{$search}%")
+                    ->orWhere('location', 'like', "%{$search}%")
+                    ->orWhere('managed_by', 'like', "%{$search}%");
+            })
+            ->latest()
+            ->get();
+
         return view('servers.index', compact('servers'));
     }
+
 
     /**
      * Form tambah server.
