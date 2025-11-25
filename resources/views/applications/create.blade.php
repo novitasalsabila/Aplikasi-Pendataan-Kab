@@ -34,18 +34,18 @@
         <form action="{{ route('applications.store') }}" method="POST"
               class="space-y-5 bg-white shadow-md rounded-lg p-6">
             @csrf
-            <div>
-                <label class="block font-medium mb-1">Nama Aplikasi</label>
-                <input type="text" name="name" required
-                       class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
-            </div>
-            <div>
-                <label class="block font-medium mb-1">Deskripsi</label>
-                <textarea name="description" rows="3"
-                          class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"></textarea>
-            </div>
+            
+        <h2 class="text-lg font-semibold mb-4 border-b pb-2">
+    Informasi Aplikasi
+</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+        <label class="block font-medium mb-1">Nama Aplikasi</label>
+        <input type="text" name="name" required
+               class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+    </div>
+
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block font-medium mb-1">Kategori</label>
                     <select name="category" required class="w-full border rounded p-2 text-sm text-gray-600">
@@ -55,6 +55,25 @@
                         <option value="desktop">Desktop</option>
                     </select>
                 </div>
+            </div>
+            
+           <div>
+    <label class="block font-medium mb-1">Deskripsi</label>
+    <textarea name="description" rows="3" placeholder="Jelaskan fungsi dan tujuan aplikasi"
+              class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"></textarea>
+</div>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- <div>
+                    <label class="block font-medium mb-1">Kategori</label>
+                    <select name="category" required class="w-full border rounded p-2 text-sm text-gray-600">
+                        <option value="">-- Pilih --</option>
+                        <option value="web">Web</option>
+                        <option value="mobile">Mobile</option>
+                        <option value="desktop">Desktop</option>
+                    </select>
+                </div> -->
                 <div>
                     <label class="block font-medium mb-1">Sensitivitas Data</label>
                     <select name="data_sensitivity" required class="w-full border rounded p-2 text-sm text-gray-600">
