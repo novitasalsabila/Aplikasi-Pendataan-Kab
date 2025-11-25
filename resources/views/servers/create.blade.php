@@ -1,9 +1,9 @@
 <x-app-layout>
     <div class="max-w-3xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
-         <x-page-header 
+         {{-- <x-page-header 
             title="Tambah Server Baru"
             subtitle="Lengkapi informasi server di bawah ini."
-        />
+        /> --}}
 
         <form action="{{ route('servers.store') }}" method="POST" class="space-y-5 bg-white shadow-md rounded-lg p-6">
             @csrf
@@ -18,6 +18,16 @@
                     </ul>
                 </div>
             @endif
+            
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">
+                    Tambah Server Baru
+                </h1>
+                <p class="text-sm text-gray-500 -mt-1 mb-10">
+                    Lengkapi informasi Server di bawah ini
+                </p>
+            </div>
+
 
             <div>
                 <label class="block font-medium mb-1">Hostname</label>
