@@ -9,7 +9,7 @@
         <div class="relative mb-6">
             <!-- Tombol kanan atas -->
             @if(auth()->user()->role === 'admin')
-                <a href="{{ route('developers.create') }}"
+                <a href="{{ route('users.create') }}"
                     class="absolute top-0 right-0 bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition no-underline flex items-center gap-2">
                     <img src="{{ asset('icons/plus.svg') }}" alt="Tambah"
                         class="w-5 h-5 filter invert brightness-0">
@@ -75,10 +75,10 @@
                         <th class="px-4 py-2 text-left">No</th>
                         <th class="px-4 py-2 text-left">Nama</th>
                         <th class="px-4 py-2 text-left">Email</th>
+                         <th class="px-4 py-2 text-left">Jabatan</th>
+                         <th class="px-4 py-2 text-left">Role</th>
+                         <th class="px-4 py-2 text-left">OPD</th>
                         <th class="px-4 py-2 text-left">NoTelepon</th>
-                        <th class="px-4 py-2 text-left">Jabatan Pengguna</th>
-                        <th class="px-4 py-2 text-left">Role</th>
-                        <th class="px-4 py-2 text-left">OPD</th>
                         <th class="px-4 py-2 text-left">Aksi</th>
                     </tr>
                 </thead>
@@ -88,19 +88,22 @@
                             <td class="px-4 py-2">{{ $index + 1 }}</td>
                             <td class="px-4 py-2">{{ $user->name }}</td>
                             <td class="px-4 py-2">{{ $user->email }}</td>
-                            <td class="px-4 py-2">{{ $user->phone }}</td>
                             <td class="px-4 py-2">{{ $user->position }}</td>
-                            <td class="px-4 py-2 capitalize">{{ $user->role }}</td>
-                            <td class="px-4 py-2">{{ $user->department->name ?? '-' }}</td>
                             <td class="px-4 py-2">
-                                <!-- <div class="flex gap-2">
-                                    <a href="{{ route('users.edit', $user) }}" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">Edit</a>
-                                    <form action="{{ route('users.destroy', $user) }}" method="POST" onsubmit="return confirm('Hapus pengguna ini?')">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Hapus</button>
-                                    </form>
-                                </div> -->
-
+                                <span class="
+                                    px-3 py-1 rounded-lg text-sm font-semibold
+                                    @if ($user->role == 'admin') bg-red-100 text-red-700
+                                    @elseif ($user->role == 'diskominfo') bg-blue-100 text-blue-700
+                                    @elseif ($user->role == 'opd') bg-green-100 text-green-700
+                                    @endif
+                                ">
+                                    {{ strtoupper($user->role) }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-2">{{ $user->department->name ?? '-' }}</td>
+                            <td class="px-4 py-2">{{ $user->phone }}</td>
+                            <td class="px-4 py-2">
+                                
                                  @if(auth()->user()->role === 'admin')
                             <div class="flex items-center justify-center divide-x divide-gray-300">
 
