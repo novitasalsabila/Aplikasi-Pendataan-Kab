@@ -4,7 +4,7 @@
         <div class="relative mb-6">
             <!-- Tombol kanan atas -->
             @if(auth()->user()->role === 'admin')
-                <a href="{{ route('developers.create') }}"
+                <a href="{{ route('servers.create') }}"
                     class="absolute top-0 right-0 bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition no-underline flex items-center gap-2">
                     <img src="{{ asset('icons/plus.svg') }}" alt="Tambah"
                         class="w-5 h-5 filter invert brightness-0">
