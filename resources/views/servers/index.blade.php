@@ -45,7 +45,7 @@
                                 type="text" 
                                 name="search"
                                 value="{{ request('search') }}"
-                                placeholder="Cari nama server"
+                                placeholder="Cari nama server atau IP address"
                                 class="w-full truncate px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 overflow-hidden text-ellipsis whitespace-nowrap"/>
                             <!-- Tombol Search -->
                             <button 
