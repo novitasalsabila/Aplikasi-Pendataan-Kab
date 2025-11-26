@@ -4,11 +4,11 @@
             <!-- Kiri: Judul dan deskripsi -->
             <div>
                 <h1 class="text-2xl font-bold text-gray-800 mb-0">
-                    Riwayat Cadangan Aplikasi
+                    Riwayat Backup Aplikasi
                 </h1>
 
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
-                    {{ __('Catatan bug dan verifikasi data') }} 
+                    {{ __('Catatan backup dan verifikasi data') }} 
                 </p>
 
             </div>
@@ -26,28 +26,42 @@
 
 
         <div class="overflow-x-auto bg-white shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full text-sm text-gray-700">
-                <thead class="bg-gray-100">
+            <div class="px-4 py-3">
+                <h1 class="text-xl font-bold">
+                    Daftar Backup ({{ $backups->count() }})
+                </h1>
+            </div>
+            <table class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
+                <thead>
                     <tr>
                         <th class="px-4 py-3 text-left">No</th>
-                        <th class="px-4 py-3 text-left">Aplikasi</th>
-                        <th class="px-4 py-3 text-left">Waktu Pencadangan</th>
-                        <th class="px-4 py-3 text-left">Tipe Pencadangan</th>
-                        <th class="px-4 py-3 text-left">Lokasi Penyimpanan</th>
+                        <th class="px-4 py-3 text-left min-w-[200px]">Aplikasi</th>
+                        <th class="px-4 py-3 text-left  min-w-[250px]">Waktu Pencadangan</th>
+                        <th class="px-4 py-3 text-left  min-w-[200px]">Tipe Pencadangan</th>
+                        <th class="px-4 py-3 text-left  min-w-[350px]">Lokasi Penyimpanan</th>
                         <th class="px-4 py-3 text-left">Terverifikasi</th>
                         {{-- Kolom Aksi hanya untuk admin --}}
                         @if (auth()->user()?->role === 'admin' || auth()->user()->role === 'diskominfo')
                             <th class="px-4 py-3 text-left">Aksi</th>
                         @endif
                     </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100">
+                </thead >
+                
+                <tbody class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
                     @forelse ($backups as $index => $b)
                         <tr class="hover:bg-gray-50 transition align-top">
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3 font-medium">{{ $b->application->name ?? '-' }}</td>
                             <td class="px-4 py-3">{{ \Carbon\Carbon::parse($b->backup_date)->format('d M Y H:i') }}</td>
-                            <td class="px-4 py-3 capitalize">{{ $b->backup_type }}</td>
+                            <td class="px-4 py-3 capitalize
+                                @if($b->backup_type === 'manual') text-gray-500
+                                @elseif($b->backup_type === 'harian') text-green-600
+                                @elseif($b->backup_type === 'mingguan') text-blue-600
+                                @elseif($b->backup_type === 'bulanan') text-orange-500
+                                @endif">
+                                {{ $b->backup_type }}
+                            </td>
+
                             <td class="px-4 py-3">{{ $b->storage_location }}</td>
                             <td class="px-4 py-3 text-center">
                                 @if ($b->verified_st === 'ya')

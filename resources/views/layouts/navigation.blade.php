@@ -6,7 +6,7 @@
         flex flex-col justify-between transition-transform duration-300 ease-in-out
         
         {{-- DESKTOP: Tetap w-64, relative, full height (w-64 = 256px) --}}
-        md:relative md:flex-shrink-0 md:translate-x-0 md:w-64 md:h-full-md
+        md:relative md:flex-shrink-0 md:translate-x-0 md:w-72 md:h-full-md
     "
     {{-- Mengontrol Transisi Sidebar (Meluncur dari Kiri ke Kanan) --}}
     :class="{ 
@@ -42,75 +42,65 @@
             
             {{-- Tambahkan @click="if(isMobile) open = false" agar menu tertutup setelah klik di mobile --}}
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" 
-                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
-                @click="if(isMobile) open = false">
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group">
                 <img src="{{ asset('icons/dashboard.svg') }}" alt="Dashboard" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Dashboard</span>
             </x-nav-link>
 
             <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')" 
-                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
-                @click="if(isMobile) open = false">
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group">
                 <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Aplikasi Saya</span>
             </x-nav-link>
 
             <x-nav-link :href="route('developers.index')" :active="request()->routeIs('developers.*')" 
-                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
-                @click="if(isMobile) open = false">
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group">
                 <img src="{{ asset('icons/pengembang.svg') }}" alt="Pengembang" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Pengembang</span>
             </x-nav-link>
 
             <x-nav-link :href="route('departments.index')" :active="request()->routeIs('departments.*')" 
-                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
-                @click="if(isMobile) open = false">
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group">
                 <img src="{{ asset('icons/OPD.svg') }}" alt="OPD" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">OPD / Department</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('servers.index')" :active="request()->routeIs('applications.*')" 
-                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
-                @click="if(isMobile) open = false">
-                <img src="{{ asset('icons/server.svg') }}" alt="Aplikasi" class="w-5 h-5">
+            <x-nav-link :href="route('servers.index')" :active="request()->routeIs('servers.*')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group">
+                <img src="{{ asset('icons/server.svg') }}" alt="Server" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Server</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('users.index')" :active="request()->routeIs('applications.*')" 
-                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
-                @click="if(isMobile) open = false">
-                <img src="{{ asset('icons/user.svg') }}" alt="Aplikasi" class="w-5 h-5">
+            <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group">
+                <img src="{{ asset('icons/user.svg') }}" alt="Pengguna" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Pengguna</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('applications.*')" 
-                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
-                @click="if(isMobile) open = false">
-                <img src="{{ asset('icons/LogPengembang.svg') }}" alt="Aplikasi" class="w-5 h-5">
-                <span class="font-medium text-gray-700 group-hover:text-blue-600">Log Pengembangan</span>
+            <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('application_logs.*')">
+                <img src="{{ asset('icons/activity.svg') }}" alt="Log Pengembangan" class="w-5 h-5">
+                <i class="fa-solid fa-code"></i> {{ __('Log Pengembangan') }}
             </x-nav-link>
 
             <x-nav-link :href="route('application_findings.index')" :active="request()->routeIs('application_findings.*')" 
-                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
-                @click="if(isMobile) open = false">
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group">
                 <img src="{{ asset('icons/warning.svg') }}" alt="Temuan" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Temuan / Bug</span>
             </x-nav-link>
 
-            <x-nav-link :href="route('application_integrations.index')" :active="request()->routeIs('users.*')" 
-                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group"
-                @click="if(isMobile) open = false">
+            <x-nav-link :href="route('application_integrations.index')" :active="request()->routeIs('application_integrations.*')" 
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group">
                 <img src="{{ asset('icons/integrasi.svg') }}" alt="Aplikasi integrations" class="w-5 h-5">
                 <span class="font-medium text-gray-700 group-hover:text-blue-600">Integrasi</span>
             </x-nav-link>
 
             <x-nav-link :href="route('application_backups.index')" :active="request()->routeIs('application_backups.*')">
                 <img src="{{ asset('icons/database.svg') }}" alt="Aplikasi Backups" class="w-5 h-5">
-                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Backup') }}
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Backup') }}
             </x-nav-link>
 
             <x-nav-link :href="route('application_metrics.index')" :active="request()->routeIs('application_metrics.*')">
-                <img src="{{ asset('icons/monitoring.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/monitoring.svg') }}" alt="Monitoring" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Monitoring') }}
             </x-nav-link>
 
@@ -118,17 +108,6 @@
                 <img src="{{ asset('icons/Dokumen.svg') }}" alt="Dokumen" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Dokumen') }}
             </x-nav-link>
-
-            <x-nav-link :href="route('application_logs.index')" :active="request()->routeIs('application_logs.*')">
-                <img src="{{ asset('icons/clock.svg') }}" alt="Log Aktivitas" class="w-5 h-5">
-                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Log Aktivitas') }}
-            </x-nav-link>
-
-            <x-nav-link :href="route('application_metrics.index')" :active="request()->routeIs('application_metrics.*')">
-                <img src="{{ asset('icons/LogPengembang.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
-                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Laporan') }}
-            </x-nav-link>
-
 
             <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
                 <img src="{{ asset('icons/versiaplikasi.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">

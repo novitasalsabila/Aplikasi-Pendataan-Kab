@@ -11,7 +11,7 @@
             <!-- Kiri: Judul dan deskripsi -->
             <div>
                 <h1 class="text-2xl font-bold text-gray-800 mb-0">
-                    Temuan/Bug/Keamanan
+                    Temuan/Bug
                 </h1>
 
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
@@ -38,20 +38,53 @@
         {{ session('error') }}
     </div>
 @endif
+ <!-- Search + Filter dalam 1 kotak -->
+        <div class="p-4 bg-white shadow-sm rounded-lg border-gray-200 mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-center mb-6 gap-3 w-full">
+                    <!-- Form Search & Filter -->
+                    <form action="{{ route('application_findings.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
 
+                        <!-- Input + Tombol Search -->
+                        <div class="relative flex-1">
+                            <input 
+                                type="text" 
+                                name="search"
+                                value="{{ request('search') }}"
+                                placeholder="Cari nama atau email pengguna"
+                                class="w-full truncate px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 overflow-hidden text-ellipsis whitespace-nowrap"/>
+                            <!-- Tombol Search -->
+                            <button 
+                                type="submit"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 hover:text-blue-600 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                                    class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
+                                </svg>
+                            </button>
+                        </div>         
+                    </form>
+                </div>
+        </div>
             </div>
         </div>
 
         <div class="overflow-x-auto bg-white shadow-md rounded-lg">
-            <table class="min-w-full table-fixed text-sm text-gray-700">
-                <thead class="bg-gray-100 text-gray-800">
+            <div class="px-4 py-3">
+                <h1 class="text-xl font-bold">
+                    Daftar Temuan ({{ $findings->count() }})
+                </h1>
+            </div>
+            <table class="min-w-full table-fixed text-sm text-gray-700 ">
+                <thead class="bg-white-100 text-gray-800 border-b-2 border-gray-300">
                     <tr>
                         <th class="px-3 py-3 text-center w-10">No</th>
                         <th class="px-4 py-3 text-left  w-40">Aplikasi</th>
-                        <th class="px-4 py-3 text-left  w-1/3">Deskripsi</th>
+                        <th class="px-4 py-3 text-left  min-w-[350px]">Deskripsi</th>
                         <th class="px-4 py-3 text-center w-20">Tipe</th>
                         <th class="px-4 py-3 text-center w-24">Tingkat</th>
-                        <th class="px-4 py-3 text-left  w-32">Sumber</th>
+                        <th class="px-4 py-3 text-left  min-w-[190px]">Sumber</th>
                         <th class="px-4 py-3 text-center w-28">Status</th>
                         <th class="px-4 py-3 text-left  w-32">Tindak Lanjut</th>
                         <th class="px-4 py-3 text-center w-32">Tanggal Ditemukan</th>
@@ -62,21 +95,36 @@
                 <tbody>
                     @forelse ($findings as $index => $f)
                         <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <td class="px-3 py-3 text-center align-middle">
+                            <td class="px-3 py-3 text-center align-middle font-bold">
                                 {{ $index + 1 }}
                             </td>
 
-                            <td class="px-4 py-3 align-middle">
+                            <td class="px-4 py-3 align-middle font-bold">
                                 {{ $f->application->name ?? '-' }}
                             </td>
 
-                            <td class="px-4 py-3 align-middle">
+                            <td class="px-4 py-3 align-middle ">
                                 {{ Str::limit($f->description, 100) }}
                             </td>
 
                             <td class="px-4 py-3 text-center align-middle">
-                                {{ ucfirst($f->type) }}
-                            </td>
+                            @php
+                                $type = strtolower($f->type);
+
+                                $styles = [
+                                    'bug' => 'bg-red-100 text-red-600',
+                                    'vulnerability' => 'bg-yellow-100 text-yellow-600',
+                                    'hack' => 'bg-purple-100 text-purple-600',
+                                    'lainnya' => 'bg-orange-100 text-orange-600',
+                                ];
+                            @endphp
+
+                            <span class="px-3 py-1 rounded-lg text-sm font-semibold 
+                                {{ $styles[$type] ?? 'bg-gray-100 text-gray-600' }}">
+                                {{ ucfirst($type) }}
+                            </span>
+                        </td>
+
 
                             <td class="px-4 py-3 text-center align-middle">
                                 @php

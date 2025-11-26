@@ -8,9 +8,19 @@ use Illuminate\Http\Request;
 class DepartmentController extends Controller
 {
     // Tampilkan daftar department
-    public function index()
+   public function index(Request $request)
     {
-        $departments = Department::all();
+        // Ambil nilai search dari input
+        $search = $request->search;
+
+        // Query pencarian
+        $departments = Department::when($search, function ($query) use ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+        })
+        ->orderBy('name')
+        ->get();
+
         return view('departments.index', compact('departments'));
     }
 

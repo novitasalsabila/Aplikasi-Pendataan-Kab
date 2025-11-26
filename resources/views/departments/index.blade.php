@@ -1,26 +1,27 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto p-6">
         <!-- Header -->
-        <div class="flex items-center justify-between mb-6">
-            <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
-                📋 Daftar OPD
-            </h1>
+        <div class="relative mb-6 md:mt-0 sm:mt-20">
+            <!-- Tombol kanan atas -->
+            
+                <a href="{{ route('departments.create') }}"
+                    class="absolute top-0 right-0 bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition no-underline flex items-center gap-2">
+                    <img src="{{ asset('icons/plus.svg') }}" alt="Tambah"
+                        class="w-5 h-5 filter invert brightness-0">
+                    <span>Tambah OPD</span>
+                </a>
+           
+            <!-- Kiri: Judul dan deskripsi -->
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-0">
+                    Manajemen OPD / Department
+                </h1>
 
-            <!-- Tombol Tambah OPD -->
-            <a href="{{ route('departments.create') }}"
-               class="inline-flex items-center justify-center gap-2
-                      bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500
-                      text-white font-semibold px-4 py-2 rounded-lg shadow-md
-                      hover:from-blue-600 hover:via-indigo-600 hover:to-purple-600
-                      transition-all duration-300 transform hover:scale-105
-                      focus:outline-none focus:ring-2 focus:ring-blue-300
-                      !opacity-100 !cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                     stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-                Tambah OPD
-            </a>
+                <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
+                    {{ __('Daftar Orgnisasi Perangkat Daerah') }} 
+                </p>
+
+            </div>
         </div>
 
         @if (session('success'))
@@ -33,58 +34,101 @@
             </div>
         @endif  
 
-        <!-- Table -->
-        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead class="bg-gray-50 dark:bg-gray-900">
-                    <tr>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">No</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Nama OPD</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Email</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Kepala OPD</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Kontak</th>
-                        <th class="px-4 py-3 text-center text-sm font-semibold text-gray-600 dark:text-gray-300">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-                    @forelse ($departments as $index => $dept)
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-                            <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-200">{{ $index + 1 }}</td>
-                            <td class="px-4 py-3 text-sm font-medium text-gray-800 dark:text-gray-100">{{ $dept->name }}</td>
-                            <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-200">{{ $dept->email }}</td>
-                            <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-200">{{ $dept->head_name }}</td>
-                            <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-200">{{ $dept->head_phone }}</td>
-                            <td class="px-4 py-3 text-center">
-                                <div class="flex justify-center space-x-2">
-                                    <!-- Tombol Edit -->
-                                    <a href="{{ route('departments.edit', $dept->id) }}"
-                                       class="bg-yellow-400 text-gray-900 text-xs font-semibold px-3 py-1 rounded hover:bg-yellow-500">
-                                        Edit
-                                    </a>
+         <!-- Search + Filter dalam 1 kotak -->
+        <div class="p-4 bg-white shadow-xs rounded-lg border border-gray-200 mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-center mb-6 gap-3 w-full">
+                    <!-- Form Search & Filter -->
+                    <form action="{{ route('departments.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
 
-                                    <!-- Tombol Hapus -->
-                                    <form action="{{ route('departments.destroy', $dept->id) }}" method="POST"
-                                          onsubmit="return confirm('Yakin ingin menghapus {{ $dept->name }}?')"
-                                          class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                                class="bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded hover:bg-red-600">
-                                            Hapus
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="text-center py-4 text-gray-500 dark:text-gray-400">
-                                Belum ada data.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                        <!-- Input + Tombol Search -->
+                        <div class="relative flex-1">
+                            <input 
+                                type="text" 
+                                name="search"
+                                value="{{ request('search') }}"
+                                placeholder="Cari nama atau email OPD"
+                                class="w-full truncate px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 overflow-hidden text-ellipsis whitespace-nowrap"/>
+                            <!-- Tombol Search -->
+                            <button 
+                                type="submit"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 hover:text-blue-600 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                                    class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
+                                </svg>
+                            </button>
+                        </div>         
+                    </form>
+                </div>
         </div>
+<!-- Table -->
+<div class="bg-white shadow-md rounded-lg overflow-x-auto">
+    <h1 class="text-xl font-semibold text-gray-800 pt-2 pb-2 mb-3 ml-4 mt-3">
+        Daftar OPD ({{ $departments->count() }})
+     </h1>
+    <table class="min-w-full text-sm text-gray-700">
+        <!-- Header -->
+        <thead class="bg-white border-b-2 border-t-2">
+            <tr class="text-gray-800 text-medium tracking-wide">
+                <th class="px-4 py-3 text-left font-semibold">No</th>
+                <th class="px-4 py-3 text-left font-semibold min-w-[480px]">Nama OPD</th>
+                <th class="px-4 py-3 text-left font-semibold min-w-[180px]">Email</th>
+                <th class="px-4 py-3 text-left font-semibold min-w-[180px]">Kepala OPD</th>
+                <th class="px-4 py-3 text-left font-semibold min-w-[180px]">Kontak</th>
+                <th class="px-4 py-3 text-center font-semibold">Aksi</th>
+            </tr>
+        </thead>
+
+        <!-- Body -->
+        <tbody class="divide-y divide-gray-100">
+            @forelse ($departments as $index => $dept)
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-4 py-3">{{ $index + 1 }}</td>
+
+                    <!-- Nama OPD -->
+                    <td class="px-4 py-3 font-medium text-gray-800">
+                        {{ $dept->name }}
+                    </td>
+
+                    <!-- Email -->
+                    <td class="px-4 py-3 text-gray-600">
+                        {{ $dept->email }}
+                    </td>
+
+                    <!-- Kepala OPD -->
+                    <td class="px-4 py-3 text-gray-600">
+                        {{ $dept->head_name }}
+                    </td>
+
+                    <!-- Kontak -->
+                    <td class="px-4 py-3 text-gray-600">
+                        {{ $dept->head_phone }}
+                    </td>
+
+                    <!-- Aksi -->
+                    <td class="px-4 py-3 text-center">
+                        <x-action-buttons
+                            :id="$dept->id"
+                            :showRoute="route('departments.show', $dept->id)"
+                            :editRoute="route('departments.edit', $dept->id)"
+                            :deleteRoute="route('departments.destroy', $dept->id)"
+                            itemName="{{ $dept->name }}"
+                        />
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center py-3 text-gray-500">
+                        Belum ada data.
+                    </td>
+                </tr>
+            @endforelse
+        </tbody>
+
+    </table>
+</div>
+
     </div>
 </x-app-layout>

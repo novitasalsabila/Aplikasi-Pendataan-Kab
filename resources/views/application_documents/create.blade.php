@@ -1,15 +1,26 @@
 <x-app-layout>
-    <div class="max-w-3xl mx-auto py-8 px-6">
-        <h2 class="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-100">➕ Tambah Dokumen Aplikasi</h2>
-
+    <div class="max-w-3xl mx-auto py-8 px-6 sm:mt-20 md:mt-0">
         <form action="{{ route('application_documents.store') }}" method="POST" enctype="multipart/form-data"
-              class="space-y-5 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+              class="space-y-6 bg-white shadow-md rounded-lg p-6 border border-gray-500">
             @csrf
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">
+                    Tambah Dokumen Baru
+                </h1>
+                <p class="text-sm text-gray-500 -mt-1 mb-10">
+                    Lengkapi informasi Dokumen di bawah ini
+                </p>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1">Nama Dokumen</label>
+                <input type="text" name="doc_name" required
+                       class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-600">
+            </div>
 
             <div>
-                <label class="block font-medium mb-1">Aplikasi</label>
+                <label class="block text-sm font-medium mb-1">Aplikasi</label>
                 <select name="application_id" required
-                        class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-600">
                     <option value="">-- Pilih Aplikasi --</option>
                     @foreach ($applications as $app)
                         <option value="{{ $app->id }}">{{ $app->name }}</option>
@@ -18,15 +29,9 @@
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Nama Dokumen</label>
-                <input type="text" name="doc_name" required
-                       class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
-            </div>
-
-            <div>
-                <label class="block font-medium mb-1">Jenis Dokumen</label>
+                <label class="block text-sm font-medium mb-1">Tipe Dokumen</label>
                 <select name="doc_type" required
-                        class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                        class="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-600">
                     <option value="tor">TOR</option>
                     <option value="kontrak">Kontrak</option>
                     <option value="manual">Manual</option>
@@ -35,17 +40,21 @@
             </div>
 
             <div>
-                <label class="block font-medium mb-1">File Dokumen</label>
+                <label class="block text-sm font-medium mb-1">File Dokumen</label>
                 <input type="file" name="file_path" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt" required
-                       class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
+                       class="w-full border rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-600">
                 <p class="text-xs text-gray-500 mt-1">Format: PDF, DOCX, PPTX, XLSX (maks. 2MB)</p>
             </div>
-
+            {{-- Tombol --}}
             <div class="flex justify-end space-x-3">
                 <a href="{{ route('application_documents.index') }}"
-                   class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Kembali</a>
+                class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition no-underline flex items-center gap-2">
+                    <span>Batal</span>
+                </a>
                 <button type="submit"
-                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Simpan</button>
+                        class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+                    Simpan
+                </button>
             </div>
         </form>
     </div>
