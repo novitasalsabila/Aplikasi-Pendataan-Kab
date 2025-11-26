@@ -90,7 +90,7 @@
                 <tbody class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
                     @forelse ($users as $index => $user)
                         <tr class="border-b hover:bg-gray-50 ">
-                            <td class="px-4 py-2">{{ $index + 1 }}</td>
+                            <td class="px-4 py-2 font-bold">{{ $index + 1 }}</td>
                             <td class="px-4 py-2">{{ $user->name }}</td>
                             <td class="px-4 py-2">{{ $user->email }}</td>
                             <td class="px-4 py-2">{{ $user->position }}</td>

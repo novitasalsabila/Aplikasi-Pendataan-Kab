@@ -96,22 +96,27 @@
 
         <!-- Tabel Data -->
         <div class="bg-white shadow-md rounded-lg overflow-x-auto">
-            <table class="min-w-full text-xs text-gray-700">
-                <thead class="bg-gray-100">
+                <div class="px-4 py-3">
+                <h1 class="text-xl font-bold">
+                    Daftar Aplikasi ({{ $applications->count() }})
+                </h1>
+            </div>
+            <table class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
+                <thead>
                     <tr>
                         <th class="px-3 py-3 text-left w-12">No</th>
-                        <th class="px-4 py-3 text-left">Nama Aplikasi</th>
-                        <th class="px-4 py-3 text-left">OPD</th>
+                        <th class="px-4 py-3 text-left min-w-[250px]">Nama Aplikasi</th>
+                        <th class="px-4 py-3 text-left min-w-[250px]">OPD</th>
                         <th class="px-4 py-3 text-left">Kategori</th>
-                        <th class="px-4 py-3 text-left">Sensitivitas Data</th>
+                        <th class="px-4 py-3 text-left min-w-[250px]">Sensitivitas Data</th>
                         <th class="px-4 py-3 text-left">Status</th>
-                        <th class="px-4 py-3 text-left">Terakhir Update</th>
-                        <th class="px-4 py-3 text-left">Versi</th>
+                        <th class="px-4 py-3 text-left min-w-[250px]">Terakhir Update</th>
+                        <th class="px-4 py-3 text-left min-w-[250px]">Versi</th>
                         <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
 
-                <tbody class="divide-y divide-gray-100">
+                <tbody class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
                     @forelse ($applications as $index => $app)
                         <tr class="hover:bg-gray-50 transition">
                             <td class="px-3 py-3 w-12">{{ $index + 1 }}</td>
