@@ -69,20 +69,25 @@
         </div>
 
         <div class="overflow-x-auto bg-white rounded-lg shadow">
-            <table class="w-full border-collapse">
-                <thead class="bg-gray-100 text-gray-800">
+            <div class="px-4 py-3">
+                <h1 class="text-xl font-bold">
+                    Daftar Pengguna ({{ $users->count() }})
+                </h1>
+            </div>
+            <table class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
+                <thead >
                     <tr>
                         <th class="px-4 py-2 text-left">No</th>
-                        <th class="px-4 py-2 text-left">Nama</th>
+                        <th class="px-4 py-2 text-left min-w-[250px]">Nama</th>
                         <th class="px-4 py-2 text-left">Email</th>
-                         <th class="px-4 py-2 text-left">Jabatan</th>
+                         <th class="px-4 py-2 text-left min-w-[200px]">Jabatan</th>
                          <th class="px-4 py-2 text-left">Role</th>
-                         <th class="px-4 py-2 text-left">OPD</th>
+                         <th class="px-4 py-2 text-left min-w-[350px]">OPD</th>
                         <th class="px-4 py-2 text-left">NoTelepon</th>
                         <th class="px-4 py-2 text-left">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
                     @forelse ($users as $index => $user)
                         <tr class="border-b hover:bg-gray-50 ">
                             <td class="px-4 py-2">{{ $index + 1 }}</td>
