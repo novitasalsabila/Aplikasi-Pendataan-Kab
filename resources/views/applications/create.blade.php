@@ -106,6 +106,28 @@
                     </select>
                     
                 </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block font-medium mb-1">Versi Aplikasi</label>
+                <input type="text" name="version_code"
+                    placeholder="misal: v1.0.0"
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+            </div>
+
+            <div>
+                <label class="block font-medium mb-1">Tanggal Rilis Versi</label>
+                <input type="date" name="release_date"
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+            </div>
+        </div>
+
+        <div>
+            <label class="block font-medium mb-1">Changelog / Catatan Versi</label>
+            <textarea name="changelog" rows="3"
+                    placeholder="Perubahan pada versi ini..."
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"></textarea>
+        </div>
+
                 <div>
                     <label class="block font-medium mb-1">Terakhir Update</label>
                     <input type="date" name="last_update"
