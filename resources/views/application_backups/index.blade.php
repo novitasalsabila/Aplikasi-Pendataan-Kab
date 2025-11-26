@@ -28,7 +28,7 @@
         <div class="overflow-x-auto bg-white shadow-md rounded-lg overflow-hidden">
             <div class="px-4 py-3">
                 <h1 class="text-xl font-bold">
-                    Daftar Temuan ({{ $backups->count() }})
+                    Daftar Backup ({{ $backups->count() }})
                 </h1>
             </div>
             <table class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
