@@ -39,7 +39,7 @@
     </div>
 @endif
  <!-- Search + Filter dalam 1 kotak -->
-        <div class="p-4 bg-white shadow-sm rounded-lg border border-gray-200 mb-6">
+        <div class="p-4 bg-white shadow-sm rounded-lg border-gray-200 mb-6">
                 <div class="flex flex-col sm:flex-row sm:items-center mb-6 gap-3 w-full">
                     <!-- Form Search & Filter -->
                     <form action="{{ route('application_findings.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
@@ -71,15 +71,20 @@
         </div>
 
         <div class="overflow-x-auto bg-white shadow-md rounded-lg">
-            <table class="min-w-full table-fixed text-sm text-gray-700">
-                <thead class="bg-gray-100 text-gray-800">
+            <div class="px-4 py-3">
+                <h1 class="text-xl font-bold">
+                    Daftar Temuan ({{ $findings->count() }})
+                </h1>
+            </div>
+            <table class="min-w-full table-fixed text-sm text-gray-700 ">
+                <thead class="bg-white-100 text-gray-800 border-b-2 border-gray-300">
                     <tr>
                         <th class="px-3 py-3 text-center w-10">No</th>
                         <th class="px-4 py-3 text-left  w-40">Aplikasi</th>
-                        <th class="px-4 py-3 text-left  w-1/3">Deskripsi</th>
+                        <th class="px-4 py-3 text-left  min-w-[350px]">Deskripsi</th>
                         <th class="px-4 py-3 text-center w-20">Tipe</th>
                         <th class="px-4 py-3 text-center w-24">Tingkat</th>
-                        <th class="px-4 py-3 text-left  w-32">Sumber</th>
+                        <th class="px-4 py-3 text-left  min-w-[190px]">Sumber</th>
                         <th class="px-4 py-3 text-center w-28">Status</th>
                         <th class="px-4 py-3 text-left  w-32">Tindak Lanjut</th>
                         <th class="px-4 py-3 text-center w-32">Tanggal Ditemukan</th>
@@ -90,21 +95,36 @@
                 <tbody>
                     @forelse ($findings as $index => $f)
                         <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <td class="px-3 py-3 text-center align-middle">
+                            <td class="px-3 py-3 text-center align-middle font-bold">
                                 {{ $index + 1 }}
                             </td>
 
-                            <td class="px-4 py-3 align-middle">
+                            <td class="px-4 py-3 align-middle font-bold">
                                 {{ $f->application->name ?? '-' }}
                             </td>
 
-                            <td class="px-4 py-3 align-middle">
+                            <td class="px-4 py-3 align-middle ">
                                 {{ Str::limit($f->description, 100) }}
                             </td>
 
                             <td class="px-4 py-3 text-center align-middle">
-                                {{ ucfirst($f->type) }}
-                            </td>
+                            @php
+                                $type = strtolower($f->type);
+
+                                $styles = [
+                                    'bug' => 'bg-red-100 text-red-600',
+                                    'vulnerability' => 'bg-yellow-100 text-yellow-600',
+                                    'hack' => 'bg-purple-100 text-purple-600',
+                                    'lainnya' => 'bg-orange-100 text-orange-600',
+                                ];
+                            @endphp
+
+                            <span class="px-3 py-1 rounded-lg text-sm font-semibold 
+                                {{ $styles[$type] ?? 'bg-gray-100 text-gray-600' }}">
+                                {{ ucfirst($type) }}
+                            </span>
+                        </td>
+
 
                             <td class="px-4 py-3 text-center align-middle">
                                 @php
