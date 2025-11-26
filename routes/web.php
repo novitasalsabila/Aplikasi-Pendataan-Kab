@@ -34,7 +34,6 @@ Route::middleware('auth')->group(function () {
 
     // Dashboard umum (redirect tergantung role di controller)
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
     // Profil user
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -58,9 +57,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('application_metrics', ApplicationMetricController::class);
     Route::resource('application_findings', ApplicationFindingController::class);
     Route::resource('users', UserController::class);
-    Route::resource('application_versions', ApplicationVersionController::class)->only([
-        'index', 'create', 'store'
-    ]);
+    Route::resource('application_versions', ApplicationVersionController::class)->only(['index', 'create', 'store']);
 });
 
 // ==========================================================
@@ -71,9 +68,7 @@ Route::middleware(['auth', 'role:diskominfo'])->group(function () {
     Route::get('applications/{application}', [ApplicationController::class, 'show'])->name('applications.show');
     Route::resource('application_logs', ApplicationLogController::class)->except(['destroy']);
     Route::resource('application_findings', ApplicationFindingController::class)->only(['index', 'show', 'create','edit','update', 'store']);
-    Route::resource('application_versions', ApplicationVersionController::class)->only([
-        'index', 'show', 'create', 'store', 'edit', 'update', 'destroy'
-    ]);
+    Route::resource('application_versions', ApplicationVersionController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::resource('application_documents', ApplicationDocumentController::class)->only(['index']);
     Route::get('application_documents/{id}/download', [ApplicationDocumentController::class, 'download'])
         ->name('application_documents.download');
@@ -85,12 +80,9 @@ Route::middleware(['auth', 'role:diskominfo'])->group(function () {
 Route::middleware(['auth', 'role:opd'])->group(function () {
     Route::get('applications', [ApplicationController::class, 'index'])->name('applications.index');
     Route::get('applications/{application}', [ApplicationController::class, 'show'])->name('applications.show');
-    Route::resource('application_versions', ApplicationVersionController::class)->only([
-        'index', 'show'
-    ]);
+    Route::resource('application_versions', ApplicationVersionController::class)->only(['index', 'show']);
     Route::resource('application_documents', ApplicationDocumentController::class)->only(['index']);
-    Route::get('application_documents/{id}/download', [ApplicationDocumentController::class, 'download'])
-        ->name('application_documents.download');
+    Route::get('application_documents/{id}/download', [ApplicationDocumentController::class, 'download'])->name('application_documents.download');
 });
 
 require __DIR__.'/auth.php';
