@@ -189,7 +189,10 @@
                     @forelse($application->versions as $v)
                         <tr>
                             <td class="px-4 py-2 font-medium">{{ $v->version_code }}</td>
-                            <td class="px-4 py-2">{{ $v->released_date->format('d M Y') }}</td>
+                            <td class="px-4 py-2">
+    {{ $v->release_date ? $v->release_date->format('d M Y') : '-' }}
+</td>
+
                             <td class="px-4 py-2">{{ $v->changelog }}</td>
                         </tr>
                     @empty

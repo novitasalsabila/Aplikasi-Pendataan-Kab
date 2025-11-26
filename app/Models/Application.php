@@ -10,8 +10,18 @@ class Application extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'category', 'data_sensitivity',
-        'department_id', 'developer_id', 'server_id', 'status', 'last_update'
+        'name', 
+        'description', 
+        'category', 
+        'data_sensitivity',
+        'department_id', 
+        'developer_id', 
+        'server_id', 
+        'status',
+        'version_code',
+        'release_date',
+        'changelog',
+        'last_update',
     ];
 
     public function department()

@@ -106,6 +106,7 @@
                         <th class="px-4 py-3 text-left">Sensitivitas Data</th>
                         <th class="px-4 py-3 text-left">Status</th>
                         <th class="px-4 py-3 text-left">Terakhir Update</th>
+                        <th class="px-4 py-3 text-left">Versi</th>
                         <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -159,6 +160,20 @@
                             <td class="px-4 py-3">
                                 {{ $app->last_update ? \Carbon\Carbon::parse($app->last_update)->format('Y-m-d') : '-' }}
                             </td>
+                            
+                            @php
+    $latestVersion = $app->versions->sortByDesc('release_date')->first();
+@endphp
+
+<td class="px-4 py-3">
+    @if($latestVersion)
+        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+            {{ $latestVersion->version_code }}
+        </span>
+    @else
+        <span class="text-gray-400 text-xs">Belum ada</span>
+    @endif
+</td>
 
                             <!-- Kolom Aksi -->
                             <td class="px-3 py-3 text-center">

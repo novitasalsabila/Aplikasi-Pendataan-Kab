@@ -10,6 +10,9 @@ class ApplicationVersion extends Model
     use HasFactory;
 
     protected $fillable = ['application_id', 'version_code', 'release_date', 'changelog'];
+    protected $casts = [
+        'release_date' => 'date',
+    ];
 
     public function application()
     {
