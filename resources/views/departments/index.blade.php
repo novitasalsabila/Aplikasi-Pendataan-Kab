@@ -63,84 +63,72 @@
                     </form>
                 </div>
         </div>
+<!-- Table -->
+<div class="bg-white shadow-md rounded-lg overflow-x-auto">
+    <h1 class="text-xl font-semibold text-gray-800 pt-2 pb-2 mb-3 ml-4 mt-3">
+        Daftar OPD ({{ $departments->count() }})
+     </h1>
+    <table class="min-w-full text-sm text-gray-700">
+        <!-- Header -->
+        <thead class="bg-white border-b-2 border-t-2">
+            <tr class="text-gray-800 text-medium tracking-wide">
+                <th class="px-4 py-3 text-left font-semibold">No</th>
+                <th class="px-4 py-3 text-left font-semibold min-w-[480px]">Nama OPD</th>
+                <th class="px-4 py-3 text-left font-semibold min-w-[180px]">Email</th>
+                <th class="px-4 py-3 text-left font-semibold min-w-[180px]">Kepala OPD</th>
+                <th class="px-4 py-3 text-left font-semibold min-w-[180px]">Kontak</th>
+                <th class="px-4 py-3 text-center font-semibold">Aksi</th>
+            </tr>
+        </thead>
 
-        <!-- Table -->
-        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead class="bg-gray-50 dark:bg-gray-900">
-                    <tr>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">No</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Nama OPD</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Email</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Kepala OPD</th>
-                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Kontak</th>
-                        <th class="px-4 py-3 text-center text-sm font-semibold text-gray-600 dark:text-gray-300">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-                    @forelse ($departments as $index => $dept)
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-                            <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-200">{{ $index + 1 }}</td>
-                            <td class="px-4 py-3 text-sm font-medium text-gray-800 dark:text-gray-100">{{ $dept->name }}</td>
-                            <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-200">{{ $dept->email }}</td>
-                            <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-200">{{ $dept->head_name }}</td>
-                            <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-200">{{ $dept->head_phone }}</td>
-                            <td class="px-4 py-3 text-center">
-                                <div class="flex justify-center space-x-2">
-                                    <!-- Tombol Edit -->
-                            <a href="{{ route('departments.edit', $dept->id) }}"
-                            class="text-yellow-600 hover:text-yellow-700 font-semibold inline-flex items-center px-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
-                            stroke-width="1.5" stroke="currentColor" class="size-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" 
-                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652
-                            L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18
-                            l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z
-                            M19.5 7.125 16.862 4.487M18 14v4.75
-                            A2.25 2.25 0 0 1 15.75 21H5.25
-                            A2.25 2.25 0 0 1 3 18.75V8.25
-                            A2.25 2.25 0 0 1 5.25 6H10" />
-                        </svg>
-                    </a>
-                    <!-- Tombol Hapus -->
-                    <form id="deleteForm-{{ $dept->id }}" 
-                    action="{{ route('departments.destroy', $dept->id) }}" 
-                    method="POST" class="inline px-3">
-                    @csrf
-                    @method('DELETE')
-                    <button type="button"
-                        onclick="openModal('{{ $dept->id }}')" 
-                        class="text-red-600 hover:text-red-700 font-semibold inline-flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
-                                stroke-width="1.5" stroke="currentColor" class="size-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" 
-                                d="m14.74 9-.346 9m-4.788 0L9.26 9
-                                m9.968-3.21c.342.052.682.107 1.022.166
-                                m-1.022-.165L18.16 19.673
-                                a2.25 2.25 0 0 1-2.244 2.077H8.084
-                                a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79
-                                m14.456 0a48.108 48.108 0 0 0-3.478-.397
-                                m-12 .562c.34-.059.68-.114 1.022-.165
-                                m0 0a48.11 48.11 0 0 1 3.478-.397
-                                m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201
-                                a51.964 51.964 0 0 0-3.32 0
-                                c-1.18.037-2.09 1.022-2.09 2.201v.916
-                                m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                            </svg>
-                    </button>
-                </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="text-center py-4 text-gray-500 dark:text-gray-400">
-                                Belum ada data.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
+        <!-- Body -->
+        <tbody class="divide-y divide-gray-100">
+            @forelse ($departments as $index => $dept)
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-4 py-3">{{ $index + 1 }}</td>
+
+                    <!-- Nama OPD -->
+                    <td class="px-4 py-3 font-medium text-gray-800">
+                        {{ $dept->name }}
+                    </td>
+
+                    <!-- Email -->
+                    <td class="px-4 py-3 text-gray-600">
+                        {{ $dept->email }}
+                    </td>
+
+                    <!-- Kepala OPD -->
+                    <td class="px-4 py-3 text-gray-600">
+                        {{ $dept->head_name }}
+                    </td>
+
+                    <!-- Kontak -->
+                    <td class="px-4 py-3 text-gray-600">
+                        {{ $dept->head_phone }}
+                    </td>
+
+                    <!-- Aksi -->
+                    <td class="px-4 py-3 text-center">
+                        <x-action-buttons
+                            :id="$dept->id"
+                            :showRoute="route('departments.show', $dept->id)"
+                            :editRoute="route('departments.edit', $dept->id)"
+                            :deleteRoute="route('departments.destroy', $dept->id)"
+                            itemName="{{ $dept->name }}"
+                        />
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center py-3 text-gray-500">
+                        Belum ada data.
+                    </td>
+                </tr>
+            @endforelse
+        </tbody>
+
+    </table>
+</div>
+
     </div>
 </x-app-layout>
