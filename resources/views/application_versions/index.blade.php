@@ -78,7 +78,6 @@
                             <td class="px-4 py-2 text-center">
                                 <x-action-buttons
                                     :id="$ver->id"
-                                    :showRoute="route('application_versions.show', $ver->id)"
                                     :editRoute="route('application_versions.edit', $ver->id)"
                                     :deleteRoute="route('application_versions.destroy', $ver->id)"
                                     itemName="{{ $ver->application->name }}"
