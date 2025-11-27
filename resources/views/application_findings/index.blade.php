@@ -76,18 +76,19 @@
                     Daftar Temuan ({{ $findings->count() }})
                 </h1>
             </div>
+            <hr class="border-t-2 border-gray-300 mb-3">
             <table class="min-w-full table-fixed text-sm text-gray-700 ">
-                <thead class="bg-white-100 text-gray-800 border-b-2 border-gray-300">
+                <thead class="bg-white text-gray-800 border-b border-gray-200">
                     <tr>
                         <th class="px-3 py-3 text-center w-10">No</th>
-                        <th class="px-4 py-3 text-left  w-40">Aplikasi</th>
-                        <th class="px-4 py-3 text-left  min-w-[350px]">Deskripsi</th>
+                        <th class="px-4 py-3 text-left   min-w-[200px]">Aplikasi</th>
+                        <th class="px-4 py-3 text-left  min-w-[400px]">Deskripsi</th>
                         <th class="px-4 py-3 text-center w-20">Tipe</th>
                         <th class="px-4 py-3 text-center w-24">Tingkat</th>
                         <th class="px-4 py-3 text-left  min-w-[190px]">Sumber</th>
                         <th class="px-4 py-3 text-center w-28">Status</th>
-                        <th class="px-4 py-3 text-left  w-32">Tindak Lanjut</th>
-                        <th class="px-4 py-3 text-center w-32">Tanggal Ditemukan</th>
+                        <th class="px-4 py-3 text-left   min-w-[300px]">Tindak Lanjut</th>
+                        <th class="px-4 py-3 text-left min-w-[300px]">Tanggal Ditemukan</th>
                         <th class="px-4 py-3 text-center w-20">Aksi</th>
                     </tr>
                 </thead>
@@ -124,7 +125,7 @@
                                 {{ ucfirst($type) }}
                             </span>
                         </td>
-  
+
 
                             <td class="px-4 py-3 text-center align-middle">
                                 @php
