@@ -31,7 +31,7 @@
                 />
 
                 <x-stat-card 
-                    color="red"
+                    color="indigo"
                     title="Server & Pengguna"
                     :value="$findingsCount"
                     detail="5 penguna aktif"
@@ -39,7 +39,7 @@
                 />
 
                 <x-stat-card 
-                    color="green"
+                    color="red"
                     title="Temuan Kritis"
                     :value="$inactiveApps"
                     detail="1 temuan terbuka"
