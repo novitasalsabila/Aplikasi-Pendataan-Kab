@@ -65,45 +65,47 @@
         </div>
 <!-- Table -->
 <div class="bg-white shadow-md rounded-lg overflow-x-auto">
-    <h1 class="text-xl font-semibold text-gray-800 pt-2 pb-2 mb-3 ml-4 mt-3">
-        Daftar OPD ({{ $departments->count() }})
-     </h1>
-    <table class="min-w-full text-sm text-gray-700">
+        <div class="px-4 py-3">
+            <h1 class="text-xl font-bold">
+                Daftar OPD ({{ $departments->count() }})
+            </h1>
+        </div>
+    <table class="min-w-full divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
         <!-- Header -->
-        <thead class="bg-white border-b-2 border-t-2">
+        <thead>
             <tr class="text-gray-800 text-medium tracking-wide">
-                <th class="px-4 py-3 text-left font-semibold">No</th>
-                <th class="px-4 py-3 text-left font-semibold min-w-[480px]">Nama OPD</th>
-                <th class="px-4 py-3 text-left font-semibold min-w-[180px]">Email</th>
-                <th class="px-4 py-3 text-left font-semibold min-w-[180px]">Kepala OPD</th>
-                <th class="px-4 py-3 text-left font-semibold min-w-[180px]">Kontak</th>
+                <th class="px-4 py-3 text-left">No</th>
+                <th class="px-4 py-3 text-left min-w-[480px]">Nama OPD</th>
+                <th class="px-4 py-3 text-left min-w-[180px]">Email</th>
+                <th class="px-4 py-3 text-left min-w-[180px]">Kepala OPD</th>
+                <th class="px-4 py-3 text-left min-w-[180px]">Kontak</th>
                 <th class="px-4 py-3 text-center font-semibold">Aksi</th>
             </tr>
         </thead>
 
         <!-- Body -->
-        <tbody class="divide-y divide-gray-100">
+        <tbody class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
             @forelse ($departments as $index => $dept)
                 <tr class="hover:bg-gray-50 transition">
                     <td class="px-4 py-3">{{ $index + 1 }}</td>
 
                     <!-- Nama OPD -->
-                    <td class="px-4 py-3 font-medium text-gray-800">
+                    <td class="px-4 py-3">
                         {{ $dept->name }}
                     </td>
 
                     <!-- Email -->
-                    <td class="px-4 py-3 text-gray-600">
+                    <td class="px-4 py-3">
                         {{ $dept->email }}
                     </td>
 
                     <!-- Kepala OPD -->
-                    <td class="px-4 py-3 text-gray-600">
+                    <td class="px-4 py-3">
                         {{ $dept->head_name }}
                     </td>
 
                     <!-- Kontak -->
-                    <td class="px-4 py-3 text-gray-600">
+                    <td class="px-4 py-3">
                         {{ $dept->head_phone }}
                     </td>
 
