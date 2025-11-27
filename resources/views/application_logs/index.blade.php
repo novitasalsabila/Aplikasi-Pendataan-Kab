@@ -8,17 +8,17 @@
                     class="absolute top-0 right-0 bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition no-underline flex items-center gap-2">
                     <img src="{{ asset('icons/plus.svg') }}" alt="Tambah"
                         class="w-5 h-5 filter invert brightness-0">
-                    <span>Tambah Audit</span>
+                    <span>Tambah Log</span>
                 </a>
             @endif
             <!-- Kiri: Judul dan deskripsi -->
             <div>
                 <h1 class="text-2xl font-bold text-gray-800 mb-0">
-                    Log Aktivitas
+                    Log Pengembangan Aplikasi
                 </h1>
 
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
-                    {{ __('Catatan semua aktivitas pengguna dalam sistem untuk keperluan audit trail') }} 
+                    {{ __('Catatan perubahan dan pengembangan aplikasi') }} 
                 </p>
 
             </div>
@@ -72,18 +72,18 @@
                     Daftar Log ({{ $logs->count() }})
                 </h1>
             </div>
-            <table class="min-w-full text-sm text-gray-700">
-                <thead class="bg-gray-100">
+            <table class="min-w-full divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
+                <thead>
                     <tr>
                         <th class="px-3 py-3">No</th>
-                        <th class="px-4 py-3">Aplikasi</th>
-                        <th class="px-4 py-3">Judul</th>
-                        <th class="px-4 py-3">Jenis Perubahan</th>
-                        <th class="px-4 py-3">Versi</th>
-                        <th class="px-4 py-3">Tanggal</th>
-                        <th class="px-4 py-3">Reviewer</th>
-                        <th class="px-4 py-3">Status</th>
-                        <th class="px-4 py-3 text-center">Aksi</th>
+                        <th class="px-4 py-3 min-w-[180px]">Aplikasi</th>
+                        <th class="px-4 py-3 min-w-[220px]">Judul</th>
+                        <th class="px-4 py-3 min-w-[170px]">Jenis Perubahan</th>
+                        <th class="px-4 py-3 min-w-[120px]">Versi</th>
+                        <th class="px-4 py-3 min-w-[120px]">Tanggal</th>
+                        <th class="px-4 py-3 min-w-[160px]">Reviewer</th>
+                        <th class="px-4 py-3 min-w-[120px]">Status</th>
+                        <th class="px-4 py-3 text-center min-w-[120px]">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -92,7 +92,7 @@
                             <td class="px-3 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $log->application->name ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->title }}</td>
-                            <td class="px-4 py-3 capitalize">{{ $log->change_type }}</td>
+                            <td class="px-4 py-3">{{ $log->change_type }}</td>
                             <td class="px-4 py-3">{{ $log->version ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->date ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->reviewer->name ?? '-' }}</td>
