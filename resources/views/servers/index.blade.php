@@ -84,10 +84,10 @@
 
                 <tbody class="divide-y divide-gray-100">
                     @forelse ($servers as $index => $srv)
-                        <tr class="hover:bg-gray-50 transition-colors text-gray-600">
+                        <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-4 py-3 w-10">{{ $index + 1 }}</td>
 
-                            <td class="px-4 py-3 font-medium min-w-[180px]">
+                            <td class="px-4 py-3 min-w-[180px]">
                                 {{ $srv->hostname }}
                             </td>
 
