@@ -43,7 +43,7 @@
                 <label class="block text-sm font-medium mb-1">File Dokumen</label>
                 <input type="file" name="file_path" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt" required
                        class="w-full border rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm text-gray-600">
-                <p class="text-xs text-gray-500 mt-1">Format: PDF, DOCX, PPTX, XLSX (maks. 2MB)</p>
+                <p class="text-xs text-gray-500 mt-1">Format: PDF, DOCX, PPTX, XLSX (maks. 20MB)</p>
             </div>
             {{-- Tombol --}}
             <div class="flex justify-end space-x-3">

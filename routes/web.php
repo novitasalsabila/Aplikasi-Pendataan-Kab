@@ -41,6 +41,15 @@ Route::middleware('auth')->group(function () {
 });
 
 
+Route::get('/documents/view/{filename}', function ($filename) {
+    $path = storage_path('app/public/documents/' . $filename);
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    return response()->file($path);
+})->middleware('auth')->name('documents.view');
 // ==========================================================
 // ROLE: ADMIN (Full Access)
 // ==========================================================

@@ -36,7 +36,7 @@ class ApplicationDocumentController extends Controller
             'application_id' => 'required|exists:applications,id',
             'doc_name' => 'required|string|max:150',
             'doc_type' => 'required|in:tor,kontrak,manual,lainnya',
-            'file_path' => 'required|file|mimes:pdf,docx,doc,xlsx,xls,pptx,ppt,txt|max:2048',
+            'file_path' => 'required|file|mimes:pdf,docx,doc,xlsx,xls,pptx,ppt,txt|max:20000',
         ]);
 
         // Simpan file ke storage
