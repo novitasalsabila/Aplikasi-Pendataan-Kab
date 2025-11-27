@@ -51,18 +51,122 @@
 
                 {{-- Bagian kiri --}}
                 <div class="w-1/2">
-                    <x-dashboard-section title="Aktivitas Terbaru">
-                        <x-table>
-                            <x-slot name="head"></x-slot>
-                        </x-table>
-                    </x-dashboard-section>
+<x-dashboard-section title="Aktivitas Terbaru">
+
+    <div class="space-y-3">
+
+        @forelse ($recentActivities as $activity)
+            <div class="flex items-start justify-between p-3 bg-white rounded-lg border shadow-sm">
+
+                {{-- Kiri --}}
+                <div class="w-3/4">
+                    <h3 class="text-gray-900 font-semibold text-sm leading-tight">
+                        {{ $activity->title }}
+                    </h3>
+
+                    <p class="text-xs text-gray-600 mt-1">
+                        {{ $activity->application->name ?? '-' }}
+                    </p>
+
+                    {{-- Badge --}}
+                    <div class="mt-2 flex gap-2">
+                        <span class="px-2 py-0.5 text-[10px] rounded-full bg-gray-100 text-gray-700 border">
+                            v{{ $activity->version ?? '-' }}
+                        </span>
+
+                        @php
+                            $cat = $activity->category ?? 'lainnya';
+                            $clr = [
+                                'penambahan' => 'bg-green-100 text-green-700',
+                                'perbaikan'  => 'bg-blue-100 text-blue-700',
+                                'penghapusan'=> 'bg-red-100 text-red-700',
+                            ][$cat] ?? 'bg-gray-100 text-gray-700';
+                        @endphp
+
+                        <span class="px-2 py-0.5 text-[10px] rounded-full {{ $clr }} capitalize border">
+                            {{ $cat }}
+                        </span>
+                    </div>
+                </div>
+
+                {{-- Tanggal --}}
+                <p class="text-xs text-gray-500">
+                    {{ $activity->date ?? $activity->created_at->format('Y-m-d') }}
+                </p>
+            </div>
+
+        @empty
+            <p class="text-gray-500 text-center py-4 text-sm">Belum ada aktivitas.</p>
+        @endforelse
+
+    </div>
+
+</x-dashboard-section>
+
+
                 </div>
 
                 {{-- Bagian kanan --}}
                 <div class="w-1/2">
-                    <x-dashboard-section title=" Temuan Terbaru">
-                        <p>Isi konten di sini, misalnya log aktivitas atau grafik bar chart.</p>
-                    </x-dashboard-section>
+<x-dashboard-section title="Temuan Terbaru">
+
+    <div class="space-y-3">
+
+        @forelse ($recentFindings as $finding)
+            <div class="flex items-start p-3 bg-white rounded-lg border shadow-sm">
+
+                {{-- Icon / Severity --}}
+                <div class="mt-1">
+                    @if(($finding->severity ?? '') === 'tinggi')
+                        <span class="inline-block w-3 h-3 rounded-full bg-red-400"></span>
+                    @elseif(($finding->severity ?? '') === 'sedang')
+                        <span class="inline-block w-3 h-3 rounded-full bg-yellow-400"></span>
+                    @else
+                        <span class="inline-block w-3 h-3 rounded-full bg-green-400"></span>
+                    @endif
+                </div>
+
+                <div class="ml-3 w-full">
+
+                    <h3 class="text-gray-900 font-semibold text-sm leading-tight">
+                        {{ $finding->title }}
+                    </h3>
+
+                    <p class="text-xs text-gray-600 mt-1">
+                        {{ $finding->application->name ?? '-' }}
+                    </p>
+
+                    <div class="mt-2 flex gap-2">
+
+                        @php
+                            $sev = strtolower($finding->severity ?? 'rendah');
+                            $sevClr = [
+                                'tinggi' => 'bg-red-100 text-red-700',
+                                'sedang' => 'bg-yellow-100 text-yellow-700',
+                                'rendah' => 'bg-green-100 text-green-700',
+                            ][$sev] ?? 'bg-gray-100 text-gray-700';
+                        @endphp
+
+                        <span class="px-2 py-0.5 text-[10px] rounded-full {{ $sevClr }} capitalize border">
+                            {{ $sev }}
+                        </span>
+
+                        <span class="px-2 py-0.5 text-[10px] rounded-full bg-gray-100 text-gray-700 border capitalize">
+                            {{ $finding->type ?? 'bug' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        @empty
+            <p class="text-gray-500 text-center py-4 text-sm">Belum ada temuan.</p>
+        @endforelse
+
+    </div>
+
+</x-dashboard-section>
+
+
                 </div>
             </div>
 

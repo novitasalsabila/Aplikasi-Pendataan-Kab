@@ -70,6 +70,25 @@ class DashboardController extends Controller
             ? Department::withCount('applications')->get()
             : null;
 
+        // 📌 Temuan terbaru untuk admin & diskominfo
+$recentFindings = null;
+if (in_array($user->role, ['admin', 'diskominfo'])) {
+    $recentFindings = ApplicationFinding::with('application')
+        ->latest()
+        ->take(10)
+        ->get();
+}
+
+// 📌 Aktivitas terbaru untuk admin & diskominfo
+$recentActivities = null;
+if (in_array($user->role, ['admin', 'diskominfo'])) {
+    $recentActivities = ApplicationLog::with('application')
+        ->latest()
+        ->take(10)
+        ->get();
+}
+
+
         // 💡 Return satu view saja
         return view('dashboard', compact(
             'totalApps',
@@ -78,7 +97,9 @@ class DashboardController extends Controller
             'findingsCount',
             'recentLogs',
             'appsPerDepartment',
-            'opdApplications'
+            'opdApplications',
+            'recentActivities', 
+            'recentFindings'   
         ));
     }
 }
