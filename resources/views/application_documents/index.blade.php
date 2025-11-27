@@ -111,23 +111,18 @@
                                         </a>
                                     @endif
 
-                                    {{-- Download --}}
-                                    @if ($doc->file_path)
-                                        <a href="{{ asset('storage/' . $doc->file_path) }}" 
-                                        download
-                                        class="text-gray-600 hover:text-black transition pl-3 pr-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                width="20" height="20"
-                                                viewBox="0 0 24 24"
-                                                fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="M12 15V3"/>
-                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                                <path d="m7 10 5 5 5-5"/>
-                                            </svg>
-                                        </a>
-                                    @endif
+                                    {{-- Edit --}}
+                                    <a href="{{ route('application_documents.edit', $doc->id) }}"
+                                        class="text-yellow-600 hover:text-yellow-700 transition pl-3 pr-3"
+                                        title="Edit Dokumen">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z"/>
+                                            <path d="M19.5 7.125 16.862 4.487"/>
+                                        </svg>
+                                    </a>
+
 
                                 </div>
 
