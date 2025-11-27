@@ -36,6 +36,11 @@
 
 
         <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+            <div class="px-4 py-3">
+                <h1 class="text-xl font-bold">
+                    Daftar Versi ({{ $versions->count() }})
+                </h1>
+            </div>
             <table class="min-w-full text-sm text-left text-gray-700 ">
                 <thead class="bg-gray-100 text-gray-800">
                     <tr>

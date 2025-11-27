@@ -63,6 +63,11 @@
                 </div>
         </div>
         <div class="bg-white shadow-md rounded-lg overflow-x-auto">
+            <div class="px-4 py-3">
+                <h1 class="text-xl font-bold">
+                    Daftar Server ({{ $servers->count() }})
+                </h1>
+            </div>
             <table class="min-w-full text-sm text-gray-700">
                 <thead>
                     <tr class="bg-white border-b">
