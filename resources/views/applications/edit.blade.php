@@ -117,8 +117,18 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="border-t pt-4">
-    <h3 class="font-semibold text-gray-700 mb-3">Informasi Versi Aplikasi</h3>
+
+                <div>
+                    <label class="block font-medium mb-1">Terakhir Update</label>
+                    <input type="date" name="last_update" value="{{ $application->last_update }}"
+                           class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+                </div>
+            
+
+
+
+                <!-- <div class="border-t pt-4"> -->
+    <!-- <p class="font-semibold text-gray-700 mb-3">Informasi Versi Aplikasi</p> -->
 
     @if($latestVersion)
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -141,9 +151,9 @@
                           class="w-full border rounded p-2 text-sm text-gray-600">{{ $latestVersion->changelog }}</textarea>
             </div>
 
-        </div>
+        <!-- </div> -->
     @else
-        <p class="text-gray-400 text-sm italic">Belum ada versi.</p>
+        <!-- <p class="text-gray-400 text-sm italic">Belum ada versi.</p> -->
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
             <div>
@@ -167,11 +177,11 @@
     @endif
 </div>
 
-                <div>
+                <!-- <div>
                     <label class="block font-medium mb-1">Terakhir Update</label>
                     <input type="date" name="last_update" value="{{ $application->last_update }}"
                            class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
-                </div>
+                </div> -->
             </div>
 
             {{-- Tombol --}}
