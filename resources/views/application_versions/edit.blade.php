@@ -23,10 +23,10 @@
             {{-- Judul + teks bawah --}}
             <div>
                 <h2 class="text-2xl font-bold text-gray-800 mb-0">
-                    Edit Versi Aplikasi
+                    Edit Versi Aplikasi Baru
                 </h2>
                 <p class="text-sm text-gray-500">
-                    {{ __('Lengkapi informasi aplikasi di bawah ini.') }}
+                    {{ __('Lengkapi informasi aplikasi di bawah ini') }}
                 </p>
             </div>
         </div>
@@ -37,7 +37,7 @@
             @method('PUT')
 
             <div>
-                <label class="block font-medium mb-1">Nama Aplikasi</label>
+                <label class="block font-medium mb-1">Nama Aplikasi *</label>
                 <select name="application_id" required class="w-full border rounded p-2">
                     @foreach ($applications as $app)
                         <option value="{{ $app->id }}" @selected($app->id == $version->application_id)>
@@ -48,19 +48,19 @@
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Kode Versi</label>
+                <label class="block font-medium mb-1">Kode Versi *</label>
                 <input type="text" name="version_code" value="{{ $version->version_code }}"
                        required class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Tanggal Rilis</label>
+                <label class="block font-medium mb-1">Tanggal Rilis *</label>
                 <input type="date" name="release_date" value="{{ $version->release_date }}"
                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Catatan Perubahan (Changelog)</label>
+                <label class="block font-medium mb-1">Perubahan *</label>
                 <textarea name="changelog" rows="4"
                           class="w-full border rounded p-2">{{ $version->changelog }}</textarea>
             </div>

@@ -41,10 +41,11 @@
                     Daftar Versi ({{ $versions->count() }})
                 </h1>
             </div>
+            <hr class="border-t-2 border-gray-300 mb-3">
             <table class="min-w-full text-sm text-left text-gray-700 ">
-                <thead class="bg-gray-100 text-gray-800">
+                <thead class="bg-white text-gray-800 border-b border-gray-200">
                     <tr>
-                        <th class="px-4 py-2">No</th>
+                        <th class="px-3 py-1">No</th>
                         <th class="px-4 py-2">Aplikasi</th>
                         <th class="px-4 py-2">Versi</th>
                         <th class="px-4 py-2">Tanggal Rilis</th>
@@ -59,13 +60,32 @@
                         <tr class="border-b border-gray-200 hover:bg-gray-50">
                             <td class="px-4 py-2">{{ $index + 1 }}</td>
                             <td class="px-4 py-2">{{ $ver->application->name ?? '-' }}</td>
-                            <td class="px-4 py-2 font-semibold">{{ $ver->version_code }}</td>
+                            <!-- <td class="px-4 py-2 font-semibold">{{ $ver->version_code }}</td> -->
+                             <td class="px-4 py-2">
+                                <span class="bg-white px-2 py-1 rounded border font-semibold">
+                                    {{ $ver->version_code }}
+                                </span>
+                            </td>
+
                             <td class="px-4 py-2">
                                 {{ $ver->release_date
                                     ? \Carbon\Carbon::parse($ver->release_date)->format('Y-m-d')
                                     : '-' }}
                             </td>
                             <td class="px-4 py-2">{{ Str::limit($ver->changelog, 50) ?? '-' }}</td>
+
+                            {{-- Aksi --}}
+                            <td class="px-4 py-2 text-center">
+                                <x-action-buttons
+                                    :id="$ver->id"
+                                    :showRoute="route('application_versions.show', $ver->id)"
+                                    :editRoute="route('application_versions.edit', $ver->id)"
+                                    :deleteRoute="route('application_versions.destroy', $ver->id)"
+                                    itemName="{{ $ver->application->name }}"
+                                />
+                            </td>
+
+
                             @if(auth()->user()->role === 'diskominfo')
                             <td class="px-4 py-2">
                                 {{-- Diskominfo boleh edit & hapus --}}
