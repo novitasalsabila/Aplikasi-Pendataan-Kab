@@ -53,9 +53,16 @@
                 </select>
             </div>
 
+            {{-- Tombol --}}
             <div class="flex justify-end space-x-3">
-                <a href="{{ route('users.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Kembali</a>
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Simpan</button>
+                <a href="{{ route('users.index') }}"
+                class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition no-underline flex items-center gap-2">
+                    <span>Batal</span>
+                </a>
+                <button type="submit"
+                        class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+                    Simpan
+                </button>
             </div>
         </form>
     </div>

@@ -1,8 +1,6 @@
 <x-app-layout>
-    <div class="max-w-3xl mx-auto py-8 px-6">
-
-            <!-- EDIT PENGGUNA BARU --> 
-
+    <div class="max-w-3xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
+        <!-- EDIT PENGGUNA BARU --> 
         <form action="{{ route('users.update', $user) }}" method="POST" class="space-y-5 bg-white shadow-md rounded-lg p-6">
             @csrf
             @method('PUT')
@@ -55,35 +53,18 @@
                 </select>
             </div>
 
-
-            <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block font-medium mb-1">Password (kosongkan jika tidak diubah)</label>
-                    <input type="password" name="password" class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
-                </div>
-                <div>
-                    <label class="block font-medium mb-1">Konfirmasi Password</label>
-                    <input type="password" name="password_confirmation" class="w-full border rounded p-2 dark:bg-gray-700 focus:ring-2 focus:ring-blue-500">
-                </div>
-            </div> -->
-
-
-            <!-- <div>
-                <label class="block font-medium mb-1">OPD</label>
-                <select name="department_id" class="w-full border rounded p-2 dark:bg-gray-700">
-                    <option value="">-- Tidak Ada --</option>
-                    @foreach ($departments as $dept)
-                        <option value="{{ $dept->id }}" {{ $user->department_id == $dept->id ? 'selected' : '' }}>
-                            {{ $dept->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div> -->
-
+            {{-- Tombol --}}
             <div class="flex justify-end space-x-3">
-                <a href="{{ route('users.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Kembali</a>
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Perbarui</button>
+                <a href="{{ route('users.index') }}"
+                class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300 transition no-underline flex items-center gap-2">
+                    <span>Batal</span>
+                </a>
+                <button type="submit"
+                        class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+                    Simpan
+                </button>
             </div>
+            
         </form>
     </div>
 </x-app-layout>
