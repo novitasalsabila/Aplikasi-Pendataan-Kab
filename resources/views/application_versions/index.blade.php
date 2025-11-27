@@ -62,7 +62,7 @@
                             <td class="px-4 py-2">{{ $ver->application->name ?? '-' }}</td>
                             <!-- <td class="px-4 py-2 font-semibold">{{ $ver->version_code }}</td> -->
                              <td class="px-4 py-2">
-                                <span class="bg-white px-2 py-1 rounded border font-semibold">
+                                <span class="bg-gray-50 px-2 py-1 rounded border font-semibold">
                                     {{ $ver->version_code }}
                                 </span>
                             </td>
