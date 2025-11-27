@@ -52,6 +52,30 @@
                     @endforeach
                 </select>
             </div>
+            <div>
+            <label class="block font-medium mb-1">Password *</label>
+            <input type="password" name="password" required 
+                placeholder="Masukkan password"
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+            <label class="block font-medium mb-1">Konfirmasi Password *</label>
+            <input type="password" name="password_confirmation" required 
+                placeholder="Ulangi password"
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div>
+    <label class="block font-medium mb-1">OPD *</label>
+    <select name="department_id" required class="w-full border rounded p-2">
+        <option value="">-- Pilih OPD --</option>
+        @foreach ($departments as $dept)
+            <option value="{{ $dept->id }}">{{ $dept->name }}</option>
+        @endforeach
+    </select>
+</div>
+
+
 
             {{-- Tombol --}}
             <div class="flex justify-end space-x-3">
