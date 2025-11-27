@@ -101,28 +101,28 @@
                     Daftar Aplikasi ({{ $applications->count() }})
                 </h1>
             </div>
-            <table class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
+            <table class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
                 <thead>
                     <tr>
-                        <th class="px-3 py-3 text-left w-12">No</th>
-                        <th class="px-4 py-3 text-left min-w-[250px]">Nama Aplikasi</th>
-                        <th class="px-4 py-3 text-left min-w-[250px]">OPD</th>
+                        <th class="px-4 py-3 text-left w-12">No</th>
+                        <th class="px-4 py-3 text-left min-w-[200px]">Nama Aplikasi</th>
+                        <th class="px-4 py-3 text-left min-w-[270px]">OPD</th>
                         <th class="px-4 py-3 text-left">Kategori</th>
-                        <th class="px-4 py-3 text-left min-w-[250px]">Sensitivitas Data</th>
+                        <th class="px-4 py-3 text-left min-w-[170px]">Sensitivitas Data</th>
                         <th class="px-4 py-3 text-left">Status</th>
-                        <th class="px-4 py-3 text-left min-w-[250px]">Terakhir Update</th>
-                        <th class="px-4 py-3 text-left min-w-[250px]">Versi</th>
-                        <th class="px-4 py-3 text-center">Aksi</th>
+                        <th class="px-4 py-3 text-left min-w-[170px]">Terakhir Update</th>
+                        <th class="px-4 py-3 text-left min-w-[120px]">Versi</th>
+                        <th class="px-4 py-3 text-center min-w-[170px]">Aksi</th>
                     </tr>
                 </thead>
 
-                <tbody class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
+                <tbody class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
                     @forelse ($applications as $index => $app)
-                        <tr class="hover:bg-gray-50 transition">
-                            <td class="px-3 py-3 w-12">{{ $index + 1 }}</td>
+                        <tr class="hover:bg-gray-50 transition text-sm">
+                            <td class="px-4 py-3 w-12">{{ $index + 1 }}</td>
                             <td class="px-4 py-3 font-medium">{{ $app->name }}</td>
                             <td class="px-4 py-3">{{ $app->department->name ?? '-' }}</td>
-                             <td class="px-4 py-3 text-center">
+                             <td class="px-4 py-3 text-left">
                                 @php
                                     $categoryColors = [
                                         'web' => 'bg-blue-100 text-blue-800',
@@ -135,7 +135,7 @@
                                     {{ $app->category }}
                                 </span>
                             </td>
-                            <td class="px-4 py-3 text-center">
+                            <td class="px-4 py-3 text-left">
                                 @php
                                     $sensitivityColors = [
                                         'internal' => 'bg-yellow-100 text-yellow-800',
@@ -149,7 +149,7 @@
                                     {{ $app->data_sensitivity }}
                                 </span>
                             </td>
-                            <td class="px-4 py-3 text-center">
+                            <td class="px-4 py-3 text-left">
                                 @php
                                     $statusColors = [
                                         'aktif' => 'bg-green-100 text-green-800',
@@ -157,7 +157,7 @@
                                     ];
                                 @endphp
 
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full 
                                     {{ $statusColors[$app->status] ?? 'bg-gray-100 text-gray-800' }}">
                                     {{ $app->status }}
                                 </span>
@@ -172,7 +172,7 @@
 
 <td class="px-4 py-3">
     @if($latestVersion)
-        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+        <span class="bg-gray-50 px-2 py-1 rounded border font-semibold">
             {{ $latestVersion->version_code }}
         </span>
     @else
