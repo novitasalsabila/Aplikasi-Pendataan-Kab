@@ -42,7 +42,7 @@ class ApplicationBackupController extends Controller
         ApplicationBackup::create($validated);
 
         return redirect()->route('application_backups.index')
-            ->with('success', '✅ Data backup berhasil ditambahkan.');
+            ->with('success', 'Data backup berhasil ditambahkan.');
     }
 
     /**
@@ -73,7 +73,7 @@ class ApplicationBackupController extends Controller
         $application_backup->update($validated);
 
         return redirect()->route('application_backups.index')
-            ->with('success', '✏️ Data backup berhasil diperbarui.');
+            ->with('success', 'Data backup berhasil diperbarui.');
     }
 
     /**
@@ -84,6 +84,6 @@ class ApplicationBackupController extends Controller
         $application_backup->delete();
 
         return redirect()->route('application_backups.index')
-            ->with('success', '🗑️ Data backup berhasil dihapus.');
+            ->with('success', 'Data backup berhasil dihapus.');
     }
 }
