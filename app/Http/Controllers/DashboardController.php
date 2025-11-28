@@ -38,6 +38,19 @@ class DashboardController extends Controller
     // 🐞 Temuan keamanan
     $findings = ApplicationFinding::query();
 
+    // Tambahan statistik detail untuk dashboard cards
+    $maintenanceApps = (clone $applications)
+        ->whereIn('status', ['maintenance', 'pemeliharaan'])
+        ->count();
+
+    $departmentCount = Department::count();
+
+    $activeUsersCount = \App\Models\User::count();
+
+    $openCriticalFindings = ApplicationFinding::where('severity', 'kritis')
+        ->where('status', 'open')
+        ->count();
+
     if ($user->role === 'opd') {
         $findings->whereHas('application', fn($q) =>
             $q->where('department_id', $user->department_id)
@@ -66,9 +79,18 @@ class DashboardController extends Controller
         }
 
         // 🏢 Admin: tambahan data per OPD
-        $appsPerDepartment = $user->role === 'admin'
-            ? Department::withCount('applications')->get()
-            : null;
+        $appsPerDepartment = in_array($user->role, ['admin', 'diskominfo'])
+        ? Department::withCount([
+            'applications',
+            'applications as active_applications_count' => function ($q) {
+                $q->where('status', 'aktif');
+            }
+        ])
+        ->having('applications_count', '>', 0) // hanya OPD yang punya aplikasi
+        ->get()
+        : null;
+
+
 
         // 📌 Temuan terbaru untuk admin & diskominfo
 $recentFindings = null;
@@ -94,6 +116,10 @@ if (in_array($user->role, ['admin', 'diskominfo'])) {
             'totalApps',
             'activeApps',
             'inactiveApps',
+            'maintenanceApps',       // baru
+            'departmentCount',       // baru
+            'activeUsersCount',      // baru
+            'openCriticalFindings', // baru
             'findingsCount',
             'recentLogs',
             'appsPerDepartment',
