@@ -75,7 +75,7 @@
             <table class="min-w-full divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
                 <thead>
                     <tr>
-                        <th class="px-3 py-3">No</th>
+                        <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3 min-w-[180px]">Aplikasi</th>
                         <th class="px-4 py-3 min-w-[220px]">Judul</th>
                         <th class="px-4 py-3 min-w-[170px]">Jenis Perubahan</th>
@@ -89,7 +89,7 @@
                 <tbody class="divide-y divide-gray-200">
                     @forelse ($logs as $index => $log)
                         <tr class="hover:bg-gray-50 transition">
-                            <td class="px-3 py-3">{{ $index + 1 }}</td>
+                            <td class="px-4 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $log->application->name ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->title }}</td>
                             <td class="px-4 py-3">{{ $log->change_type }}</td>
