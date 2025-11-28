@@ -47,7 +47,7 @@ class DashboardController extends Controller
 
     $activeUsersCount = \App\Models\User::count();
 
-    $openCriticalFindings = ApplicationFinding::where('severity', 'kritis')
+    $openCriticalFindings = ApplicationFinding::where('severity', 'tinggi')
         ->where('status', 'open')
         ->count();
 

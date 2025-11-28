@@ -25,15 +25,15 @@
                 <x-stat-card 
                     color="green"
                     title="OPD/Dinas"
-                    :value="$activeApps"
+                    :value="$departmentCount"
                     detail="Perangkat daerah tercatat"
                     icon="building"
                 />
 
                 <x-stat-card 
                     color="indigo"
-                    title="Server & Pengguna"
-                    :value="$findingsCount"
+                    title="Pengguna"
+                    :value="$activeUsersCount"
                     detail="{{ $activeUsersCount }} pengguna aktif"
                     icon="server"
                 />
@@ -41,8 +41,8 @@
                 <x-stat-card 
                     color="red"
                     title="Temuan Kritis"
-                    :value="$inactiveApps"
-                    detail="{{ $openCriticalFindings }} temuan terbuka"
+                    :value="$openCriticalFindings"
+                    detail="{{$findingsCount}} temuan terbuka"
                     icon="warning"
                 />
             </div>
