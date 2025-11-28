@@ -41,8 +41,8 @@
                     Daftar Versi ({{ $versions->count() }})
                 </h1>
             </div>
-            <hr class="border-t-2 border-gray-300 mb-3">
-            <table class="min-w-full text-sm text-left text-gray-700 ">
+          
+            <table class="min-w-full divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
                 <thead class="bg-white text-gray-800 border-b border-gray-200">
                     <tr>
                         <th class="px-3 py-1">No</th>

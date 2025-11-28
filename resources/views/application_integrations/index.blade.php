@@ -36,10 +36,12 @@
 
 
         <div class="bg-white shadow-md rounded-lg overflow-x-auto">
-            <h1 class="text-lg font-semibold text-gray-800 pt-2 pb-2 mb-3 ml-4 mt-3">
-                Daftar Integrasi ({{ $integrations->count() }})
-            </h1>
-            <table class="min-w-full text-sm text-gray-700">
+            <div class="px-4 py-3">
+                <h1 class="text-xl font-bold">
+                    Daftar Integrasi ({{ $integrations->count() }})
+                </h1>
+            </div>
+            <table class="min-w-full divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
                 <thead class="bg-white border-b-2 border-t-2">
                     <tr>
                         <th class="px-4 py-3 text-left w-12">No</th>

@@ -35,7 +35,7 @@
                     Daftar Dokumen ({{ $documents->count() }})
                 </h1>
             </div>
-            <table class="min-w-full text-sm text-gray-700">
+            <table class="min-w-full divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
                 <thead>
                     <tr class="bg-white border-b">
                         <th class="px-4 py-3 text-left w-12">No</th>
