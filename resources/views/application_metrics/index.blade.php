@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-6xl mx-auto py-8 px-6">
+    <div class="max-w-6xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
          <!-- Header -->
         <div class="relative mb-6">
             <!-- Tombol kanan atas -->
@@ -8,7 +8,7 @@
                     class="absolute top-0 right-0 bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition no-underline flex items-center gap-2">
                     <img src="{{ asset('icons/plus.svg') }}" alt="Tambah"
                         class="w-5 h-5 filter invert brightness-0">
-                    <span>Tambah Monitoring</span>
+                    <span>Monitoring</span>
                 </a>
             @endif
             <!-- Kiri: Judul dan deskripsi -->
