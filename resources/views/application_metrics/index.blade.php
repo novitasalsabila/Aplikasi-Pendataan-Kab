@@ -25,34 +25,34 @@
         </div>
 
 
-        <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow-md rounded-lg">
+        <div class="overflow-x-auto bg-white shadow-md rounded-lg">
              <div class="px-4 py-3">
                 <h1 class="text-xl font-bold">
                     Daftar Monitoring ({{ $metrics->count() }})
                 </h1>
             </div>
-            <table class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
+            <table class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
                 <thead>
                     <tr>
-                        <th class="px-4 py-2">No</th>
-                        <th class="px-4 py-2 min-w-[200px]">Aplikasi</th>
-                        <th class="px-4 py-2 min-w-[200px]">Tanggal Cek</th>
-                        <th class="px-4 py-2 min-w-[200px]">Uptime (%)</th>
-                        <th class="px-4 py-2 min-w-[200px]">Response (s)</th>
-                        <th class="px-4 py-2">Status</th>
-                        <th class="px-4 py-2 min-w-[250px]">Catatan</th>
-                        <th class="px-4 py-2 text-center">Aksi</th>
+                        <th class="px-4 py-3">No</th>
+                        <th class="px-4 py-3 min-w-[200px]">Aplikasi</th>
+                        <th class="px-4 py-3 min-w-[200px]">Tanggal Cek</th>
+                        <th class="px-4 py-3 min-w-[150px]">Uptime (%)</th>
+                        <th class="px-4 py-3 min-w-[150px]">Response (s)</th>
+                        <th class="px-4 py-3 min-w-[150px]">Status</th>
+                        <th class="px-4 py-3 min-w-[220px]">Catatan</th>
+                        <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
                     @forelse ($metrics as $index => $m)
-                        <tr class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900">
-                            <td class="px-4 py-2">{{ $index + 1 }}</td>
-                            <td class="px-4 py-2">{{ $m->application->name ?? '-' }}</td>
-                            <td class="px-4 py-2">{{ \Carbon\Carbon::parse($m->check_date)->format('d M Y H:i') }}</td>
-                            <td class="px-4 py-2">{{ $m->uptime ?? '-' }}</td>
-                            <td class="px-4 py-2">{{ $m->response_time ?? '-' }}</td>
-                            <td class="px-4 py-2">
+                        <tr class="border-b border-gray-200 hover:bg-gray-50">
+                            <td class="px-4 py-3">{{ $index + 1 }}</td>
+                            <td class="px-4 py-3">{{ $m->application->name ?? '-' }}</td>
+                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($m->check_date)->format('d M Y H:i') }}</td>
+                            <td class="px-4 py-3">{{ $m->uptime ?? '-' }}</td>
+                            <td class="px-4 py-3">{{ $m->response_time ?? '-' }}</td>
+                            <td class="px-4 py-3">
                                 <span class="px-2 py-1 rounded
                                     @if ($m->status === 'normal') bg-green-100 text-green-700
                                     @elseif ($m->status === 'lambat') bg-yellow-100 text-yellow-700
@@ -62,9 +62,9 @@
                                 </span>
                             </td>
 
-                            <td class="px-4 py-2">{{ $m->note ?? '-' }}</td>
+                            <td class="px-4 py-3">{{ $m->note ?? '-' }}</td>
                             {{-- Aksi --}}
-                            <td class="px-4 py-2 text-center">
+                            <td class="px-4 py-3 text-center">
                                 <x-action-buttons
                                     :id="$m->id"
                                     :showRoute="route('application_metrics.show', $m->id)"
