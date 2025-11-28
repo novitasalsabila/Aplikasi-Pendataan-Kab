@@ -80,7 +80,7 @@
             <table class="min-w-full divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
                 <thead class="bg-white text-gray-800 border-b border-gray-200">
                     <tr>
-                        <th class="px-3 py-3 text-center w-10">No</th>
+                        <th class="px-4 py-3 text-center w-10">No</th>
                         <th class="px-4 py-3 text-left   min-w-[200px]">Aplikasi</th>
                         <th class="px-4 py-3 text-left  min-w-[400px]">Deskripsi</th>
                         <th class="px-4 py-3 text-center w-20">Tipe</th>
@@ -96,11 +96,11 @@
                 <tbody>
                     @forelse ($findings as $index => $f)
                         <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <td class="px-3 py-3 text-center align-middle font-bold">
+                            <td class="px-3 py-3 text-center align-middle">
                                 {{ $index + 1 }}
                             </td>
 
-                            <td class="px-4 py-3 align-middle font-bold">
+                            <td class="px-4 py-3 align-middle">
                                 {{ $f->application->name ?? '-' }}
                             </td>
 
