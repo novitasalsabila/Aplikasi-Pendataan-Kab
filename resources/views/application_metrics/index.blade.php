@@ -67,7 +67,6 @@
                             <td class="px-4 py-3 text-center">
                                 <x-action-buttons
                                     :id="$m->id"
-                                    :showRoute="route('application_metrics.show', $m->id)"
                                     :editRoute="route('application_metrics.edit', $m->id)"
                                     :deleteRoute="route('application_metrics.destroy', $m->id)"
                                     itemName="{{ $m->application->name }}"
