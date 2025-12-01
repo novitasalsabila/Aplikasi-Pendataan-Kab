@@ -43,7 +43,7 @@ class ApplicationMetricController extends Controller
         ApplicationMetric::create($validated);
 
         return redirect()->route('application_metrics.index')
-            ->with('success', '✅ Data metrik aplikasi berhasil ditambahkan.');
+            ->with('success', 'Data metrik aplikasi berhasil ditambahkan.');
     }
 
     /**
@@ -75,7 +75,7 @@ class ApplicationMetricController extends Controller
         $application_metric->update($validated);
 
         return redirect()->route('application_metrics.index')
-            ->with('success', '✏️ Data metrik aplikasi berhasil diperbarui.');
+            ->with('success', 'Data metrik aplikasi berhasil diperbarui.');
     }
 
     /**
@@ -86,6 +86,6 @@ class ApplicationMetricController extends Controller
         $application_metric->delete();
 
         return redirect()->route('application_metrics.index')
-            ->with('success', '🗑️ Data metrik aplikasi berhasil dihapus.');
+            ->with('success', 'Data metrik aplikasi berhasil dihapus.');
     }
 }
