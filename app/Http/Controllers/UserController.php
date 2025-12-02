@@ -12,11 +12,21 @@ class UserController extends Controller
     /**
      * Tampilkan semua pengguna.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::with('department')->get();
+        $search = $request->input('search');
+
+        $users = \App\Models\User::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            })
+            ->orderBy('name')
+            ->get();
+
         return view('users.index', compact('users'));
     }
+
 
     /**
      * Tampilkan form tambah pengguna.
@@ -48,7 +58,7 @@ class UserController extends Controller
         User::create($validated);
 
         return redirect()->route('users.index')
-            ->with('success', '✅ Pengguna berhasil ditambahkan.');
+            ->with('success', 'Pengguna berhasil ditambahkan.');
     }
 
     /**
@@ -85,7 +95,7 @@ class UserController extends Controller
         $user->update($validated);
 
         return redirect()->route('users.index')
-            ->with('success', '✅ Data pengguna berhasil diperbarui.');
+            ->with('success', 'Data pengguna berhasil diperbarui.');
     }
 
     /**
@@ -96,6 +106,6 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.index')
-            ->with('success', '🗑️ Pengguna berhasil dihapus.');
+            ->with('success', 'Pengguna berhasil dihapus.');
     }
 }

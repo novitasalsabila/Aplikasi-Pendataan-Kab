@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-3xl mx-auto py-8 px-6">
+    <div class="max-w-3xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
 
         <!-- TAMBAH PENGGUNA BARU -->        
 
@@ -11,7 +11,7 @@
                 <h2 class="text-2xl font-bold text-gray-800 mb-0">
                     Tambah Pengguna Baru
                 </h2>
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-gray-500 w-3/4 sm:w-auto -mt-1 mb-10">
                     {{ __('Lengkapi informasi Pengguna di bawah ini.') }}
                 </p>
             </div>
@@ -19,34 +19,31 @@
             <div>
                 <label class="block font-medium mb-1">Nama Lengkap *</label>
                 <input type="text" name="name" required 
-                placeholder="Nama Lengkap"
-                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Email *</label>
-                <input type="email" name="email" required 
-                placeholder="admin@pemkab.go.id"
-                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                <input type="email" name="email" required
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Nomor Telepon *</label>
                 <input type="phone" name="phone" required 
                 placeholder="08xxxxxxxxxx"
-                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Jabatan *</label>
                 <input type="position" name="position" required 
-                placeholder="Contoh : Staf IT"
-                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Role *</label>
-                <select name="role" required class="w-full border rounded p-2">
+                <select name="role" required class="w-full border rounded p-2 text-sm text-gray-600">
                     @foreach ($roles as $role)
                         <option value="{{ $role }}">{{ ucfirst($role) }}</option>
                     @endforeach
@@ -56,26 +53,24 @@
             <label class="block font-medium mb-1">Password *</label>
             <input type="password" name="password" required 
                 placeholder="Masukkan password"
-                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
         </div>
 
         <div>
             <label class="block font-medium mb-1">Konfirmasi Password *</label>
             <input type="password" name="password_confirmation" required 
                 placeholder="Ulangi password"
-                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
         </div>
         <div>
-    <label class="block font-medium mb-1">OPD *</label>
-    <select name="department_id" required class="w-full border rounded p-2">
-        <option value="">-- Pilih OPD --</option>
-        @foreach ($departments as $dept)
-            <option value="{{ $dept->id }}">{{ $dept->name }}</option>
-        @endforeach
-    </select>
-</div>
-
-
+            <label class="block font-medium mb-1">OPD *</label>
+            <select name="department_id" required class="w-full border rounded p-2 text-sm text-gray-600">
+                <option value="">-- Pilih OPD --</option>
+                @foreach ($departments as $dept)
+                    <option value="{{ $dept->id }}">{{ $dept->name }}</option>
+                @endforeach
+            </select>
+        </div>
 
             {{-- Tombol --}}
             <div class="flex justify-end space-x-3">

@@ -33,7 +33,7 @@
                 {{ session('success') }}
             </div>
         @endif
-         <!-- Search + Filter dalam 1 kotak -->
+        <!-- Search + Filter dalam 1 kotak -->
         <div class="p-4 bg-white shadow-sm rounded-lg border border-gray-200 mb-6">
                 <div class="flex flex-col sm:flex-row sm:items-center mb-6 gap-3 w-full">
                     <!-- Form Search & Filter -->
@@ -72,24 +72,24 @@
             <table class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
                 <thead >
                     <tr>
-                        <th class="px-4 py-2 text-left">No</th>
-                        <th class="px-4 py-2 text-left min-w-[250px]">Nama</th>
-                        <th class="px-4 py-2 text-left">Email</th>
-                        <th class="px-4 py-2 text-left min-w-[200px]">Jabatan</th>
-                        <th class="px-4 py-2 text-left">Role</th>
-                        <th class="px-4 py-2 text-left min-w-[350px]">OPD</th>
-                        <th class="px-4 py-2 text-left">NoTelepon</th>
-                        <th class="px-4 py-2 text-center">Aksi</th>
+                        <th class="px-4 py-3 text-left">No</th>
+                        <th class="px-4 py-3 text-left min-w-[250px]">Nama</th>
+                        <th class="px-4 py-3 text-left">Email</th>
+                        <th class="px-4 py-3 text-left min-w-[200px]">Jabatan</th>
+                        <th class="px-4 py-3 text-left">Role</th>
+                        <th class="px-4 py-3 text-left min-w-[350px]">OPD</th>
+                        <th class="px-4 py-3 text-left">NoTelepon</th>
+                        <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white">
                     @forelse ($users as $index => $user)
                         <tr class="border-b hover:bg-gray-50 ">
-                            <td class="px-4 py-2">{{ $index + 1 }}</td>
-                            <td class="px-4 py-2">{{ $user->name }}</td>
-                            <td class="px-4 py-2">{{ $user->email }}</td>
-                            <td class="px-4 py-2">{{ $user->position }}</td>
-                            <td class="px-4 py-2">
+                            <td class="px-4 py-3">{{ $index + 1 }}</td>
+                            <td class="px-4 py-3">{{ $user->name }}</td>
+                            <td class="px-4 py-3">{{ $user->email }}</td>
+                            <td class="px-4 py-3">{{ $user->position }}</td>
+                            <td class="px-4 py-3">
                                 <span class="
                                     px-3 py-1 rounded-md text-xs font-semibold
                                     @if ($user->role == 'admin') bg-red-100 text-red-700
@@ -100,9 +100,9 @@
                                     {{ strtoupper($user->role) }}
                                 </span>
                             </td>
-                            <td class="px-4 py-2">{{ $user->department->name ?? '-' }}</td>
-                            <td class="px-4 py-2">{{ $user->phone }}</td>
-                            <td class="px-4 py-2 text-center">
+                            <td class="px-4 py-3">{{ $user->department->name ?? '-' }}</td>
+                            <td class="px-4 py-3">{{ $user->phone }}</td>
+                            <td class="px-4 py-3 text-center">
                                 <x-action-buttons
                                     :id="$user->id"
                                     :editRoute="route('users.edit', $user->id)"
