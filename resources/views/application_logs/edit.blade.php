@@ -1,40 +1,24 @@
 <x-app-layout>
     <div class="max-w-4xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
-       <div class="flex items-start gap-3">
-            {{-- Tombol panah kembali --}}
-            <button type="button"
-                    onclick="history.back()"
-                    class="mt-1 inline-flex items-center justify-center p-1
-                        text-gray-700 hover:text-gray-900
-                        rounded-full hover:bg-gray-100 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                        width="24" 
-                        height="24" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        stroke-width="2" 
-                        stroke-linecap="round" 
-                        stroke-linejoin="round" 
-                        class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
-                </svg>
-            </button>
-
-            {{-- Judul + teks bawah --}}
-            <div>
-                <h2 class="text-2xl font-bold text-gray-800 mb-0">
-                    Edit Log Pengembangan Aplikasi
-                </h2>
-                <p class="text-sm text-gray-500">
-                    {{ __('Lengkapi informasi aplikasi di bawah ini.') }}
-                </p>
-            </div>
-        </div>
-
+       
         <form action="{{ route('application_logs.update', $log->id) }}" method="POST"
             class="space-y-6 bg-white shadow-md rounded-lg p-6">
             @csrf
             @method('PUT')
+        <!-- Header -->
+            <div class="relative mb-6">
+                <!-- Kiri: Judul dan deskripsi -->
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800 mb-0">
+                        Edit Log Pengembangan Aplikasi
+                    </h1>
+
+                    <p class="text-sm text-gray-500 w-3/4 sm:w-auto -mt-1 mb-10">
+                        {{ __('Lengkapi informasi Aplikasi di bawah ini') }} 
+                    </p>
+
+                </div>
+            </div>
 
             {{-- Aplikasi --}}
             <div>
@@ -53,14 +37,14 @@
             <div>
                 <label class="block font-medium mb-1">Judul Perubahan</label>
                 <input type="text" name="title" value="{{ $log->title }}" required
-                    class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"">
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             {{-- Jenis Perubahan --}}
             <div>
                 <label class="block font-medium mb-1">Jenis Perubahan</label>
                 <select name="change_type" required
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
                     @foreach (['penambahan', 'perbaikan', 'penghapusan', 'lainnya'] as $type)
                         <option value="{{ $type }}" @selected($log->change_type == $type)>
                             {{ ucfirst($type) }}
@@ -83,12 +67,12 @@
                     <label class="block font-medium mb-1">Versi</label>
                     <input type="text" name="version" value="{{ $log->version }}"
                         placeholder="Contoh: v2.3.1"
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Tanggal Perubahan</label>
                     <input type="date" name="date" value="{{ $log->date }}"
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
                 </div>
             </div>
 
@@ -96,7 +80,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block font-medium mb-1">Reviewer</label>
-                    <select name="reviewed_by" class="w-full border rounded p-2 text-sm text-gray-600"">
+                    <select name="reviewed_by" class="w-full border rounded p-2 text-sm text-gray-600">
                         <option value="">-- Pilih Reviewer --</option>
                         @foreach ($reviewers as $rev)
                             <option value="{{ $rev->id }}" @selected($log->reviewed_by == $rev->id)>
