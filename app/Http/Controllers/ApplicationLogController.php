@@ -74,7 +74,7 @@ class ApplicationLogController extends Controller
         ApplicationLog::create($validated);
 
         return redirect()->route('application_logs.index')
-            ->with('success', '📝 Log aplikasi berhasil ditambahkan.');
+            ->with('success', 'Log aplikasi berhasil ditambahkan.');
     }
 
     /**
@@ -110,7 +110,7 @@ class ApplicationLogController extends Controller
         $application_log->update($validated);
 
         return redirect()->route('application_logs.index')
-            ->with('success', '✅ Log aplikasi berhasil diperbarui.');
+            ->with('success', 'Log aplikasi berhasil diperbarui.');
     }
 
     /**
@@ -121,6 +121,6 @@ class ApplicationLogController extends Controller
         $application_log->delete();
 
         return redirect()->route('application_logs.index')
-            ->with('success', '🗑️ Log aplikasi berhasil dihapus.');
+            ->with('success', 'Log aplikasi berhasil dihapus.');
     }
 }
