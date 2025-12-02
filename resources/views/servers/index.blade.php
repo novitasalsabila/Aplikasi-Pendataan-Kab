@@ -112,7 +112,7 @@
                                     </span>
                                 </div>
                             </td>                                
-                            <td class="px-4 py-2 text-center">
+                            <td class="px-4 py-3 text-center">
                                 @if(auth()->user()->role === 'admin')
                                     <x-action-buttons
                                         :id="$srv->id"

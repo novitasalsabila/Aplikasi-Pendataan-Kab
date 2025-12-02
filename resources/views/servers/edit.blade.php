@@ -1,11 +1,6 @@
 <x-app-layout>
     <div class="max-w-3xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
-        {{-- <x-page-header 
-            title="Edit Informasi Server"
-            subtitle="Lengkapi informasi server di bawah ini."
-        /> --}}
-
-
+        
         <form action="{{ route('servers.update', $server->id) }}" method="POST" class="space-y-5 bg-white shadow-md rounded-lg p-6">
             @csrf
             @method('PUT')

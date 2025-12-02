@@ -1,10 +1,6 @@
 <x-app-layout>
     <div class="max-w-3xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
-         {{-- <x-page-header 
-            title="Tambah Server Baru"
-            subtitle="Lengkapi informasi server di bawah ini."
-        /> --}}
-
+         
         <form action="{{ route('servers.store') }}" method="POST" class="space-y-5 bg-white shadow-md rounded-lg p-6">
             @csrf
 
