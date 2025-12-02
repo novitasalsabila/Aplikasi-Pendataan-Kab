@@ -14,9 +14,23 @@ class ApplicationLogController extends Controller
     /**
      * Tampilkan semua log aplikasi.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $logs = ApplicationLog::with(['application', 'user', 'reviewer'])->latest()->get();
+        $search = $request->search;
+
+        $logs = ApplicationLog::with(['application', 'user', 'reviewer'])
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhereHas('application', function ($app) use ($search) {
+                        $app->where('name', 'like', "%{$search}%");
+                    });
+                });
+            })
+            ->latest()
+            ->get();
+
         return view('application_logs.index', compact('logs'));
     }
 
