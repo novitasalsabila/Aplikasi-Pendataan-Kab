@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\ApplicationLog;
+use App\Models\ApplicationVersion;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +27,17 @@ class ApplicationLogController extends Controller
     {
         $applications = Application::all();
         $reviewers = User::all();
-        return view('application_logs.create', compact('applications', 'reviewers'));
+
+        // Ambil versi terbaru tiap aplikasi
+        $latestVersions = ApplicationVersion::select('application_id', 'version_code')
+            ->latest('id')
+            ->get()
+            ->groupBy('application_id')
+            ->map->first();
+
+        return view('application_logs.create', compact('applications', 'reviewers', 'latestVersions'));
     }
+
 
     /**
      * Simpan log baru.

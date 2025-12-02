@@ -1,94 +1,101 @@
 <x-app-layout>
     <div class="max-w-4xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
-        <div class="flex items-start gap-3">
-            {{-- Tombol panah kembali --}}
-            <button type="button"
-                    onclick="history.back()"
-                    class="mt-1 inline-flex items-center justify-center p-1
-                        text-gray-700 hover:text-gray-900
-                        rounded-full hover:bg-gray-100 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                        width="24" 
-                        height="24" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        stroke-width="2" 
-                        stroke-linecap="round" 
-                        stroke-linejoin="round" 
-                        class="lucide lucide-arrow-left-icon lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
-                </svg>
-            </button>
-
-            {{-- Judul + teks bawah --}}
-            <div>
-                <h2 class="text-2xl font-bold text-gray-800 mb-0">
-                    Tambah Log Pengembangan Aplikasi
-                </h2>
-                <p class="text-sm text-gray-500">
-                    {{ __('Lengkapi informasi aplikasi di bawah ini.') }}
-                </p>
-            </div>
-        </div>
-
+        
         <form action="{{ route('application_logs.store') }}" method="POST"
               class="space-y-5 bg-white shadow-md rounded-lg p-6">
             @csrf
+
+        <!-- Header -->
+            <div class="relative mb-6">
+                <!-- Kiri: Judul dan deskripsi -->
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800 mb-0">
+                        Tambah Log Pengembangan Aplikasi
+                    </h1>
+
+                    <p class="text-sm text-gray-500 w-3/4 sm:w-auto -mt-1 mb-10">
+                        {{ __('Lengkapi informasi Aplikasi di bawah ini') }} 
+                    </p>
+
+                </div>
+            </div>
 
             {{-- Aplikasi --}}
             <div>
                 <label class="block font-medium mb-1">Nama Aplikasi</label>
                 <select name="application_id" required
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
                     <option value="">-- Pilih Aplikasi --</option>
                     @foreach ($applications as $app)
                         <option value="{{ $app->id }}">{{ $app->name }}</option>
                     @endforeach
                 </select>
-                <p class="text-xs text-gray-500 mt-1">Contoh: Sistem Informasi Kepegawaian</p>
             </div>
 
             {{-- Judul --}}
             <div>
                 <label class="block font-medium mb-1">Judul Perubahan</label>
                 <input type="text" name="title" required
-                       placeholder="Contoh: Penambahan fitur laporan bulanan"
-                       class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                       class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             {{-- Deskripsi --}}
             <div>
                 <label class="block font-medium mb-1">Deskripsi</label>
                 <textarea name="description" rows="4"
-                          placeholder="Contoh: Memperbaiki error validasi data user pada halaman registrasi."
-                          class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500"></textarea>
+                          class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"></textarea>
             </div>
             
             {{-- Jenis Perubahan --}}
-            <div>
-                <label class="block font-medium mb-1">Jenis Perubahan</label>
-                <select name="change_type" required
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
-                    <option value="penambahan">Penambahan</option>
-                    <option value="perbaikan">Perbaikan</option>
-                    <option value="penghapusan">Penghapusan</option>
-                    <option value="lainnya">Lainnya</option>
+            <div class="space-y-1">
+                <label class="block font-medium text-gray-700">Jenis Perubahan *</label>
+
+                <select name="change_type" 
+                        required
+                        class="w-full border border-gray-300 rounded-lg p-2 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    
+                    <option value="">-- Pilih Jenis Perubahan --</option>
+
+                    <option value="penambahan" 
+                        {{ old('change_type', $change->change_type ?? '') === 'penambahan' ? 'selected' : '' }}>
+                        Penambahan
+                    </option>
+
+                    <option value="perbaikan" 
+                        {{ old('change_type', $change->change_type ?? '') === 'perbaikan' ? 'selected' : '' }}>
+                        Perbaikan
+                    </option>
+
+                    <option value="penghapusan" 
+                        {{ old('change_type', $change->change_type ?? '') === 'penghapusan' ? 'selected' : '' }}>
+                        Penghapusan
+                    </option>
+
+                    <option value="lainnya" 
+                        {{ old('change_type', $change->change_type ?? '') === 'lainnya' ? 'selected' : '' }}>
+                        Lainnya
+                    </option>
                 </select>
-                <p class="text-xs text-gray-500 mt-1">Contoh: Pilih “Perbaikan” jika memperbaiki bug pada modul.</p>
             </div>
+
 
             {{-- Versi dan Tanggal --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label class="block font-medium mb-1">Versi</label>
-                    <input type="text" name="version" placeholder="Contoh: v2.3.1"
-                           class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
+                    <label class="block font-medium mb-1">Versi Terakhir</label>
+                    <input 
+                        type="text" 
+                        id="version-input"
+                        name="version"
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"
+                    >
+                    <p class="text-xs text-red-600">*Versi akan otomatis muncul setelah memilih aplikasi</p>
                 </div>
+
                 <div>
                     <label class="block font-medium mb-1">Tanggal Perubahan</label>
                     <input type="date" name="date"
-                           class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500">
-                    <p class="text-xs text-gray-500 mt-1">Contoh: 2025-10-20</p>
+                           class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
                 </div>
             </div>
 
@@ -96,22 +103,20 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block font-medium mb-1">Reviewer</label>
-                    <select name="reviewed_by" class="w-full border rounded p-2">
+                    <select name="reviewed_by" class="w-full border rounded p-2 text-sm text-gray-600">
                         <option value="">-- Pilih Reviewer --</option>
                         @foreach ($reviewers as $rev)
                             <option value="{{ $rev->id }}">{{ $rev->name }}</option>
                         @endforeach
                     </select>
-                    <p class="text-xs text-gray-500 mt-1">Contoh: Admin Sistem / Kepala Divisi</p>
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Status Persetujuan</label>
-                    <select name="approved_st" class="w-full border rounded p-2">
+                    <select name="approved_st" class="w-full border rounded p-2 text-sm text-gray-600">
                         <option value="pending">Diproses</option>
                         <option value="approved">Diterima</option>
                         <option value="rejected">Ditolak</option>
                     </select>
-                    <p class="text-xs text-gray-500 mt-1">Contoh: Pilih "Diproses" jika masih menunggu verifikasi.</p>
                 </div>
             </div>
 
@@ -128,4 +133,23 @@
             </div>
         </form>
     </div>
+    
+    <script>
+    // Data versi terbaru dari controller (ubah ke JS object)
+    const latestVersions = @json($latestVersions);
+
+    const appSelect = document.querySelector('select[name="application_id"]');
+    const versionInput = document.getElementById('version-input');
+
+    appSelect.addEventListener('change', function () {
+        let appId = this.value;
+
+        if (latestVersions[appId]) {
+            versionInput.value = latestVersions[appId].version_code;
+        } else {
+            versionInput.value = '';
+        }
+    });
+</script>
+
 </x-app-layout>
