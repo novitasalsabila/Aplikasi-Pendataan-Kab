@@ -110,7 +110,7 @@
                         <th class="px-4 py-3 text-left">Kategori</th>
                         <th class="px-4 py-3 text-left min-w-[170px]">Sensitivitas Data</th>
                         <th class="px-4 py-3 text-left">Status</th>
-                        <th class="px-4 py-3 text-left min-w-[170px]">Terakhir Update</th>
+                        <th class="px-4 py-3 text-left min-w-[170px]">Tanggal Rilis</th>
                         <th class="px-4 py-3 text-left min-w-[120px]">Versi</th>
                         <th class="px-4 py-3 text-center min-w-[170px]">Aksi</th>
                     </tr>
@@ -120,7 +120,7 @@
                     @forelse ($applications as $index => $app)
                         <tr class="hover:bg-gray-50 transition text-sm">
                             <td class="px-4 py-3 w-12">{{ $index + 1 }}</td>
-                            <td class="px-4 py-3 font-medium">{{ $app->name }}</td>
+                            <td class="px-4 py-3">{{ $app->name }}</td>
                             <td class="px-4 py-3">{{ $app->department->name ?? '-' }}</td>
                              <td class="px-4 py-3 text-left">
                                 @php
@@ -163,22 +163,22 @@
                                 </span>
                             </td>
                             <td class="px-4 py-3">
-                                {{ $app->last_update ? \Carbon\Carbon::parse($app->last_update)->format('Y-m-d') : '-' }}
+                                {{ $app->created_at ? \Carbon\Carbon::parse($app->created_at)->format('Y-m-d') : '-' }}
                             </td>
                             
                             @php
-    $latestVersion = $app->versions->sortByDesc('release_date')->first();
-@endphp
+                                $latestVersion = $app->versions->sortByDesc('release_date')->first();
+                            @endphp
 
-<td class="px-4 py-3">
-    @if($latestVersion)
-        <span class="bg-gray-50 px-2 py-1 rounded border font-semibold">
-            {{ $latestVersion->version_code }}
-        </span>
-    @else
-        <span class="text-gray-400 text-xs">Belum ada</span>
-    @endif
-</td>
+                            <td class="px-4 py-3">
+                                @if($latestVersion)
+                                    <span class="bg-gray-50 px-2 py-1 rounded border font-semibold">
+                                        {{ $latestVersion->version_code }}
+                                    </span>
+                                @else
+                                    <span class="text-gray-400 text-xs">Belum ada</span>
+                                @endif
+                            </td>
 
                             <!-- Kolom Aksi -->
                             <td class="px-3 py-3 text-center">
