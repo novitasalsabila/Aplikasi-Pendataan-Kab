@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-4xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
         <form action="{{ route('application_findings.update', $finding->id) }}" method="POST"
-              class="space-y-5 bg-white shadow-md rounded-lg p-6 text-sm">
+              class="space-y-5 bg-white shadow-md rounded-lg p-6">
             @csrf
             @method('PUT')
             <!-- Header -->
@@ -20,7 +20,7 @@
             </div>
             <div>
                 <label class="block font-medium mb-1">Nama Aplikasi</label>
-                <select name="application_id" required class="w-full border rounded p-2 text-gray-600">
+                <select name="application_id" required class="w-full border rounded p-2 text-sm text-gray-600">
                     <option value="">-- Pilih Aplikasi --</option>
                     @foreach ($applications as $app)
                         <option value="{{ $app->id }}" {{ $app->id == $finding->application_id ? 'selected' : '' }}>
@@ -33,7 +33,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                     <label class="block font-medium mb-1">Tipe Temuan</label>
-                    <select name="type" required class="w-full border rounded p-2 text-gray-600">
+                    <select name="type" required class="w-full border rounded p-2 text-sm text-gray-600">
                         <option value="bug" {{ $finding->type == 'bug' ? 'selected' : '' }}>Bug</option>
                         <option value="vulnerability" {{ $finding->type == 'vulnerability' ? 'selected' : '' }}>Kerentanan</option>
                         <option value="hack" {{ $finding->type == 'hack' ? 'selected' : '' }}>Peretasan</option>
@@ -43,7 +43,7 @@
 
                 <div>
                     <label class="block font-medium mb-1">Sumber</label>
-                    <select name="source" required class="w-full border rounded p-2 text-gray-600">
+                    <select name="source" required class="w-full border rounded p-2 text-sm text-gray-600">
                         <option value="user" {{ $finding->source == 'user' ? 'selected' : '' }}>Pengguna</option>
                         <option value="monitoring" {{ $finding->source == 'monitoring' ? 'selected' : '' }}>Monitoring</option>
                         <option value="audit" {{ $finding->source == 'audit' ? 'selected' : '' }}>Audit</option>
@@ -53,7 +53,7 @@
 
                 <div>
                     <label class="block font-medium mb-1">Tingkat Keparahan</label>
-                    <select name="severity" required class="w-full border rounded p-2 text-gray-600">
+                    <select name="severity" required class="w-full border rounded p-2 text-sm text-gray-600">
                         <option value="rendah" {{ $finding->severity == 'rendah' ? 'selected' : '' }}>Rendah</option>
                         <option value="sedang" {{ $finding->severity == 'sedang' ? 'selected' : '' }}>Sedang</option>
                         <option value="tinggi" {{ $finding->severity == 'tinggi' ? 'selected' : '' }}>Tinggi</option>
@@ -64,12 +64,12 @@
             <div>
                 <label class="block font-medium mb-1">Deskripsi Temuan</label>
                 <textarea name="description" rows="3"
-                          class="w-full border rounded p-2 text-gray-600">{{ old('description', $finding->description) }}</textarea>
+                          class="w-full border rounded p-2 text-sm text-gray-600">{{ old('description', $finding->description) }}</textarea>
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Status</label>
-                <select name="status" class="w-full border rounded p-2 text-gray-600">
+                <select name="status" class="w-full border rounded p-2 text-sm text-gray-600">
                     <option value="open" {{ $finding->status == 'open' ? 'selected' : '' }}>Buka</option>
                     <option value="in_progress" {{ $finding->status == 'in_progress' ? 'selected' : '' }}>Proses</option>
                     <option value="resolved" {{ $finding->status == 'resolved' ? 'selected' : '' }}>Selesai</option>
@@ -79,7 +79,7 @@
             <div>
                 <label class="block font-medium mb-1">Tindak Lanjut (Opsional)</label>
                 <textarea name="follow_up_action" rows="2"
-                          class="w-full border rounded p-2 text-gray-600"
+                          class="w-full border rounded p-2 text-sm text-gray-600"
                           placeholder="Contoh: Patch diterapkan dan diuji ulang.">{{ old('follow_up_action', $finding->follow_up_action) }}</textarea>
             </div>
 
@@ -87,7 +87,7 @@
                 <label class="block font-medium mb-1">Tanggal Ditemukan</label>
                 <input type="date" name="follow_up_date"
                        value="{{ old('follow_up_date', $finding->follow_up_date) }}"
-                       class="w-full border rounded p-2 text-gray-600">
+                       class="w-full border rounded p-2 text-sm text-gray-600">
             </div>
 
             {{-- Tombol --}}

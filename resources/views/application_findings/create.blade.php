@@ -2,7 +2,7 @@
     <div class="max-w-4xl mx-auto py-8 px-6 md:mt-0 sm:mt-20">
 
         <form action="{{ route('application_findings.store') }}" method="POST"
-              class="space-y-5 bg-white shadow-md rounded-lg p-6 text-sm">
+              class="space-y-5 bg-white shadow-md rounded-lg p-6">
             @csrf
             <!-- Header -->
             <div class="relative mb-6">
@@ -20,7 +20,7 @@
             </div>
             <div>
                 <label class="block font-medium mb-1">Nama Aplikasi</label>
-                <select name="application_id" required class="w-full border rounded p-2 text-gray-600">
+                <select name="application_id" required class="w-full border rounded p-2 text-sm text-gray-600">
                     <option value="">-- Pilih Aplikasi --</option>
                     @foreach ($applications as $app)
                         <option value="{{ $app->id }}">{{ $app->name }}</option>
@@ -31,7 +31,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                     <label class="block font-medium mb-1">Tipe Temuan</label>
-                    <select name="type" required class="w-full border rounded p-2 text-gray-600">
+                    <select name="type" required class="w-full border rounded p-2 text-sm text-gray-600">
                         <option value="bug">Bug</option>
                         <option value="vulnerability">Kerentanan</option>
                         <option value="hack">Peretasan</option>
@@ -40,7 +40,7 @@
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Sumber</label>
-                    <select name="source" required class="w-full border rounded p-2 text-gray-600">
+                    <select name="source" required class="w-full border rounded p-2 text-sm text-gray-600">
                         <option value="user">Pengguna</option>
                         <option value="monitoring">Monitoring</option>
                         <option value="audit">Audit</option>
@@ -49,7 +49,7 @@
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Tingkat Keparahan</label>
-                    <select name="severity" required class="w-full border rounded p-2 text-gray-600">
+                    <select name="severity" required class="w-full border rounded p-2 text-sm text-gray-600">
                         <option value="rendah">Rendah</option>
                         <option value="sedang">Sedang</option>
                         <option value="tinggi">Tinggi</option>
@@ -60,12 +60,12 @@
             <div>
                 <label class="block font-medium mb-1">Deskripsi Temuan</label>
                 <textarea name="description" rows="3" placeholder="Contoh: Sistem login tidak memvalidasi input dengan benar."
-                          class="w-full border rounded p-2 text-gray-600"></textarea>
+                          class="w-full border rounded p-2 text-sm text-gray-600"></textarea>
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Status</label>
-                <select name="status" class="w-full border rounded p-2 text-gray-600">
+                <select name="status" class="w-full border rounded p-2 text-sm text-gray-600">
                     <option value="open">Buka</option>
                     <option value="in_progress">Proses</option>
                     <option value="resolved">Selesai</option>
@@ -75,12 +75,12 @@
             <div>
                 <label class="block font-medium mb-1">Tindak Lanjut (Opsional)</label>
                 <textarea name="follow_up_action" rows="2" placeholder="Contoh: Patch diterapkan dan diuji ulang."
-                          class="w-full border rounded p-2 text-gray-600"></textarea>
+                          class="w-full border rounded p-2 text-sm text-gray-600"></textarea>
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Tanggal Ditemukan</label>
-                <input type="date" name="follow_up_date" class="w-full border rounded p-2 text-gray-600">
+                <input type="date" name="follow_up_date" class="w-full border rounded p-2 text-sm text-gray-600">
             </div>
 
             {{-- Tombol --}}

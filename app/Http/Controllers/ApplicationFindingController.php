@@ -11,11 +11,22 @@ class ApplicationFindingController extends Controller
     /**
      * Menampilkan daftar temuan aplikasi
      */
-    public function index()
+    public function index(Request $request)
     {
-        $findings = ApplicationFinding::with('application')->latest()->get();
+        $search = $request->search;
+
+        $findings = ApplicationFinding::with('application')
+            ->when($search, function ($query) use ($search) {
+                $query->whereHas('application', function ($app) use ($search) {
+                    $app->where('name', 'like', '%' . $search . '%');
+                });
+            })
+            ->latest()
+            ->get();
+
         return view('application_findings.index', compact('findings'));
     }
+
 
     /**
      * Form tambah data temuan
