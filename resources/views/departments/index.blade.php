@@ -113,7 +113,6 @@
                     <td class="px-4 py-3 text-center">
                         <x-action-buttons
                             :id="$dept->id"
-                            :showRoute="route('departments.show', $dept->id)"
                             :editRoute="route('departments.edit', $dept->id)"
                             :deleteRoute="route('departments.destroy', $dept->id)"
                             itemName="{{ $dept->name }}"
