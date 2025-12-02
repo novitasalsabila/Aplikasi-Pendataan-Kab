@@ -93,7 +93,9 @@
                             <td class="px-4 py-3">{{ $log->application->name ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->title }}</td>
                             <td class="px-4 py-3">{{ $log->change_type }}</td>
-                            <td class="px-4 py-3">{{ $log->version ?? '-' }}</td>
+                            <td class="px-4 py-3">
+                                <span class="bg-gray-50 px-2 py-1 rounded border font-semibold">{{ $log->version ?? '-' }}</span>
+                            </td>
                             <td class="px-4 py-3">{{ $log->date ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->reviewer->name ?? '-' }}</td>
                             <td class="px-4 py-3">
