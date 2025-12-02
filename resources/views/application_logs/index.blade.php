@@ -94,7 +94,7 @@
                             <td class="px-4 py-3">{{ $log->title }}</td>
                             <td class="px-4 py-3">{{ $log->change_type }}</td>
                             <td class="px-4 py-3">
-                                <span class="bg-gray-50 px-2 py-1 rounded border font-semibold">{{ $log->version ?? '-' }}</span>
+                                <span class="bg-gray-50 px-2 py-1 rounded border font-semibold">{{ optional($log->application->versions->first())->version_code ?? '-' }}</span>
                             </td>
                             <td class="px-4 py-3">{{ $log->date ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->reviewer->name ?? '-' }}</td>

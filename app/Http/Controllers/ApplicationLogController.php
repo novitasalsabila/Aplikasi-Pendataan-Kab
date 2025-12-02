@@ -18,7 +18,7 @@ class ApplicationLogController extends Controller
     {
         $search = $request->search;
 
-        $logs = ApplicationLog::with(['application', 'user', 'reviewer'])
+        $logs = ApplicationLog::with(['application', 'user', 'application.versions' => fn($v) => $v->orderByDesc('id'), 'reviewer'])
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
