@@ -95,7 +95,6 @@
                             <td class="px-4 py-3 text-center">
                                 <x-action-buttons
                                     :id="$integration->id"
-                                    :showRoute="route('application_integrations.show', $integration->id)"
                                     :editRoute="route('application_integrations.edit', $integration->id)"
                                     :deleteRoute="route('application_integrations.destroy', $integration->id)"
                                     itemName="{{ $integration->sourceApp->name }}"
