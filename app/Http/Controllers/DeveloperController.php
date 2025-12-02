@@ -10,11 +10,21 @@ class DeveloperController extends Controller
     /**
      * Tampilkan semua data pengembang.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $developers = Developer::latest()->get();
+        $search = $request->input('search');
+
+        $developers = \App\Models\Developer::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('contact_email', 'like', "%{$search}%");
+            })
+            ->orderBy('name')
+            ->get();
+
         return view('developers.index', compact('developers'));
     }
+
 
     /**
      * Tampilkan form tambah.

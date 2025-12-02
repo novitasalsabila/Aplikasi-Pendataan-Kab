@@ -84,8 +84,8 @@
                     @forelse ($developers as $index => $dev)
                         <tr class="hover:bg-gray-50 transition">
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
-                            <td class="px-4 py-3 font-medium">{{ $dev->name }}</td>
-                            <td class="px-4 py-3 capitalize">{{ $dev->developer_type }}</td>
+                            <td class="px-4 py-3">{{ $dev->name }}</td>
+                            <td class="px-4 py-3">{{ $dev->developer_type }}</td>
                             <td class="px-4 py-3">{{ $dev->contact_email ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $dev->contact_phone ?? '-' }}</td>             
                             <td class="px-4 py-3 text-center">

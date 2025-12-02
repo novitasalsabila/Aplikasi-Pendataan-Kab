@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-6xl mx-auto py-8 px-6 space-y-8">
+    <div class="max-w-6xl mx-auto py-8 px-6 space-y-8 md:mt-0 sm:mt-20">
 
         {{-- HEADER --}}
         <x-page-header 
