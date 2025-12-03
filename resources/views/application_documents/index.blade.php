@@ -94,50 +94,13 @@
 
                             <!-- Aksi Ikon -->
                             <td class="px-4 py-3 text-center">
-                                <div class="flex items-center justify-center divide-x divide-gray-300">
-
-                                    {{-- Lihat --}}
-                                    @if ($doc->file_path)
-                                        <a href="{{ asset('storage/' . $doc->file_path) }}" 
-                                        target="_blank"
-                                        class="text-blue-500 hover:text-blue-700 transition pl-3 pr-3">
-                                            <svg xmlns="http://www.w3.org/2000/svg" 
-                                                fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-5">
-                                                <path stroke-linecap="round" stroke-linejoin="round" 
-                                                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639
-                                                    C3.423 7.51 7.36 4.5 12 4.5
-                                                    c4.638 0 8.573 3.007 9.963 7.178
-                                                    .07.207.07.431 0 .639
-                                                    C20.577 16.49 16.64 19.5 12 19.5
-                                                    c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" 
-                                                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                            </svg>
-                                        </a>
-                                    @endif
-                                    @if(auth()->user()->role !== 'opd')
-                                    {{-- Edit --}}
-                                    <a href="{{ route('application_documents.edit', $doc->id) }}"
-                                        class="text-yellow-500 hover:text-yellow-700 transition pl-3 pr-3"
-                                        title="Edit Dokumen">
-                                        <svg xmlns="http://www.w3.org/2000/svg" 
-                                            fill="none" viewBox="0 0 24 24" 
-                                            stroke-width="1.5" stroke="currentColor" class="size-5">
-                                            <path stroke-linecap="round" stroke-linejoin="round" 
-                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652
-                                                L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18
-                                                l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z
-                                                M19.5 7.125 16.862 4.487M18 14v4.75
-                                                A2.25 2.25 0 0 1 15.75 21H5.25
-                                                A2.25 2.25 0 0 1 3 18.75V8.25
-                                                A2.25 2.25 0 0 1 5.25 6H10" />
-                                        </svg>
-                                    </a>
-                                    @endif
-
-                                </div>
-
+                                <x-action-buttons 
+                                    :id="$doc->id"
+                                    :fileRoute="asset('storage/' . $doc->file_path)"
+                                    :editRoute="route('application_documents.edit', $doc->id)"
+                                    :deleteRoute="route('application_documents.destroy', $doc->id)"
+                                    itemName="{{ $doc->doc_name }}"
+                                />
                             </td>
                         </tr>
                     @empty

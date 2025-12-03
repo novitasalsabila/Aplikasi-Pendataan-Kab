@@ -3,6 +3,7 @@
     'showRoute' => null,
     'editRoute' => null,
     'deleteRoute' => null,
+    'fileRoute' => null,
     'itemName' => 'data',
 ])
 
@@ -27,6 +28,30 @@
             </svg>
         </a>
     @endif
+
+    {{-- Tombol Lihat Dokumen--}}
+    @if($fileRoute)
+        <a href="{{ $fileRoute }}"
+        target="_blank"
+        class="text-blue-500 hover:text-blue-700 inline-flex items-center px-3">
+
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                fill="none" viewBox="0 0 24 24"
+                stroke-width="1.5" stroke="currentColor" class="size-5">
+                <path stroke-linecap="round" stroke-linejoin="round" 
+                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639
+                    C3.423 7.51 7.36 4.5 12 4.5
+                    c4.638 0 8.573 3.007 9.963 7.178
+                    .07.207.07.431 0 .639
+                    C20.577 16.49 16.64 19.5 12 19.5
+                    c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" 
+                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+
+        </a>
+    @endif
+
 
 
     {{-- Tombol Edit --}}
@@ -76,7 +101,7 @@
         <div id="modal-{{ $id }}"
             class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
             
-            <div class="bg-white rounded-xl shadow-lg p-6 min-w-[300px] text-center animate-fadeIn">
+            <div class="bg-white rounded-xl shadow-lg p-6 w-[90%] max-w-[400px] text-center animate-fadeIn">
                 <h4 class="text-md font-semibold mb-2">Konfirmasi Hapus</h4>
                 <p class="text-gray-700 mb-4">
                     Yakin ingin menghapus <strong>{{ $itemName }}</strong>?
