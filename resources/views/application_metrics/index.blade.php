@@ -37,6 +37,7 @@
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3 min-w-[200px]">Aplikasi</th>
                         <th class="px-4 py-3 min-w-[200px]">Tanggal Cek</th>
+                        <th class="px-4 py-3 min-w-[200px]">Waktu Cek</th>
                         <th class="px-4 py-3 min-w-[150px]">Uptime (%)</th>
                         <th class="px-4 py-3 min-w-[150px]">Response (s)</th>
                         <th class="px-4 py-3 min-w-[150px]">Status</th>
@@ -49,7 +50,8 @@
                         <tr class="border-b border-gray-200 hover:bg-gray-50">
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $m->application->name ?? '-' }}</td>
-                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($m->check_date)->format('Y-d-m | H:i A') }}</td>
+                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($m->check_date)->format('Y-d-m') }}</td>
+                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($m->check_date)->format('H:i A') }}</td>
                             <td class="px-4 py-3">{{ $m->uptime ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $m->response_time ?? '-' }}</td>
                             <td class="px-4 py-3">

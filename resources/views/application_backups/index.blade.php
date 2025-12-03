@@ -35,8 +35,9 @@
                 <thead>
                     <tr>
                         <th class="px-4 py-3 text-left">No</th>
-                        <th class="px-4 py-3 text-left min-w-[200px]">Aplikasi</th>
-                        <th class="px-4 py-3 text-left  min-w-[250px]">Waktu Pencadangan</th>
+                        <th class="px-4 py-3 text-left min-w-[250px]">Aplikasi</th>
+                        <th class="px-4 py-3 text-left  min-w-[220px]">Tanggal Pencadangan</th>
+                        <th class="px-4 py-3 text-left  min-w-[220px]">Waktu Pencadangan</th>
                         <th class="px-4 py-3 text-left  min-w-[200px]">Tipe Pencadangan</th>
                         <th class="px-4 py-3 text-left  min-w-[350px]">Lokasi Penyimpanan</th>
                         <th class="px-4 py-3 text-left">Terverifikasi</th>
@@ -52,15 +53,15 @@
                         <tr class="hover:bg-gray-50 transition align-top">
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $b->application->name ?? '-' }}</td>
-                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($b->backup_date)->timezone('Asia/Jakarta')->format('Y-m-d | H:i A') }}</td>
-                            <td class="px-4 py-3
-                                @if($b->backup_type === 'manual') text-gray-500
-                                @elseif($b->backup_type === 'harian') text-green-500
-                                @elseif($b->backup_type === 'mingguan') text-blue-500
-                                @elseif($b->backup_type === 'bulanan') text-orange-500
-                                @endif">
-                                {{ ucfirst($b->backup_type) }}
+                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($b->backup_date)->timezone('Asia/Jakarta')->format('Y-m-d') }}</td>
+                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($b->backup_date)->timezone('Asia/Jakarta')->format('H:i A') }}</td>
+                            <td class="px-4 py-3">
+                                <span class="px-3 py-1 rounded-lg border text-sm font-semibold
+                                    {{ $colors[$b->backup_type] ?? 'bg-gray-50 text-gray-600 border-gray-300' }}">
+                                    {{ ucfirst($b->backup_type) }}
+                                </span>
                             </td>
+
 
                             <td class="px-4 py-3">{{ $b->storage_location }}</td>
                             <td class="px-4 py-3 text-center">
