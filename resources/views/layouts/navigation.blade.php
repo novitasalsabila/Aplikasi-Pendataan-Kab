@@ -137,13 +137,18 @@
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Temuan') }}
             </x-nav-link>
 
+            <x-nav-link :href="route('application_documents.index')" :active="request()->routeIs('application_documents.*')">
+                <img src="{{ asset('icons/Dokumen.svg') }}" alt="Dokumen" class="w-5 h-5">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Dokumen') }}
+            </x-nav-link>
+
             <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">
                 <img src="{{ asset('icons/version.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Versi Aplikasi') }}
             </x-nav-link>
 
             <x-nav-link :href="route('application_backups.index')" :active="request()->routeIs('application_backups.*')">
-                <img src="{{ asset('icons/database.svg') }}" alt="Versi Aplikasi" class="w-5 h-5">
+                <img src="{{ asset('icons/database.svg') }}" alt="Aplikasi Backups" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Backups') }}
             </x-nav-link>
 
@@ -158,6 +163,11 @@
             <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')">
                 <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi Saya" class="w-5 h-5">
                 <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Saya') }}
+            </x-nav-link>
+
+            <x-nav-link :href="route('application_documents.index')" :active="request()->routeIs('application_documents.*')">
+                <img src="{{ asset('icons/Dokumen.svg') }}" alt="Dokumen" class="w-5 h-5">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Dokumen') }}
             </x-nav-link>
 
             <x-nav-link :href="route('application_versions.index')" :active="request()->routeIs('application_versions.*')">

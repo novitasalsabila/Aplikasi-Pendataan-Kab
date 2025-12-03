@@ -2,12 +2,14 @@
     <div class="max-w-7xl mx-auto py-8 px-6">
         <div class="relative mb-6 md:mt-0 sm:mt-20">
             <!-- Tombol kanan atas -->
+            @if(auth()->user()->role !== 'opd')
                 <a href="{{ route('application_documents.create') }}"
                     class="absolute top-0 right-0 bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition no-underline flex items-center gap-2">
                     <img src="{{ asset('icons/plus.svg') }}" alt="Tambah"
                         class="w-5 h-5 filter invert brightness-0">
                     <span>Upload Dokumen</span>
                 </a>
+            @endif
 
             <!-- Kiri: Judul dan deskripsi -->
             <div>
@@ -114,7 +116,7 @@
                                             </svg>
                                         </a>
                                     @endif
-
+                                    @if(auth()->user()->role !== 'opd')
                                     {{-- Edit --}}
                                     <a href="{{ route('application_documents.edit', $doc->id) }}"
                                         class="text-yellow-500 hover:text-yellow-700 transition pl-3 pr-3"
@@ -132,7 +134,7 @@
                                                 A2.25 2.25 0 0 1 5.25 6H10" />
                                         </svg>
                                     </a>
-
+                                    @endif
 
                                 </div>
 

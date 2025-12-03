@@ -467,7 +467,7 @@
                         title="Non Aktif"
                         :value="$inactiveApps"
                         detail="Aplikasi tidak aktif"
-                        icon="trending-up"
+                        icon="square-x"
                     />
 
                     <x-stat-card 

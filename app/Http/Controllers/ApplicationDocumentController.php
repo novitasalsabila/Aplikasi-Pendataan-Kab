@@ -14,7 +14,22 @@ class ApplicationDocumentController extends Controller
      */
     public function index()
     {
-        $documents = ApplicationDocument::with(['application', 'uploader'])->latest()->get();
+        $user = Auth::user();
+
+        if ($user->role === 'opd') {
+            // Hanya ambil dokumen dari aplikasi milik OPD itu
+            $documents = ApplicationDocument::with(['application', 'uploader'])
+                ->whereHas('application', function ($q) use ($user) {
+                    $q->where('department_id', $user->department_id);
+                })
+                ->latest()
+                ->get();
+        } else {
+            // Admin/diskominfo → semua dokumen
+            $documents = ApplicationDocument::with(['application', 'uploader'])
+                ->latest()
+                ->get();
+        }
         return view('application_documents.index', compact('documents'));
     }
 
