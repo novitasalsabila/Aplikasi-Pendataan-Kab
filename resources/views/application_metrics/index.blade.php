@@ -49,7 +49,7 @@
                         <tr class="border-b border-gray-200 hover:bg-gray-50">
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $m->application->name ?? '-' }}</td>
-                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($m->check_date)->format('d M Y H:i') }}</td>
+                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($m->check_date)->format('Y-d-m | H:i A') }}</td>
                             <td class="px-4 py-3">{{ $m->uptime ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $m->response_time ?? '-' }}</td>
                             <td class="px-4 py-3">

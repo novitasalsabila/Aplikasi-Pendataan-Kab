@@ -67,8 +67,8 @@
                             </td>
 
                             <td class="px-4 py-3">
-                                {{ $ver->release_date
-                                    ? \Carbon\Carbon::parse($ver->release_date)->format('Y-m-d')
+                                {{ $ver->created_at
+                                    ? \Carbon\Carbon::parse($ver->created_at)->format('Y-m-d')
                                     : '-' }}
                             </td>
                             <td class="px-4 py-3">{{ Str::limit($ver->changelog, 50) ?? '-' }}</td>

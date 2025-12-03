@@ -14,15 +14,15 @@
             </div>
         </div>
 
-@if (session('success'))
-    <div x-data="{ show: true }"
-         x-show="show"
-         x-transition
-         x-init="setTimeout(() => show = false, 2500)"
-         class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded mb-4">
-        {{ session('success') }}
-    </div>
-@endif
+        @if (session('success'))
+            <div x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 2500)"
+                class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
 
 
         <div class="overflow-x-auto bg-white shadow-md rounded-lg overflow-hidden">
@@ -52,7 +52,7 @@
                         <tr class="hover:bg-gray-50 transition align-top">
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $b->application->name ?? '-' }}</td>
-                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($b->backup_date)->format('d M Y H:i') }}</td>
+                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($b->backup_date)->timezone('Asia/Jakarta')->format('Y-m-d | H:i A') }}</td>
                             <td class="px-4 py-3
                                 @if($b->backup_type === 'manual') text-gray-500
                                 @elseif($b->backup_type === 'harian') text-green-500
