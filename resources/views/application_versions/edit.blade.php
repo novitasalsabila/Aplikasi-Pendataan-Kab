@@ -38,8 +38,8 @@
 
             <div>
                 <label class="block font-medium mb-1">Tanggal Rilis *</label>
-                <input type="date" name="release_date" value="{{ $version->release_date }}"
-                       class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-gray-600">
+                <input type="date" name="release_date" value="{{ \Carbon\Carbon::parse($version->created_at)->format('Y-m-d') }}"
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-gray-600">
             </div>
 
             <div>
