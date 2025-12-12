@@ -67,7 +67,7 @@
 
                             <!-- Filter Status -->
                             <select name="status"
-                                class="px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
+                                class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
                                 <option value="">Semua Status</option>
                                 <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
                                 <option value="nonaktif" {{ request('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
@@ -76,7 +76,7 @@
 
                             <!-- Filter Kategori -->
                             <select name="kategori"
-                                class="px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
+                                class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
                                 <option value="">Semua Kategori</option>
                                 <option value="web" {{ request('kategori') == 'web' ? 'selected' : '' }}>Web</option>
                                 <option value="mobile" {{ request('kategori') == 'mobile' ? 'selected' : '' }}>Mobile</option>
@@ -85,7 +85,7 @@
 
                             <!-- Filter Sensitivitas Data -->
                             <select name="sensitivitas"
-                                class="px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
+                                class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
                                 <option value="">Semua Sensitivitas</option>
                                 <option value="internal" {{ request('sensitivitas') == 'internal' ? 'selected' : '' }}>Internal</option>
                                 <option value="publik" {{ request('sensitivitas') == 'publik' ? 'selected' : '' }}>Publik</option>
