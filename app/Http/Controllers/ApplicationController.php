@@ -22,6 +22,7 @@ class ApplicationController extends Controller
     $search   = request('search');
     $status   = request('status');
     $kategori = request('kategori');
+    $sensitivitas = request('sensitivitas');
 
     // Kalau role OPD → hanya tampilkan aplikasi milik departemennya sendiri
     if ($user->role === 'opd') {
@@ -49,6 +50,10 @@ class ApplicationController extends Controller
     // --- Filter Kategori ---
     if ($kategori) {
         $query->where('category', $kategori);
+    }
+
+    if ($sensitivitas){
+        $query->where('data_sensitivity', $sensitivitas);
     }
 
     // Eksekusi

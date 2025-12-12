@@ -33,65 +33,78 @@
         </div>
 
         <!-- Search dan Filter -->
-<!-- Search + Filter dalam 1 kotak -->
-<div class="p-4 bg-white shadow-sm rounded-lg border border-gray-200 mb-6">
-        <div class="flex flex-col sm:flex-row sm:items-center mb-6 gap-3 w-full">
-            <!-- Form Search & Filter -->
-            <form action="{{ route('applications.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
+        <!-- Search + Filter dalam 1 kotak -->
+        <div class="p-4 bg-white shadow-sm rounded-lg border border-gray-200 mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-center mb-6 gap-3 w-full">
+                    <!-- Form Search & Filter -->
+                    <form action="{{ route('applications.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
 
-                <!-- Input + Tombol Search -->
-                <div class="relative flex-1">
-                    <input 
-                        type="text" 
-                        name="search"
-                        value="{{ request('search') }}"
-                        placeholder="Cari nama atau deskripsi aplikasi"
-                        class="w-full truncate px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 overflow-hidden text-ellipsis whitespace-nowrap"
-                    />
-                    <!-- Tombol Search -->
-                    <button 
-                        type="submit"
-                        class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 hover:text-blue-600 transition"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
-                            class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
-                        </svg>
-                    </button>
+                        <!-- Input + Tombol Search -->
+                        <div class="relative flex-1">
+                            <input 
+                                type="text" 
+                                name="search"
+                                value="{{ request('search') }}"
+                                placeholder="Cari nama aplikasi"
+                                class="w-full truncate px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 overflow-hidden text-ellipsis whitespace-nowrap"
+                            />
+                            <!-- Tombol Search -->
+                            <button 
+                                type="submit"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 hover:text-blue-600 transition"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                                    class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Dropdown filter (turun di mobile) -->
+                        <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+
+                            <!-- Filter Status -->
+                            <select name="status"
+                                class="px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
+                                <option value="">Semua Status</option>
+                                <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                <option value="nonaktif" {{ request('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                                <option value="dalam perbaikan" {{ request('status') == 'dalam perbaikan' ? 'selected' : '' }}>Dalam Perbaikan</option>
+                            </select>
+
+                            <!-- Filter Kategori -->
+                            <select name="kategori"
+                                class="px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
+                                <option value="">Semua Kategori</option>
+                                <option value="web" {{ request('kategori') == 'web' ? 'selected' : '' }}>Web</option>
+                                <option value="mobile" {{ request('kategori') == 'mobile' ? 'selected' : '' }}>Mobile</option>
+                                <option value="dekstop" {{ request('kategori') == 'dekstop' ? 'selected' : '' }}>Dekstop</option>
+                            </select>
+
+                            <!-- Filter Sensitivitas Data -->
+                            <select name="sensitivitas"
+                                class="px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
+                                <option value="">Semua Sensitivitas</option>
+                                <option value="internal" {{ request('sensitivitas') == 'internal' ? 'selected' : '' }}>Internal</option>
+                                <option value="publik" {{ request('sensitivitas') == 'publik' ? 'selected' : '' }}>Publik</option>
+                                <option value="rahasia" {{ request('sensitivitas') == 'rahasia' ? 'selected' : '' }}>Rahasia</option>
+                            </select>
+
+                        </div>
+                    </form>
                 </div>
-
-                <!-- Dropdown filter (turun di mobile) -->
-                <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-                    <!-- Filter Status -->
-                    <select name="status"
-                        class="px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
-                        <option value="">Semua Status</option>
-                        <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                        <option value="nonaktif" {{ request('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
-                    </select>
-
-                    <!-- Filter Kategori -->
-                    <select name="kategori"
-                        class="px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
-                        <option value="">Semua Kategori</option>
-                        <option value="web" {{ request('kategori') == 'web' ? 'selected' : '' }}>Web</option>
-                        <option value="mobile" {{ request('kategori') == 'mobile' ? 'selected' : '' }}>Mobile</option>
-                    </select>
-                </div>
-            </form>
         </div>
-</div>
-@if (session('success'))
-    <div x-data="{ show: true }"
-         x-show="show"
-         x-transition
-         x-init="setTimeout(() => show = false, 2500)"
-         class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded mb-4">
-        {{ session('success') }}
-    </div>
-@endif
+        @if (session('success'))
+            <div x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 2500)"
+                class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
 
 
         <!-- Tabel Data -->
