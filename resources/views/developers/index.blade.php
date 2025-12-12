@@ -57,7 +57,21 @@
                                         d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
                                 </svg>
                             </button>
-                        </div>         
+                        </div>        
+                        
+                        <!--Tombol Search berdasarkan tipe-->
+                    <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                        <select name="tipe" onchange="this.form.submit()"
+                            class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
+                            <option value="">Semua Tipe</option>
+                            <option value="internal"  {{ request('tipe') === 'internal' ? 'selected' : '' }}>Internal</option>
+                            <option value="vendor"    {{ request('tipe') === 'vendor' ? 'selected' : '' }}>Vendor</option>
+                            <option value="freelance" {{ request('tipe') === 'freelance' ? 'selected' : '' }}>Freelance</option>
+                        </select>
+
+                    </div>
+
+
                     </form>
                 </div>
         </div>

@@ -13,12 +13,19 @@ class DeveloperController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $tipe = $request->input('tipe');
 
         $developers = \App\Models\Developer::query()
             ->when($search, function ($query) use ($search) {
                 $query->where('name', 'like', "%{$search}%")
                     ->orWhere('contact_email', 'like', "%{$search}%");
             })
+
+            // FILTER TIPE
+            ->when($tipe, function ($query) use ($tipe) {
+            $query->where('developer_type', $tipe);
+            })
+
             ->orderBy('name')
             ->get();
 
