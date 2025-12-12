@@ -104,7 +104,7 @@
                     <label class="block font-medium mb-1">Status</label>
                     <select name="status"
                             class="w-full border rounded-lg p-2.5 text-sm text-gray-700">
-                        @foreach (['aktif', 'nonaktif', 'maintenance'] as $st)
+                        @foreach (['aktif', 'nonaktif', 'perbaikan'] as $st)
                             <option value="{{ $st }}" @selected($application->status == $st)>
                                 {{ ucfirst($st) }}
                             </option>
@@ -133,7 +133,7 @@
 
             <!-- CHANGELOG -->
             <div>
-                <label class="block font-medium mb-1">Changelog / Catatan Versi</label>
+                <label class="block font-medium mb-1">Catatan Versi</label>
                 <textarea name="changelog" rows="3"
                         class="w-full border rounded-lg p-2.5 text-sm text-gray-700">{{ $latestVersion->changelog ?? '' }}</textarea>
             </div>

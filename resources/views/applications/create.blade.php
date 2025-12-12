@@ -99,7 +99,7 @@
                             class="w-full border rounded-lg p-2.5 text-sm text-gray-700">
                         <option value="aktif">Aktif</option>
                         <option value="nonaktif">Nonaktif</option>
-                        <option value="maintenance">Maintenance</option>
+                        <option value="maintenance">Dalam Perbaikan</option>
                     </select>
                 </div>
 
@@ -120,7 +120,7 @@
 
             <!-- CHANGELOG -->
             <div>
-                <label class="block font-medium mb-1">Changelog / Catatan Versi</label>
+                <label class="block font-medium mb-1">Catatan Versi</label>
                 <textarea name="changelog" rows="3"
                         placeholder="Perubahan pada versi ini..."
                         class="w-full border rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 text-sm text-gray-700"></textarea>
