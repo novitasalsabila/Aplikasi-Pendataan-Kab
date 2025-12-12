@@ -104,7 +104,7 @@
                     <label class="block font-medium mb-1">Status</label>
                     <select name="status"
                             class="w-full border rounded-lg p-2.5 text-sm text-gray-700">
-                        @foreach (['aktif', 'nonaktif', 'perbaikan'] as $st)
+                        @foreach (['aktif', 'nonaktif', 'dalam perbaikan'] as $st)
                             <option value="{{ $st }}" @selected($application->status == $st)>
                                 {{ ucfirst($st) }}
                             </option>

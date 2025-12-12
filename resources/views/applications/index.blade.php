@@ -66,7 +66,7 @@
                 <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                     <!-- Filter Status -->
                     <select name="status"
-                        class="px-auto py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
+                        class="px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
                         <option value="">Semua Status</option>
                         <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
                         <option value="nonaktif" {{ request('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
@@ -74,7 +74,7 @@
 
                     <!-- Filter Kategori -->
                     <select name="kategori"
-                        class="px-auto py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
+                        class="px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto">
                         <option value="">Semua Kategori</option>
                         <option value="web" {{ request('kategori') == 'web' ? 'selected' : '' }}>Web</option>
                         <option value="mobile" {{ request('kategori') == 'mobile' ? 'selected' : '' }}>Mobile</option>
@@ -109,7 +109,7 @@
                         <th class="px-4 py-3 text-left min-w-[270px]">OPD</th>
                         <th class="px-4 py-3 text-left">Kategori</th>
                         <th class="px-4 py-3 text-left min-w-[170px]">Sensitivitas Data</th>
-                        <th class="px-4 py-3 text-left">Status</th>
+                        <th class="px-4 py-3 text-left min-w-[170px]">Status</th>
                         <th class="px-4 py-3 text-left min-w-[170px]">Tanggal Rilis</th>
                         <th class="px-4 py-3 text-left min-w-[120px]">Versi</th>
                         <th class="px-4 py-3 text-center min-w-[170px]">Aksi</th>
@@ -130,7 +130,7 @@
                                     ];
                                 @endphp
 
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full
+                                <span class="px-2 py-1 text-xs font-semibold rounded-md
                                     {{ $categoryColors[$app->category] ?? 'bg-gray-100 text-gray-800' }}">
                                     {{ $app->category }}
                                 </span>
@@ -144,7 +144,7 @@
                                     ];
                                 @endphp
 
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full
+                                <span class="px-2 py-1 text-xs font-semibold rounded-md
                                     {{ $sensitivityColors[$app->data_sensitivity] ?? 'bg-gray-100 text-gray-800' }}">
                                     {{ $app->data_sensitivity }}
                                 </span>
@@ -153,11 +153,11 @@
                                 @php
                                     $statusColors = [
                                         'aktif' => 'bg-green-100 text-green-800',
-                                        'maintenance' => 'bg-yellow-100 text-yellow-800',
+                                        'dalam perbaikan' => 'bg-yellow-100 text-yellow-800',
                                     ];
                                 @endphp
 
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full 
+                                <span class="px-2 py-1 text-xs font-semibold rounded-md 
                                     {{ $statusColors[$app->status] ?? 'bg-gray-100 text-gray-800' }}">
                                     {{ $app->status }}
                                 </span>
