@@ -62,7 +62,7 @@
             <x-nav-link :href="route('departments.index')" :active="request()->routeIs('departments.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group">
                 <img src="{{ asset('icons/OPD.svg') }}" alt="OPD" class="w-5 h-5">
-                <span class="font-medium text-gray-700 group-hover:text-blue-600">OPD / Department</span>
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">OPD / Departemen</span>
             </x-nav-link>
 
             <x-nav-link :href="route('servers.index')" :active="request()->routeIs('servers.*')" 
@@ -95,8 +95,8 @@
             </x-nav-link>
 
             <x-nav-link :href="route('application_backups.index')" :active="request()->routeIs('application_backups.*')">
-                <img src="{{ asset('icons/database.svg') }}" alt="Aplikasi Backups" class="w-5 h-5">
-                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Backup') }}
+                <img src="{{ asset('icons/database.svg') }}" alt="Pencadangan Aplikasi" class="w-5 h-5">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Pencadangan Aplikasi') }}
             </x-nav-link>
 
             <x-nav-link :href="route('application_metrics.index')" :active="request()->routeIs('application_metrics.*')">
@@ -148,8 +148,8 @@
             </x-nav-link>
 
             <x-nav-link :href="route('application_backups.index')" :active="request()->routeIs('application_backups.*')">
-                <img src="{{ asset('icons/database.svg') }}" alt="Aplikasi Backups" class="w-5 h-5">
-                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Aplikasi Backups') }}
+                <img src="{{ asset('icons/database.svg') }}" alt="Pencadangan Aplikasi" class="w-5 h-5">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Pencadangan Aplikasi') }}
             </x-nav-link>
 
         @elseif(auth()->user()->role === 'opd')
