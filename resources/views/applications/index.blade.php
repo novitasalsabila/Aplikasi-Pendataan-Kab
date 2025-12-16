@@ -200,8 +200,8 @@
                                 <x-action-buttons
                                     :id="$app->id"
                                     :showRoute="route('applications.show', $app->id)"
-                                    :editRoute="route('applications.edit', $app->id)"
-                                    :deleteRoute="route('applications.destroy', $app->id)"
+                                    :editRoute="auth()->user()->role !== 'opd' ? route('applications.edit', $app->id) : null"
+                                    :deleteRoute="auth()->user()->role !== 'opd' ? route('applications.destroy', $app->id) : null"
                                     itemName="{{ $app->name }}"
                                 />
                             </td>
