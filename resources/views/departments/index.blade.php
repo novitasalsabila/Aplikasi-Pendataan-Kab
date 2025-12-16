@@ -46,7 +46,7 @@
                                 type="text" 
                                 name="search"
                                 value="{{ request('search') }}"
-                                placeholder="Cari nama atau email OPD"
+                                placeholder="Cari nama, email atau Kepala OPD"
                                 class="w-full truncate px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 overflow-hidden text-ellipsis whitespace-nowrap"/>
                             <!-- Tombol Search -->
                             <button 
@@ -61,28 +61,7 @@
                             </button>
                         </div> 
                         
-                        <!-- Search Nama Kepala OPD -->
-                         <div class="relative flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-                            <input 
-                                type="text" 
-                                name="head_name"
-                                value="{{ request('head_name') }}"
-                                placeholder="Cari nama Kepala OPD"
-                                class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
-
-                            <!-- Tombol Search -->
-                            <button 
-                                type="submit"
-                                class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 hover:text-blue-600 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
-                                    class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
-                                </svg>
-                            </button>
-                            
-                        </div>
+                    
                     </form>
                 </div>
         </div>
