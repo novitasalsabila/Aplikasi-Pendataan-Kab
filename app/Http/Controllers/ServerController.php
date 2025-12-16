@@ -18,6 +18,7 @@ class ServerController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
+        $status        = $request->input('status');
 
         $servers = Server::when($search, function ($query) use ($search) {
                 $query->where('hostname', 'like', "%{$search}%")
@@ -26,6 +27,12 @@ class ServerController extends Controller
                     ->orWhere('location', 'like', "%{$search}%")
                     ->orWhere('managed_by', 'like', "%{$search}%");
             })
+
+            // FILTER STATUS
+            ->when($status, function ($query) use ($status) {
+                $query->where('status', $status);
+            })
+
             ->latest()
             ->get();
 
@@ -52,13 +59,13 @@ class ServerController extends Controller
             'os' => 'nullable|string|max:100',
             'location' => 'nullable|string|max:150',
             'managed_by' => 'nullable|string|max:150',
-            'status' => 'required|in:aktif,nonaktif,maintenance',
+            'status' => 'required|in:aktif,tidak aktif,dalam perbaikan',
         ]);
 
         Server::create($validated);
 
         return redirect()->route('servers.index')
-            ->with('success', '✅ Data server berhasil ditambahkan.');
+            ->with('success', 'Data server berhasil ditambahkan.');
     }
 
     /**
@@ -80,13 +87,13 @@ class ServerController extends Controller
             'os' => 'nullable|string|max:100',
             'location' => 'nullable|string|max:150',
             'managed_by' => 'nullable|string|max:150',
-            'status' => 'required|in:aktif,nonaktif,maintenance',
+            'status' => 'required|in:aktif,tidak aktif,dalam perbaikan',
         ]);
 
         $server->update($validated);
 
         return redirect()->route('servers.index')
-            ->with('success', '✏️ Data server berhasil diperbarui.');
+            ->with('success', 'Data server berhasil diperbarui.');
     }
 
     /**

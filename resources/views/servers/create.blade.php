@@ -62,8 +62,8 @@
                         class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
                     <option value="">-- Pilih Status --</option>
                     <option value="aktif">Aktif</option>
-                    <option value="nonaktif">Nonaktif</option>
-                    <option value="maintenance">Maintenance</option>
+                    <option value="tidak aktif">Tidak Aktif</option>
+                    <option value="dalam perbaikan">Dalam Perbaikan</option>
                 </select>
             </div>
 

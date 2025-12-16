@@ -58,6 +58,17 @@
                                         d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
                                 </svg>
                             </button>
+                        </div>
+                        
+                        <!--Tombol Search berdasarkan tipe-->
+                        <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                            <select name="status" onchange="this.form.submit()"
+                                class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
+                                <option value="">Semua Status</option>
+                                <option value="aktif" {{ request('status') === 'freelance' ? 'aktif' : '' }}>Aktif</option>
+                                <option value="tidak aktif"  {{ request('status') === 'tidak aktif' ? 'selected' : '' }}>Tidak aktif</option>
+                                <option value="dalam perbaikan"    {{ request('status') === 'dalam perbaikan' ? 'selected' : '' }}>Dalam Perbaikan</option>
+                            </select>
                         </div>         
                     </form>
                 </div>
@@ -77,7 +88,7 @@
                         <th class="px-4 py-3 text-left min-w-[180px]">OS</th>
                         <th class="px-4 py-3 text-left min-w-[220px]">Lokasi</th>
                         <th class="px-4 py-3 text-left min-w-[180px]">Dikelola Oleh</th>
-                        <th class="px-4 py-3 text-left">Status</th>
+                        <th class="px-4 py-3 text-left min-w-[180px]">Status</th>
                         <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -100,8 +111,8 @@
                                 @php
                                     $color = match($srv->status) {
                                         'aktif' => 'bg-green-100 text-green-700',
-                                        'maintenance' => 'bg-yellow-100 text-yellow-700',
-                                        'nonaktif' => 'bg-red-100 text-red-700',
+                                        'dalam perbaikan' => 'bg-yellow-100 text-yellow-700',
+                                        'tidak aktif' => 'bg-red-100 text-red-700',
                                         default => 'bg-gray-100 text-gray-600'
                                     };
                                 @endphp
