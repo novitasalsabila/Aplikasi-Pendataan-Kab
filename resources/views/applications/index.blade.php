@@ -65,17 +65,9 @@
                         <!-- Dropdown filter (turun di mobile) -->
                         <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
 
-                            <!-- Filter Status -->
-                            <select name="status"
-                                class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
-                                <option value="">Semua Status</option>
-                                <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                                <option value="nonaktif" {{ request('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
-                                <option value="dalam perbaikan" {{ request('status') == 'dalam perbaikan' ? 'selected' : '' }}>Dalam Perbaikan</option>
-                            </select>
-
                             <!-- Filter Kategori -->
                             <select name="kategori"
+                                onchange="this.form.submit()"
                                 class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
                                 <option value="">Semua Kategori</option>
                                 <option value="web" {{ request('kategori') == 'web' ? 'selected' : '' }}>Web</option>
@@ -85,13 +77,23 @@
 
                             <!-- Filter Sensitivitas Data -->
                             <select name="sensitivitas"
+                                onchange="this.form.submit()"
                                 class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
                                 <option value="">Semua Sensitivitas</option>
                                 <option value="internal" {{ request('sensitivitas') == 'internal' ? 'selected' : '' }}>Internal</option>
                                 <option value="publik" {{ request('sensitivitas') == 'publik' ? 'selected' : '' }}>Publik</option>
                                 <option value="rahasia" {{ request('sensitivitas') == 'rahasia' ? 'selected' : '' }}>Rahasia</option>
                             </select>
-
+                    
+                            <!-- Filter Status -->
+                            <select name="status" 
+                                onchange="this.form.submit()"
+                                class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
+                                <option value="">Semua Status</option>
+                                <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                <option value="nonaktif" {{ request('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                                <option value="dalam perbaikan" {{ request('status') == 'dalam perbaikan' ? 'selected' : '' }}>Dalam Perbaikan</option>
+                            </select>
                         </div>
                     </form>
                 </div>
@@ -215,18 +217,4 @@
             </table>
         </div>
     </div>
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.querySelector('input[name="search"]');
-
-    if (searchInput) {
-        searchInput.addEventListener('input', function () {
-            if (this.value === '') {
-                this.form.submit(); 
-            }
-        });
-    }
-});
-</script>
-
 </x-app-layout>

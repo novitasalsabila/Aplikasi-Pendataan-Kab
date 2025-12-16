@@ -14,53 +14,51 @@ use App\Models\ApplicationVersion;
 class ApplicationController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-    $user = auth()->user();
+        $user = auth()->user();
 
-    // ambil nilai filter
-    $search   = request('search');
-    $status   = request('status');
-    $kategori = request('kategori');
-    $sensitivitas = request('sensitivitas');
+        $search        = $request->input('search');
+        $status        = $request->input('status');
+        $kategori      = $request->input('kategori');
+        $sensitivitas  = $request->input('sensitivitas');
 
-    // Kalau role OPD → hanya tampilkan aplikasi milik departemennya sendiri
-    if ($user->role === 'opd') {
-        $query = Application::with(['department', 'developer', 'server','versions'])
-            ->where('department_id', $user->department_id);
-    } 
-    // Kalau bukan OPD → tampilkan semua
-    else {
-        $query = Application::with(['department', 'developer', 'server', 'versions']);
+        $applications = Application::with(['department', 'developer', 'server', 'versions'])
+
+            // ROLE OPD → hanya data milik departemennya
+            ->when($user->role === 'opd', function ($query) use ($user) {
+                $query->where('department_id', $user->department_id);
+            })
+
+            // FILTER SEARCH
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+                });
+            })
+
+            // FILTER STATUS
+            ->when($status, function ($query) use ($status) {
+                $query->where('status', $status);
+            })
+
+            // FILTER KATEGORI
+            ->when($kategori, function ($query) use ($kategori) {
+                $query->where('category', $kategori);
+            })
+
+            // FILTER SENSITIVITAS
+            ->when($sensitivitas, function ($query) use ($sensitivitas) {
+                $query->where('data_sensitivity', $sensitivitas);
+            })
+
+            ->latest()
+            ->get();
+
+        return view('applications.index', compact('applications'));
     }
 
-    // --- Filter Search ---
-    if ($search) {
-        $query->where(function ($q) use ($search) {
-            $q->where('name', 'like', "%{$search}%")
-              ->orWhere('description', 'like', "%{$search}%");
-        });
-    }
-
-    // --- Filter Status ---
-    if ($status) {
-        $query->where('status', $status);
-    }
-
-    // --- Filter Kategori ---
-    if ($kategori) {
-        $query->where('category', $kategori);
-    }
-
-    if ($sensitivitas){
-        $query->where('data_sensitivity', $sensitivitas);
-    }
-
-    // Eksekusi
-    $applications = $query->latest()->get();
-
-    return view('applications.index', compact('applications'));
-    }
 
     /**
      * Form tambah aplikasi baru.
