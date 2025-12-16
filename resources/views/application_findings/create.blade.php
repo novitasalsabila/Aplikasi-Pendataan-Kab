@@ -33,15 +33,15 @@
                     <label class="block font-medium mb-1">Tipe Temuan</label>
                     <select name="type" required class="w-full border rounded p-2 text-sm text-gray-600">
                         <option value="bug">Bug</option>
-                        <option value="vulnerability">Kerentanan</option>
-                        <option value="hack">Peretasan</option>
+                        <option value="kerentanan">Kerentanan</option>
+                        <option value="peretasan">Peretasan</option>
                         <option value="lainnya">Lainnya</option>
                     </select>
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Sumber</label>
                     <select name="source" required class="w-full border rounded p-2 text-sm text-gray-600">
-                        <option value="user">Pengguna</option>
+                        <option value="pengguna">Pengguna</option>
                         <option value="monitoring">Monitoring</option>
                         <option value="audit">Audit</option>
                         <option value="laporan_masyarakat">Laporan Masyarakat</option>
