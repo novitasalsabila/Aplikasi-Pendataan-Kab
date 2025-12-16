@@ -153,6 +153,10 @@
                                             </span>
                                         </div>
                                     </div>
+                                    {{-- Tanggal --}}
+                                    <p class="inline-block text-xs text-gray-500 min-w-[80px] text-center">
+                                        {{ $finding->date ?? $finding->created_at->format('Y-m-d') }}
+                                    </p>
                                 </div>
 
                             @empty
@@ -161,6 +165,7 @@
                         </div>
                     </x-dashboard-section>
                 </div>
+                
             </div>
 
             {{-- Distribusi Aplikasi --}}
