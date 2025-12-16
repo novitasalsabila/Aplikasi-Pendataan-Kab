@@ -12,11 +12,16 @@ class DepartmentController extends Controller
     {
         // Ambil nilai search dari input
         $search = $request->search;
+        $headName = $request->head_name;
 
         // Query pencarian
         $departments = Department::when($search, function ($query) use ($search) {
             $query->where('name', 'like', "%{$search}%")
                 ->orWhere('email', 'like', "%{$search}%");
+        })
+
+         ->when($headName, function ($query) use ($headName) {
+            $query->where('head_name', 'like', "%{$headName}%");
         })
         ->orderBy('name')
         ->get();
