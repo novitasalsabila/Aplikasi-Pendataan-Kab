@@ -14,6 +14,9 @@ class ApplicationFindingController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
+        $type     = $request->type;
+        $severity = $request->severity;
+        $source   = $request->source;
 
         $findings = ApplicationFinding::with('application')
             ->when($search, function ($query) use ($search) {
@@ -21,6 +24,22 @@ class ApplicationFindingController extends Controller
                     $app->where('name', 'like', '%' . $search . '%');
                 });
             })
+            
+            //FILTER TIPE (dari application_findings)
+            ->when($type, function ($query) use ($type) {
+                $query->where('type', $type);
+            })
+
+            // ⚠️ FILTER TINGKAT
+            ->when($severity, function ($query) use ($severity) {
+                $query->where('severity', $severity);
+            })
+
+            // 📌 FILTER SUMBER
+            ->when($source, function ($query) use ($source) {
+                $query->where('source', $source);
+            })
+
             ->latest()
             ->get();
 
@@ -44,8 +63,8 @@ class ApplicationFindingController extends Controller
     {
         $validated = $request->validate([
             'application_id' => 'required|exists:applications,id',
-            'type' => 'required|in:bug,vulnerability,hack,lainnya',
-            'source' => 'required|in:user,monitoring,audit,laporan_masyarakat',
+            'type' => 'required|in:bug,kerentanan,peretasan,lainnya',
+            'source' => 'required|in:pengguna,monitoring,audit,laporan_masyarakat',
             'severity' => 'required|in:rendah,sedang,tinggi',
             'description' => 'required|string',
             'status' => 'required|in:open,in_progress,resolved',

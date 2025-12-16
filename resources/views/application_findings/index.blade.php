@@ -64,7 +64,44 @@
                                             d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
                                     </svg>
                                 </button>
-                            </div>         
+                            </div> 
+                            
+                             <!-- Dropdown filter (turun di mobile) -->
+                            <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+
+                                <!-- Filter Tipe -->
+                                <select name="type"
+                                    onchange="this.form.submit()"
+                                    class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
+                                    <option value="">Semua Tipe</option>
+                                    <option value="bug" {{ request('type') == 'bug' ? 'selected' : '' }}>Bug</option>
+                                    <option value="kerentanan" {{ request('type') == 'kerentanan' ? 'selected' : '' }}>Kerentanan</option>
+                                    <option value="peretasan" {{ request('type') == 'peretasan' ? 'selected' : '' }}>Peretasan</option>
+                                    <option value="lainnya" {{ request('type') == 'lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                </select>
+
+                                <!-- Filter Tingkat -->
+                                <select name="severity"
+                                    onchange="this.form.submit()"
+                                    class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
+                                    <option value="">Semua Tingkat</option>
+                                    <option value="rendah" {{ request('severity') == 'rendah' ? 'selected' : '' }}>Rendah</option>
+                                    <option value="sedang" {{ request('severity') == 'sedang' ? 'selected' : '' }}>Sedang</option>
+                                    <option value="tinggi" {{ request('severity') == 'tinggi' ? 'selected' : '' }}>Tinggi</option>
+                                </select>
+                        
+                                <!-- Filter Sumber -->
+                                <select name="source" 
+                                    onchange="this.form.submit()"
+                                    class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
+                                    <option value="">Semua Sumber</option>
+                                    <option value="pengguna" {{ request('source') == 'pengguna' ? 'selected' : '' }}>Pengguna</option>
+                                    <option value="monitoring" {{ request('source') == 'monitoring' ? 'selected' : '' }}>Monitoring</option>
+                                    <option value="audit" {{ request('source') == 'audit' ? 'selected' : '' }}>Audit</option>
+                                    <option value="laporan_masyarakat" {{ request('source') == 'Laporan_masyarakat' ? 'selected' : '' }}>Laporan Masyarakat</option>
+                                </select>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -114,8 +151,8 @@
 
                                 $styles = [
                                     'bug' => 'bg-red-100 text-red-600',
-                                    'vulnerability' => 'bg-yellow-100 text-yellow-600',
-                                    'hack' => 'bg-purple-100 text-purple-600',
+                                    'kerentanan' => 'bg-yellow-100 text-yellow-600',
+                                    'peretasan' => 'bg-purple-100 text-purple-600',
                                     'lainnya' => 'bg-orange-100 text-orange-600',
                                 ];
                             @endphp
