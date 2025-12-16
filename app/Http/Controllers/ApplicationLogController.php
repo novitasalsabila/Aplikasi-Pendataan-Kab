@@ -17,17 +17,23 @@ class ApplicationLogController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
+        $status = $request->input('status');
 
         $logs = ApplicationLog::with(['application', 'user', 'application.versions' => fn($v) => $v->orderByDesc('id'), 'reviewer'])
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
-                    ->orWhere('description', 'like', "%{$search}%")
                     ->orWhereHas('application', function ($app) use ($search) {
                         $app->where('name', 'like', "%{$search}%");
                     });
                 });
             })
+
+            // FILTER STATUS
+            ->when($status, function ($query) use ($status) {
+                $query->where('approved_st', $status);
+            })
+
             ->latest()
             ->get();
 
@@ -40,7 +46,7 @@ class ApplicationLogController extends Controller
     public function create()
     {
         $applications = Application::all();
-        $reviewers = User::all();
+        $reviewers = User::whereIn('role', ['admin', 'diskominfo'])->get();
 
         // Ambil versi terbaru tiap aplikasi
         $latestVersions = ApplicationVersion::select('application_id', 'version_code')
@@ -66,7 +72,7 @@ class ApplicationLogController extends Controller
             'version' => 'nullable|string|max:50',
             'date' => 'nullable|date',
             'reviewed_by' => 'nullable|exists:users,id',
-            'approved_st' => 'required|in:pending,approved,rejected',
+            'approved_st' => 'required|in:disetujui,diproses,ditolak',
         ]);
 
         $validated['user_id'] = Auth::id();
@@ -83,7 +89,7 @@ class ApplicationLogController extends Controller
     public function edit(ApplicationLog $application_log)
     {
         $applications = Application::all();
-        $reviewers = User::all();
+        $reviewers = User::whereIn('role', ['admin', 'diskominfo'])->get();
         return view('application_logs.edit', [
             'log' => $application_log,
             'applications' => $applications,
@@ -104,7 +110,7 @@ class ApplicationLogController extends Controller
             'version' => 'nullable|string|max:50',
             'date' => 'nullable|date',
             'reviewed_by' => 'nullable|exists:users,id',
-            'approved_st' => 'required|in:pending,approved,rejected',
+            'approved_st' => 'required|in:disetujui,diproses,ditolak',
         ]);
 
         $application_log->update($validated);

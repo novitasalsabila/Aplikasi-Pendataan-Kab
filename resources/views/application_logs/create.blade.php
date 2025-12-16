@@ -47,37 +47,35 @@
             </div>
             
             {{-- Jenis Perubahan --}}
-            <div class="space-y-1">
-                <label class="block font-medium text-gray-700">Jenis Perubahan *</label>
+            @php
+                $changeTypes = [
+                    'penambahan' => 'Penambahan',
+                    'perbaikan' => 'Perbaikan',
+                    'penghapusan' => 'Penghapusan',
+                    'lainnya' => 'Lainnya',
+                ];
+            @endphp
 
-                <select name="change_type" 
-                        required
-                        class="w-full border border-gray-300 rounded-lg p-2 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    
+            <div class="space-y-1">
+                <label class="block font-medium text-gray-700">
+                    Jenis Perubahan <span class="text-red-500">*</span>
+                </label>
+
+                <select name="change_type"
+                    required
+                    class="w-full border border-gray-300 rounded-lg p-2 text-sm text-gray-600
+                        focus:outline-none focus:ring-2 focus:ring-blue-500">
+
                     <option value="">-- Pilih Jenis Perubahan --</option>
 
-                    <option value="penambahan" 
-                        {{ old('change_type', $change->change_type ?? '') === 'penambahan' ? 'selected' : '' }}>
-                        Penambahan
-                    </option>
-
-                    <option value="perbaikan" 
-                        {{ old('change_type', $change->change_type ?? '') === 'perbaikan' ? 'selected' : '' }}>
-                        Perbaikan
-                    </option>
-
-                    <option value="penghapusan" 
-                        {{ old('change_type', $change->change_type ?? '') === 'penghapusan' ? 'selected' : '' }}>
-                        Penghapusan
-                    </option>
-
-                    <option value="lainnya" 
-                        {{ old('change_type', $change->change_type ?? '') === 'lainnya' ? 'selected' : '' }}>
-                        Lainnya
-                    </option>
+                    @foreach ($changeTypes as $value => $label)
+                        <option value="{{ $value }}"
+                            @selected(old('change_type', $change->change_type ?? '') === $value)>
+                            {{ $label }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
-
 
             {{-- Versi dan Tanggal --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -113,9 +111,9 @@
                 <div>
                     <label class="block font-medium mb-1">Status Persetujuan</label>
                     <select name="approved_st" class="w-full border rounded p-2 text-sm text-gray-600">
-                        <option value="pending">Diproses</option>
-                        <option value="approved">Diterima</option>
-                        <option value="rejected">Ditolak</option>
+                        <option value="disetuji">Disetujui</option>
+                        <option value="diproses">Diproses</option>
+                        <option value="ditolak">Ditolak</option>
                     </select>
                 </div>
             </div>

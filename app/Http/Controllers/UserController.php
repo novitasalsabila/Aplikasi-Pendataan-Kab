@@ -23,7 +23,7 @@ class UserController extends Controller
                     ->orWhere('email', 'like', "%{$search}%");
             })
 
-            // FILTER STATUS
+            // FILTER ROLE
             ->when($role, function ($query) use ($role) {
                 $query->where('role', $role);
             })

@@ -60,6 +60,17 @@
                                         d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
                                 </svg>
                             </button>
+                        </div>
+                          <!--Tombol Search berdasarkan status-->
+                        <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                            <select name="status" 
+                                onchange="this.form.submit()"
+                                class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
+                                <option value="">Semua Status</option>
+                                <option value="disetujui"  {{ request('status') === 'disetujui' ? 'selected' : '' }}>Disetujui</option>
+                                <option value="diproses"    {{ request('status') === 'diproses' ? 'selected' : '' }}>Diproses</option>
+                                <option value="ditolak" {{ request('status') === 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+                            </select>
                         </div>         
                     </form>
                 </div>
@@ -98,27 +109,21 @@
                             </td>
                             <td class="px-4 py-3">{{ $log->date ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $log->reviewer->name ?? '-' }}</td>
-                            <td class="px-4 py-3">
+                            <td class="px-4 py-3 text-left">
                                 @php
-                                    $statusText = [
-                                        'approved' => 'Disetujui',
-                                        'pending' => 'Diproses',
-                                        'rejected' => 'Ditolak',
-                                    ][$log->approved_st] ?? $log->approved_st;
+                                    $statusMap = [
+                                        'disetujui' => 'bg-green-100 text-green-700',
+                                        'ditolak' => 'bg-red-100 text-red-700',
+                                        'diproses' => 'bg-yellow-100 text-yellow-700'
+                                    ];
                                 @endphp
-                                <span class="px-3 py-1 rounded-md text-xs font-semibold
-                                    @if($log->approved_st == 'approved')
-                                        bg-green-100 text-green-700
-                                    @elseif($log->approved_st == 'rejected')
-                                        bg-red-100 text-red-700
-                                    @else
-                                        bg-yellow-100 text-yellow-700
-                                    @endif">
 
-                                    {{ $statusText }}
-
+                                <span class="px-2 py-1 text-xs font-semibold rounded-md
+                                    {{ $statusMap[$log->approved_st] ?? 'bg-gray-100 text-gray-700' }}">
+                                    {{ ucfirst ($log->approved_st) }}
                                 </span>
                             </td>
+
 
                             <td class="px-3 py-3 text-center">
                                 <x-action-buttons

@@ -91,19 +91,10 @@
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Status Persetujuan</label>
-
-                    @php
-                        $statusMap = [
-                            'pending' => 'Diproses',
-                            'approved' => 'Disetujui',
-                            'rejected' => 'Ditolak',
-                        ];
-                    @endphp
-
                     <select name="approved_st" class="w-full border rounded p-2 text-sm text-gray-600">
-                        @foreach ($statusMap as $value => $label)
-                            <option value="{{ $value }}" @selected($log->approved_st == $value)>
-                                {{ $label }}
+                        @foreach (['disetujui', 'diproses', 'ditolak'] as $value)
+                            <option value="{{ $value }}" {{ $log->approved_st === $value ? 'selected' : '' }}>
+                                {{ ucfirst ($value) }}
                             </option>
                         @endforeach
                     </select>
