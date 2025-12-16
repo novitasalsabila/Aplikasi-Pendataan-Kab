@@ -15,35 +15,35 @@
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Nama Lengkap *</label>
+                <label class="block font-medium mb-1">Nama Lengkap</label>
                 <input type="text" name="name" value="{{ old('name', $user->name) }}" required 
                 placeholder="Nama Lengkap"
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Email *</label>
+                <label class="block font-medium mb-1">Email</label>
                 <input type="email" name="email" value="{{ old('email', $user->email) }}" required 
                 placeholder="admin@pemkab.go.id"
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Nomor Telepon *</label>
+                <label class="block font-medium mb-1">Nomor Telepon</label>
                 <input type="phone" name="phone" value="{{ old('phone', $user->phone) }}" required 
                 placeholder="08xxxxxxxxxx"
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
              <div>
-                <label class="block font-medium mb-1">Jabatan *</label>
+                <label class="block font-medium mb-1">Jabatan</label>
                 <input type="position" name="position" value="{{ old('position', $user->position) }}" required 
                 placeholder="Contoh : Staf IT"
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Role *</label>
+                <label class="block font-medium mb-1">Peran</label>
                 <select name="role" required class="w-full border rounded p-2 text-sm text-gray-600">
                     @foreach ($roles as $role)
                         <option value="{{ $role }}" {{ $user->role === $role ? 'selected' : '' }}>

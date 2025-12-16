@@ -17,32 +17,32 @@
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Nama Lengkap *</label>
+                <label class="block font-medium mb-1">Nama Lengkap</label>
                 <input type="text" name="name" required 
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Email *</label>
+                <label class="block font-medium mb-1">Email</label>
                 <input type="email" name="email" required
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Nomor Telepon *</label>
+                <label class="block font-medium mb-1">Nomor Telepon</label>
                 <input type="phone" name="phone" required 
                 placeholder="08xxxxxxxxxx"
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Jabatan *</label>
+                <label class="block font-medium mb-1">Jabatan</label>
                 <input type="position" name="position" required 
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
             <div>
-                <label class="block font-medium mb-1">Role *</label>
+                <label class="block font-medium mb-1">Peran</label>
                 <select name="role" required class="w-full border rounded p-2 text-sm text-gray-600">
                     @foreach ($roles as $role)
                         <option value="{{ $role }}">{{ ucfirst($role) }}</option>
@@ -50,20 +50,20 @@
                 </select>
             </div>
             <div>
-            <label class="block font-medium mb-1">Password *</label>
+            <label class="block font-medium mb-1">Kata Sandi</label>
             <input type="password" name="password" required 
-                placeholder="Masukkan password"
+                placeholder="Masukkan kata sandi"
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
         </div>
 
         <div>
-            <label class="block font-medium mb-1">Konfirmasi Password *</label>
+            <label class="block font-medium mb-1">Konfirmasi Kata Sandi</label>
             <input type="password" name="password_confirmation" required 
-                placeholder="Ulangi password"
+                placeholder="Ulangi kata sandi"
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
         </div>
         <div>
-            <label class="block font-medium mb-1">OPD *</label>
+            <label class="block font-medium mb-1">OPD</label>
             <select name="department_id" required class="w-full border rounded p-2 text-sm text-gray-600">
                 <option value="">-- Pilih OPD --</option>
                 @foreach ($departments as $dept)

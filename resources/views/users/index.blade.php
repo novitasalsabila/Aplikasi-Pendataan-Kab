@@ -58,7 +58,18 @@
                                         d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
                                 </svg>
                             </button>
-                        </div>         
+                        </div> 
+                           <!--Tombol Search berdasarkan tipe-->
+                        <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                            <select name="role" 
+                                onchange="this.form.submit()"
+                                class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
+                                <option value="">Semua Peran</option>
+                                <option value="admin"  {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="opd"    {{ request('role') === 'opd' ? 'selected' : '' }}>OPD</option>
+                                <option value="diskominfo" {{ request('role') === 'diskominfo' ? 'selected' : '' }}>Diskominfo</option>
+                            </select>
+                        </div>        
                     </form>
                 </div>
         </div>
@@ -73,12 +84,12 @@
                 <thead >
                     <tr>
                         <th class="px-4 py-3 text-left">No</th>
-                        <th class="px-4 py-3 text-left min-w-[250px]">Nama</th>
+                        <th class="px-4 py-3 text-left min-w-[200px]">Nama</th>
                         <th class="px-4 py-3 text-left">Email</th>
                         <th class="px-4 py-3 text-left min-w-[200px]">Jabatan</th>
-                        <th class="px-4 py-3 text-left">Role</th>
+                        <th class="px-4 py-3 text-left">Peran</th>
                         <th class="px-4 py-3 text-left min-w-[350px]">OPD</th>
-                        <th class="px-4 py-3 text-left">NoTelepon</th>
+                        <th class="px-4 py-3 text-left min-w-[180px]">Nomor Telepon</th>
                         <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -89,15 +100,18 @@
                             <td class="px-4 py-3">{{ $user->name }}</td>
                             <td class="px-4 py-3">{{ $user->email }}</td>
                             <td class="px-4 py-3">{{ $user->position }}</td>
+                            @php
+                                $roleColors = [
+                                    'admin' => 'bg-red-100 text-red-700',
+                                    'diskominfo' => 'bg-blue-100 text-blue-700',
+                                    'opd' => 'bg-green-100 text-green-700',
+                                ];
+                            @endphp
+
                             <td class="px-4 py-3">
-                                <span class="
-                                    px-3 py-1 rounded-md text-xs font-semibold
-                                    @if ($user->role == 'admin') bg-red-100 text-red-700
-                                    @elseif ($user->role == 'diskominfo') bg-blue-100 text-blue-700
-                                    @elseif ($user->role == 'opd') bg-green-100 text-green-700
-                                    @endif
-                                ">
-                                    {{ strtoupper($user->role) }}
+                                <span class="px-3 py-1 rounded-md text-xs font-semibold
+                                    {{ $roleColors[$user->role] ?? 'bg-gray-100 text-gray-700' }}">
+                                    {{ $user->role }}
                                 </span>
                             </td>
                             <td class="px-4 py-3">{{ $user->department->name ?? '-' }}</td>

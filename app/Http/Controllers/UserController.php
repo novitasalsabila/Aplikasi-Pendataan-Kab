@@ -15,12 +15,19 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $role = $request->input('role');
 
         $users = \App\Models\User::query()
             ->when($search, function ($query) use ($search) {
                 $query->where('name', 'like', "%{$search}%")
                     ->orWhere('email', 'like', "%{$search}%");
             })
+
+            // FILTER STATUS
+            ->when($role, function ($query) use ($role) {
+                $query->where('role', $role);
+            })
+
             ->orderBy('name')
             ->get();
 
