@@ -89,6 +89,7 @@ Route::middleware(['auth', 'role:diskominfo'])->group(function () {
 Route::middleware(['auth', 'role:opd'])->group(function () {
     Route::get('applications', [ApplicationController::class, 'index'])->name('applications.index');
     Route::get('applications/{application}', [ApplicationController::class, 'show'])->name('applications.show');
+    Route::resource('application_logs', ApplicationLogController::class)->only(['index', 'show']);
     Route::resource('application_versions', ApplicationVersionController::class)->only(['index', 'show']);
     Route::resource('application_documents', ApplicationDocumentController::class)->only(['index']);
     Route::get('application_documents/{id}/download', [ApplicationDocumentController::class, 'download'])->name('application_documents.download');

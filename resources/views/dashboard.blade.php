@@ -375,6 +375,10 @@
                                             </span>
                                         </div>
                                     </div>
+                                    {{-- Tanggal --}}
+                                    <p class="inline-block text-xs text-gray-500 min-w-[80px] text-center">
+                                        {{ $finding->date ?? $finding->created_at->format('Y-m-d') }}
+                                    </p>
                                 </div>
 
                             @empty
@@ -387,43 +391,47 @@
                 
             </div>
             {{-- Tabel Aplikasi --}}
-                <x-dashboard-section title="Aplikasi yang Sedang Dikerjakan">
+                <x-dashboard-section title="Riwayat Update Aplikasi">
                     <x-table>
 
                         <x-slot name="head">
                             <tr class="bg-gray-100 text-gray-700">
-                                <th class="px-4 py-3 text-left font-bold tracking-wide">Nama Aplikasi</th>
-                                <th class="px-4 py-3 text-left font-bold tracking-wide">Status Aplikasi</th>
-                                <th class="px-4 py-3 text-left font-bold tracking-wide">Update Terakhir</th>
+                                <th class="px-4 py-3 text-left font-bold min-w-[170px]">Nama Aplikasi</th>
+                                <th class="px-4 py-3 text-left font-bold min-w-[170px]">Status Aplikasi</th>
+                                <th class="px-4 py-3 text-left font-bold min-w-[170px]">Update Terakhir</th>
                             </tr>
                         </x-slot>
 
-                        @forelse($recentLogs as $log)
+                        @forelse($recentAppUpdates as $app)
                             <tr class="hover:bg-gray-50 transition">
 
-                                <td class="px-4 py-3 text-gray-800">{{ $log->application->name ?? '-' }}</td>
+                                <td class="px-4 py-3 text-gray-800">{{ $app['name'] ?? '-' }}</td>
 
+                                @php
+                                    $statusColors = [
+                                        'aktif'       => 'bg-green-100 text-green-700',
+                                        'tidak aktif'    => 'bg-red-100 text-red-700',
+                                        'dalam perbaikan'=> 'bg-yellow-100 text-yellow-700',
+                                    ];
+
+                                    $status = strtolower($app['status']);
+                                @endphp
                                 <td class="px-4 py-3">
-                                    @php $status = strtolower($log->application->status ?? '-'); @endphp
-
-                                    @if($status === 'aktif')
-                                        <span class="px-2 py-1 bg-green-100 text-green-700 rounded-md text-xs font-medium">Aktif</span>
-                                    @elseif($status === 'nonaktif')
-                                        <span class="px-2 py-1 bg-red-100 text-red-700 rounded-md text-xs font-medium">Nonaktif</span>
-                                    @else
-                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-600 rounded-md text-xs font-medium">Maintenance</span>
-                                    @endif
+                                    <span class="px-3 py-1 rounded-md text-xs font-semibold
+                                        {{ $statusColors[$status] ?? 'bg-gray-100 text-gray-700' }}">
+                                        {{ ucfirst($status) }}
+                                    </span>
                                 </td>
 
-                                <td class="px-4 py-3 text-gray-800">
-                                    {{ $log->created_at ? $log->created_at->locale('id')->diffForHumans() : '-' }}
+                                <td class="px-4 py-3">
+                                    {{ \Carbon\Carbon::parse($app['updated_at'])->locale('id')->diffForHumans() }}
                                 </td>
 
                             </tr>
                         @empty
                             <tr>
                                 <td colspan="3" class="text-center text-gray-500 py-4">
-                                    Belum ada aplikasi yang terdaftar untuk OPD ini.
+                                    Belum ada update aplikasi
                                 </td>
                             </tr>
                         @endforelse
@@ -484,6 +492,75 @@
                     />
                 </div>
 
+                <div>
+    <x-dashboard-section>
+        
+         {{-- HEADER --}}
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-bold text-gray-800">
+                Aktivitas Terbaru Aplikasi
+            </h2>
+
+            @if($recentActivities->count() > 3)
+                <a href="{{ route('application_logs.index') }}"
+                class="bg-gray-800 text-white px-3 py-1.5 text-xs rounded-md
+                        hover:bg-gray-900 transition no-underline">
+                    Lihat Riwayat →
+                </a>
+            @endif
+        </div>
+
+        {{-- CONTENT --}}
+        <div class="space-y-3">
+            @forelse ($recentActivities as $activity)
+                <div class="flex items-start justify-between p-3 bg-white rounded-lg border shadow-sm">
+
+                    {{-- Kiri --}}
+                    <div class="w-3/4">
+                        <h3 class="text-gray-900 font-semibold text-sm leading-tight">
+                            {{ $activity->title }}
+                        </h3>
+
+                        <p class="text-xs text-gray-600 mt-1">
+                            {{ $activity->application->name ?? '-' }}
+                        </p>
+
+                        {{-- Badge --}}
+                        <div class="mt-2 flex gap-2">
+                            <span class="px-2 py-0.5 text-[10px] rounded-md bg-gray-100 text-gray-700 border">
+                                {{ $activity->version ?? '-' }}
+                            </span>
+
+                            @php
+                                $cat = $activity->change_type ?? 'lainnya';
+                                $clr = [
+                                    'penambahan' => 'bg-green-100 text-green-700',
+                                    'perbaikan'  => 'bg-blue-100 text-blue-700',
+                                    'penghapusan'=> 'bg-red-100 text-red-700',
+                                ][$cat] ?? 'bg-gray-100 text-gray-700';
+                            @endphp
+
+                            <span class="px-2 py-0.5 text-[10px] rounded-md {{ $clr }} capitalize border">
+                                {{ $cat }}
+                            </span>
+                        </div>
+                    </div>
+
+                    {{-- Tanggal --}}
+                    <p class="text-xs text-gray-500">
+                        {{ $activity->date ?? $activity->created_at->format('Y-m-d') }}
+                    </p>
+                </div>
+            @empty
+                <p class="text-gray-500 text-center py-4 text-sm">
+                    Belum ada aktivitas.
+                </p>
+            @endforelse
+        </div>
+
+    </x-dashboard-section>
+</div>
+
                 {{-- Tabel Aplikasi --}}
                 <x-dashboard-section title="Daftar Aplikasi Yang Dimiliki">
                     <x-table>
@@ -501,22 +578,26 @@
 
                             <td class="px-4 py-3 text-gray-800">{{ $app->name }}</td>
 
+                            @php
+                                $statusColors = [
+                                    'aktif'       => 'bg-green-100 text-green-700',
+                                    'tidak aktif'    => 'bg-red-100 text-red-700',
+                                    'dalam perbaikan'=> 'bg-yellow-100 text-yellow-700',
+                                ];
+
+                                $status = strtolower($app['status']);
+                            @endphp
                             <td class="px-4 py-3">
-                                @php $status = strtolower($app->status); @endphp
-
-                                @if($status === 'aktif')
-                                    <span class="px-2 py-1 bg-green-100 text-green-700 rounded-md text-xs font-medium">Aktif</span>
-                                @elseif(in_array($status, ['nonaktif', 'non_aktif', 'non aktif']))
-                                    <span class="px-2 py-1 bg-red-100 text-red-700 rounded-md text-xs font-medium">Nonaktif</span>
-                                @else
-                                    <span class="px-2 py-1 bg-gray-100 text-gray-600 rounded-md text-xs font-medium">-</span>
-                                @endif
+                              <span class="px-3 py-1 rounded-md text-xs font-semibold
+                                    {{ $statusColors[$status] ?? 'bg-gray-100 text-gray-700' }}">
+                                    {{ ucfirst($status) }}
+                                </span>
                             </td>
 
-                            <td class="px-4 py-3 text-gray-800">
-                                {{ $app->updated_at ? $app->updated_at->locale('id')->diffForHumans() : '-' }}
+                           <td class="px-4 py-3">
+                                {{ \Carbon\Carbon::parse($app['updated_at'])->locale('id')->diffForHumans() }}
                             </td>
-
+        
                         </tr>
                     @empty
                         <tr>
@@ -529,14 +610,14 @@
                     </x-table>
                 </x-dashboard-section>
 
-                {{-- Log Aktivitas --}}
+                {{-- Log Aktivitas
                 <x-dashboard-section title="Aktivitas 1 Minggu Terakhir">
                     @forelse ($recentLogs as $log)
                         <p class="text-gray-700 mb-2">• {{ $log->description }}</p>
                     @empty
                         <p class="text-gray-500 text-sm">Belum ada aktivitas tercatat.</p>
                     @endforelse
-                </x-dashboard-section>
+                </x-dashboard-section> --}}
 
             </div>
 

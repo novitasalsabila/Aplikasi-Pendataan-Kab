@@ -26,7 +26,7 @@ class DashboardController extends Controller
         // DISKOMINFO → lihat semua aplikasi (TIDAK difilter)
     }
 
-    // 📊 Statistik umum
+    // Statistik umum
     $totalApps = $applications->count();
     $activeApps = (clone $applications)->where('status', 'aktif')->count();
 
@@ -35,7 +35,7 @@ class DashboardController extends Controller
         ->whereIn('status', ['nonaktif', 'non_aktif', 'non aktif'])
         ->count();
 
-    // 🐞 Temuan keamanan
+    // Temuan keamanan
     $findings = ApplicationFinding::query();
 
     // Tambahan statistik detail untuk dashboard cards
@@ -59,7 +59,7 @@ class DashboardController extends Controller
     // DISKOMINFO → tidak difilter, semua temuan tampil
     $findingsCount = $findings->count();
 
-    // 🧾 Log aktivitas
+    // Log aktivitas
     $recentLogs = ApplicationLog::query()
         ->when($user->role === 'opd', fn($q) =>
             $q->whereHas('application', fn($a) =>
@@ -71,6 +71,28 @@ class DashboardController extends Controller
         ->take(10)
         ->get();
 
+    $recentAppUpdates = null;
+
+    if ($user->role === 'diskominfo') {
+        $recentAppUpdates = Application::with([
+                'logs' => fn ($q) => $q->latest()->limit(1)
+            ])
+            ->whereHas('logs') // hanya aplikasi yg pernah diupdate
+            ->get()
+            ->map(function ($app) {
+                $latestLog = $app->logs->first();
+
+                return [
+                    'name' => $app->name,
+                    'status' => $app->status,
+                    'updated_at' => $latestLog
+                        ? $latestLog->created_at
+                        : $app->created_at,
+                ];
+            });
+    }
+
+
         $opdApplications = null;
         if ($user->role === 'opd') {
             $opdApplications = Application::where('department_id', $user->department_id)
@@ -78,7 +100,7 @@ class DashboardController extends Controller
                                             ->get();
         }
 
-        // 🏢 Admin: tambahan data per OPD
+        // Admin: tambahan data per OPD
         $appsPerDepartment = in_array($user->role, ['admin', 'diskominfo'])
         ? Department::withCount([
             'applications',
@@ -92,37 +114,42 @@ class DashboardController extends Controller
 
 
 
-        // 📌 Temuan terbaru untuk admin & diskominfo
-$recentFindings = null;
-if (in_array($user->role, ['admin', 'diskominfo'])) {
-    $recentFindings = ApplicationFinding::with('application')
-        ->latest()
-        ->take(10)
-        ->get();
-}
+        // Temuan terbaru untuk admin & diskominfo
+        $recentFindings = null;
+        if (in_array($user->role, ['admin', 'diskominfo'])) {
+            $recentFindings = ApplicationFinding::with('application')
+                ->latest()
+                ->take(5)
+                ->get();
+        }
 
-// 📌 Aktivitas terbaru untuk admin & diskominfo
-$recentActivities = null;
-if (in_array($user->role, ['admin', 'diskominfo'])) {
-    $recentActivities = ApplicationLog::with('application')
-        ->latest()
-        ->take(10)
-        ->get();
-}
+        // Aktivitas terbaru
+        $recentActivities = ApplicationLog::with('application')
+            ->when($user->role === 'opd', function ($q) use ($user) {
+                // OPD hanya lihat aktivitas aplikasi miliknya
+                $q->whereHas('application', fn ($app) =>
+                    $app->where('department_id', $user->department_id)
+                );
+            })
+            // admin & diskominfo → lihat semua
+            ->latest()
+            ->take(4) // ⬅️ SELALU 3 TERBARU
+            ->get();
 
 
-        // 💡 Return satu view saja
+        // Return satu view saja
         return view('dashboard', compact(
             'totalApps',
             'activeApps',
             'inactiveApps',
-            'maintenanceApps',       // baru
-            'departmentCount',       // baru
-            'activeUsersCount',      // baru
-            'openCriticalFindings', // baru
+            'maintenanceApps',       
+            'departmentCount',       
+            'activeUsersCount',      
+            'openCriticalFindings', 
             'findingsCount',
             'recentLogs',
             'appsPerDepartment',
+            'recentAppUpdates',
             'opdApplications',
             'recentActivities', 
             'recentFindings'   

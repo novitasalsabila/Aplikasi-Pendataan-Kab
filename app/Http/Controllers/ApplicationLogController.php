@@ -14,12 +14,28 @@ class ApplicationLogController extends Controller
     /**
      * Tampilkan semua log aplikasi.
      */
-    public function index(Request $request)
+        public function index(Request $request)
     {
+        $user = auth()->user();
+
         $search = $request->search;
         $status = $request->input('status');
 
-        $logs = ApplicationLog::with(['application', 'user', 'application.versions' => fn($v) => $v->orderByDesc('id'), 'reviewer'])
+        $logs = ApplicationLog::with([
+                'application',
+                'user',
+                'application.versions' => fn ($v) => $v->orderByDesc('id'),
+                'reviewer'
+            ])
+
+            // 🔐 FILTER ROLE OPD (INI YANG DITAMBAHKAN)
+            ->when($user->role === 'opd', function ($query) use ($user) {
+                $query->whereHas('application', function ($q) use ($user) {
+                    $q->where('department_id', $user->department_id);
+                });
+            })
+
+            // 🔍 SEARCH
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
@@ -29,13 +45,13 @@ class ApplicationLogController extends Controller
                 });
             })
 
-            // FILTER STATUS
+            // ✅ FILTER STATUS
             ->when($status, function ($query) use ($status) {
                 $query->where('approved_st', $status);
             })
 
             ->latest()
-            ->get();
+            ->paginate(10); // ⬅️ disarankan pakai paginate
 
         return view('application_logs.index', compact('logs'));
     }
@@ -129,4 +145,23 @@ class ApplicationLogController extends Controller
         return redirect()->route('application_logs.index')
             ->with('success', 'Log aplikasi berhasil dihapus.');
     }
+
+        public function show(ApplicationLog $applicationLog)
+    {
+        $user = auth()->user();
+
+        // OPD hanya boleh lihat log aplikasinya sendiri
+        if ($user->role === 'opd') {
+            abort_if(
+                $applicationLog->application->department_id !== $user->department_id,
+                403,
+                'Akses ditolak'
+            );
+        }
+
+        return view('application_logs.show', [
+            'log' => $applicationLog
+        ]);
+    }
+
 }

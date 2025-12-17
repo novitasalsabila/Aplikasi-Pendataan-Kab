@@ -3,7 +3,7 @@
         <!-- Header -->
         <div class="relative mb-6">
             <!-- Tombol kanan atas -->
-            @if(auth()->user()->role === 'admin')
+            @if(in_array(auth()->user()->role, ['admin', 'diskominfo']))
                 <a href="{{ route('application_logs.create') }}"
                     class="absolute top-0 right-0 bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition no-underline flex items-center gap-2">
                     <img src="{{ asset('icons/plus.svg') }}" alt="Tambah"
@@ -129,9 +129,13 @@
                                 <x-action-buttons
                                     :id="$log->id"
                                     :showRoute="route('application_logs.show', $log->id)"
-                                    :editRoute="route('application_logs.edit', $log->id)"
-                                    :deleteRoute="route('application_logs.destroy', $log->id)"
-                                    itemName="{{ $log->name }}"
+                                    :editRoute="auth()->user()->role !== 'opd'
+                                        ? route('application_logs.edit', $log->id)
+                                        : null"
+                                    :deleteRoute="auth()->user()->role !== 'opd'
+                                        ? route('application_logs.destroy', $log->id)
+                                        : null"
+                                    :itemName="$log->title"
                                 />
                             </td>
 
