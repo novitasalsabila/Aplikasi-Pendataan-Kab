@@ -55,7 +55,7 @@ class ApplicationVersionController extends Controller
         ApplicationVersion::create($validated);
 
         return redirect()->route('application_versions.index')
-            ->with('success', '✅ Versi aplikasi berhasil ditambahkan.');
+            ->with('success', 'Versi aplikasi berhasil ditambahkan.');
     }
 
     /**
@@ -102,7 +102,7 @@ class ApplicationVersionController extends Controller
         $application_version->update($validated);
 
         return redirect()->route('application_versions.index')
-            ->with('success', '✏️ Versi aplikasi berhasil diperbarui.');
+            ->with('success', 'Versi aplikasi berhasil diperbarui.');
     }
 
     /**
@@ -113,6 +113,6 @@ class ApplicationVersionController extends Controller
         $application_version->delete();
 
         return redirect()->route('application_versions.index')
-            ->with('success', '🗑️ Versi aplikasi berhasil dihapus.');
+            ->with('success', 'Versi aplikasi berhasil dihapus.');
     }
 }

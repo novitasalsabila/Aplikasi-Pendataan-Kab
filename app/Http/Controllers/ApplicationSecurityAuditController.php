@@ -43,7 +43,7 @@ class ApplicationSecurityAuditController extends Controller
         ApplicationSecurityAudit::create($validated);
 
         return redirect()->route('application_audits.index')
-            ->with('success', '✅ Data audit keamanan berhasil ditambahkan.');
+            ->with('success', 'Data audit keamanan berhasil ditambahkan.');
     }
 
     /**
@@ -75,7 +75,7 @@ class ApplicationSecurityAuditController extends Controller
         $application_audit->update($validated);
 
         return redirect()->route('application_audits.index')
-            ->with('success', '✏️ Data audit keamanan berhasil diperbarui.');
+            ->with('success', 'Data audit keamanan berhasil diperbarui.');
     }
 
     /**
@@ -86,6 +86,6 @@ class ApplicationSecurityAuditController extends Controller
         $application_audit->delete();
 
         return redirect()->route('application_audits.index')
-            ->with('success', '🗑️ Data audit keamanan berhasil dihapus.');
+            ->with('success', 'Data audit keamanan berhasil dihapus.');
     }
 }

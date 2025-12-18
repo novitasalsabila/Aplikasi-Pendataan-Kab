@@ -104,6 +104,6 @@ class ServerController extends Controller
         $server->delete();
 
         return redirect()->route('servers.index')
-            ->with('success', '🗑️ Data server berhasil dihapus.');
+            ->with('success', 'Data server berhasil dihapus.');
     }
 }

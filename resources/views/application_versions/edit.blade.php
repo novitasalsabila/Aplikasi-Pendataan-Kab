@@ -19,7 +19,7 @@
 
             </div>
         </div>
-            <div>
+            <!-- <div>
                 <label class="block font-medium mb-1">Nama Aplikasi *</label>
                 <select name="application_id" required class="w-full border rounded p-2 text-gray-600">
                     @foreach ($applications as $app)
@@ -28,7 +28,20 @@
                         </option>
                     @endforeach
                 </select>
+            </div> -->
+            <div>
+                <label class="block font-medium mb-1">Nama Aplikasi</label>
+
+                {{-- Tampil sebagai teks, tidak bisa diedit --}}
+                <input type="text"
+                    value="{{ $version->application->name }}"
+                    readonly
+                    class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 cursor-not-allowed">
+
+                {{-- Tetap kirim application_id ke server --}}
+                <input type="hidden" name="application_id" value="{{ $version->application_id }}">
             </div>
+
 
             <div>
                 <label class="block font-medium mb-1">Kode Versi *</label>

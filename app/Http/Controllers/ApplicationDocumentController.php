@@ -104,7 +104,7 @@ class ApplicationDocumentController extends Controller
         $application_document->update($validated);
 
         return redirect()->route('application_documents.index')
-            ->with('success', '✅ Dokumen berhasil diperbarui.');
+            ->with('success', 'Dokumen berhasil diperbarui.');
     }
 
     /**
@@ -119,7 +119,7 @@ class ApplicationDocumentController extends Controller
         $application_document->delete();
 
         return redirect()->route('application_documents.index')
-            ->with('success', '🗑️ Dokumen berhasil dihapus.');
+            ->with('success', 'Dokumen berhasil dihapus.');
     }
 
     /**

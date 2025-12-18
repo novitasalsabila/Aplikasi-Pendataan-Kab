@@ -128,7 +128,7 @@ class ApplicationController extends Controller
     }
 
         return redirect()->route('applications.index')
-            ->with('success', '✅ Data aplikasi berhasil ditambahkan.');
+            ->with('success', 'Data aplikasi berhasil ditambahkan.');
     }
 
     /**

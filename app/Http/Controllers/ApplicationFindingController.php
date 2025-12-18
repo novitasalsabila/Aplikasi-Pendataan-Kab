@@ -75,7 +75,7 @@ class ApplicationFindingController extends Controller
         ApplicationFinding::create($validated);
 
         return redirect()->route('application_findings.index')
-            ->with('success', '✅ Temuan aplikasi berhasil ditambahkan.');
+            ->with('success', 'Temuan aplikasi berhasil ditambahkan.');
     }
 
     /**
@@ -109,7 +109,7 @@ class ApplicationFindingController extends Controller
         $application_finding->update($validated);
 
         return redirect()->route('application_findings.index')
-            ->with('success', '✏️ Temuan aplikasi berhasil diperbarui.');
+            ->with('success', 'Temuan aplikasi berhasil diperbarui.');
     }
 
     /**
@@ -119,6 +119,6 @@ class ApplicationFindingController extends Controller
     {
         $application_finding->delete();
         return redirect()->route('application_findings.index')
-            ->with('success', '🗑️ Temuan aplikasi berhasil dihapus.');
+            ->with('success', 'Temuan aplikasi berhasil dihapus.');
     }
 }

@@ -42,7 +42,7 @@ class ApplicationIntegrationController extends Controller
         ApplicationIntegration::create($validated);
 
         return redirect()->route('application_integrations.index')
-            ->with('success', '✅ Data integrasi berhasil ditambahkan.');
+            ->with('success', 'Data integrasi berhasil ditambahkan.');
     }
 
     /**
@@ -74,7 +74,7 @@ class ApplicationIntegrationController extends Controller
         $application_integration->update($validated);
 
         return redirect()->route('application_integrations.index')
-            ->with('success', '✏️ Data integrasi berhasil diperbarui.');
+            ->with('success', 'Data integrasi berhasil diperbarui.');
     }
 
     /**
@@ -85,6 +85,6 @@ class ApplicationIntegrationController extends Controller
         $application_integration->delete();
 
         return redirect()->route('application_integrations.index')
-            ->with('success', '🗑️ Data integrasi berhasil dihapus.');
+            ->with('success', 'Data integrasi berhasil dihapus.');
     }
 }

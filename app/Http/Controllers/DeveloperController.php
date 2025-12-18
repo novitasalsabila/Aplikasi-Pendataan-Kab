@@ -60,7 +60,7 @@ class DeveloperController extends Controller
         Developer::create($validated);
 
         return redirect()->route('developers.index')
-            ->with('success', '✅ Data pengembang berhasil ditambahkan.');
+            ->with('success', 'Data pengembang berhasil ditambahkan.');
     }
         public function show($id)
     {
@@ -95,7 +95,7 @@ class DeveloperController extends Controller
         $developer->update($validated);
 
         return redirect()->route('developers.index')
-            ->with('success', '✏️ Data pengembang berhasil diperbarui.');
+            ->with('success', 'Data pengembang berhasil diperbarui.');
     }
 
     /**
@@ -106,6 +106,6 @@ class DeveloperController extends Controller
         $developer->delete();
 
         return redirect()->route('developers.index')
-            ->with('success', '🗑️ Data pengembang berhasil dihapus.');
+            ->with('success', 'Data pengembang berhasil dihapus.');
     }
 }
