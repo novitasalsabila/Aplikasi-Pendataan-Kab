@@ -72,9 +72,9 @@
                             <td class="px-4 py-3">
                                 @php
                                     $color = match($doc->doc_type) {
-                                        'tor' => 'bg-blue-100 text-blue-700',
-                                        'manual' => 'bg-green-100 text-green-700',
-                                        'kontrak' => 'bg-purple-100 text-purple-700',
+                                        'tor' => 'bg-blue-100 text-blue-600',
+                                        'manual' => 'bg-green-100 text-green-600',
+                                        'kontrak' => 'bg-purple-100 text-purple-600',
                                         default => 'bg-gray-100 text-gray-600'
                                     };
                                 @endphp

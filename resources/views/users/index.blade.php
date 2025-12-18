@@ -102,15 +102,15 @@
                             <td class="px-4 py-3">{{ $user->position }}</td>
                             @php
                                 $roleColors = [
-                                    'admin' => 'bg-red-100 text-red-700',
-                                    'diskominfo' => 'bg-blue-100 text-blue-700',
-                                    'opd' => 'bg-green-100 text-green-700',
+                                    'admin' => 'bg-red-100 text-red-600',
+                                    'diskominfo' => 'bg-blue-100 text-blue-600',
+                                    'opd' => 'bg-green-100 text-green-600',
                                 ];
                             @endphp
 
                             <td class="px-4 py-3">
                                 <span class="px-3 py-1 rounded-md text-xs font-semibold
-                                    {{ $roleColors[$user->role] ?? 'bg-gray-100 text-gray-700' }}">
+                                    {{ $roleColors[$user->role] ?? 'bg-gray-100 text-gray-600' }}">
                                     {{ ucfirst($user->role) }}
                                 </span>
                             </td>

@@ -112,14 +112,14 @@
                             <td class="px-4 py-3 text-left">
                                 @php
                                     $statusMap = [
-                                        'disetujui' => 'bg-green-100 text-green-700',
-                                        'ditolak' => 'bg-red-100 text-red-700',
-                                        'diproses' => 'bg-yellow-100 text-yellow-700'
+                                        'disetujui' => 'bg-green-100 text-green-600',
+                                        'ditolak' => 'bg-red-100 text-red-600',
+                                        'diproses' => 'bg-yellow-100 text-yellow-600'
                                     ];
                                 @endphp
 
                                 <span class="px-2 py-1 text-xs font-semibold rounded-md
-                                    {{ $statusMap[$log->approved_st] ?? 'bg-gray-100 text-gray-700' }}">
+                                    {{ $statusMap[$log->approved_st] ?? 'bg-gray-100 text-gray-600' }}">
                                     {{ ucfirst ($log->approved_st) }}
                                 </span>
                             </td>

@@ -110,9 +110,9 @@
                             <td class="px-4 py-3">
                                 @php
                                     $color = match($srv->status) {
-                                        'aktif' => 'bg-green-100 text-green-700',
-                                        'dalam perbaikan' => 'bg-yellow-100 text-yellow-700',
-                                        'tidak aktif' => 'bg-red-100 text-red-700',
+                                        'aktif' => 'bg-green-100 text-green-600',
+                                        'dalam perbaikan' => 'bg-yellow-100 text-yellow-600',
+                                        'tidak aktif' => 'bg-red-100 text-red-600',
                                         default => 'bg-gray-100 text-gray-600'
                                     };
                                 @endphp

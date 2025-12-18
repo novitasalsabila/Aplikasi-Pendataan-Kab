@@ -140,22 +140,22 @@
                              <td class="px-4 py-3 text-left">
                                 @php
                                     $categoryColors = [
-                                        'web' => 'bg-blue-100 text-blue-800',
-                                        'mobile' => 'bg-purple-100 text-purple-800',
+                                        'web' => 'bg-blue-100 text-blue-600',
+                                        'mobile' => 'bg-purple-100 text-purple-600',
                                     ];
                                 @endphp
 
                                 <span class="px-2 py-1 text-xs font-semibold rounded-md
-                                    {{ $categoryColors[$app->category] ?? 'bg-gray-100 text-gray-800' }}">
+                                    {{ $categoryColors[$app->category] ?? 'bg-gray-100 text-gray-600' }}">
                                     {{ ucfirst($app->category) }}
                                 </span>
                             </td>
                             <td class="px-4 py-3 text-left">
                                 @php
                                     $sensitivityColors = [
-                                        'internal' => 'bg-yellow-100 text-yellow-800',
-                                        'publik' => 'bg-green-100 text-green-800',
-                                        'rahasia' => 'bg-red-100 text-red-800',
+                                        'internal' => 'bg-yellow-100 text-yellow-600',
+                                        'publik' => 'bg-green-100 text-green-600',
+                                        'rahasia' => 'bg-red-100 text-red-600',
                                     ];
                                 @endphp
 
@@ -167,9 +167,9 @@
                             <td class="px-4 py-3 text-left">
                                 @php
                                     $statusColors = [
-                                        'aktif' => 'bg-green-100 text-green-800',
-                                        'dalam perbaikan' => 'bg-yellow-100 text-yellow-800',
-                                        'tidak aktif' => 'bg-red-100 text-red-800'
+                                        'aktif' => 'bg-green-100 text-green-600',
+                                        'dalam perbaikan' => 'bg-yellow-100 text-yellow-600',
+                                        'tidak aktif' => 'bg-red-100 text-red-600'
                                     ];
                                 @endphp
 
