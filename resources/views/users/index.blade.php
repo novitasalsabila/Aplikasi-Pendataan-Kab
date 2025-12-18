@@ -111,7 +111,7 @@
                             <td class="px-4 py-3">
                                 <span class="px-3 py-1 rounded-md text-xs font-semibold
                                     {{ $roleColors[$user->role] ?? 'bg-gray-100 text-gray-700' }}">
-                                    {{ $user->role }}
+                                    {{ ucfirst($user->role) }}
                                 </span>
                             </td>
                             <td class="px-4 py-3">{{ $user->department->name ?? '-' }}</td>

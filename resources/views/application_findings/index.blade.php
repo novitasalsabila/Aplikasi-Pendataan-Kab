@@ -157,7 +157,7 @@
                                 ];
                             @endphp
 
-                            <span class="px-3 py-1 rounded-md text-sm font-semibold 
+                            <span class="px-3 py-1 rounded-md text-xs font-semibold 
                                 {{ $styles[$type] ?? 'bg-gray-100 text-gray-600' }}">
                                 {{ ucfirst($type) }}
                             </span>
@@ -177,8 +177,8 @@
                                     $class = $styles[$severity] ?? 'bg-gray-100 text-gray-600';
                                 @endphp
 
-                                <span class="px-3 py-1 rounded-md text-sm font-semibold {{ $class }}">
-                                    {{ $severity }}
+                                <span class="px-3 py-1 rounded-md text-xs font-semibold {{ $class }}">
+                                    {{ ucfirst($severity) }}
                                 </span>
                             </td>
 

@@ -80,7 +80,7 @@
                                 @endphp
 
                                 <span class="px-3 py-1 rounded-md text-xs font-semibold {{ $color }}">
-                                    {{ $doc->doc_type }}
+                                    {{ ucfirst($doc->doc_type) }}
                                 </span>
                             </td>
 

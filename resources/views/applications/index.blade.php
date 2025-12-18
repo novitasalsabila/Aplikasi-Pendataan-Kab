@@ -147,7 +147,7 @@
 
                                 <span class="px-2 py-1 text-xs font-semibold rounded-md
                                     {{ $categoryColors[$app->category] ?? 'bg-gray-100 text-gray-800' }}">
-                                    {{ $app->category }}
+                                    {{ ucfirst($app->category) }}
                                 </span>
                             </td>
                             <td class="px-4 py-3 text-left">
@@ -161,7 +161,7 @@
 
                                 <span class="px-2 py-1 text-xs font-semibold rounded-md
                                     {{ $sensitivityColors[$app->data_sensitivity] ?? 'bg-gray-100 text-gray-800' }}">
-                                    {{ $app->data_sensitivity }}
+                                    {{ ucfirst($app->data_sensitivity) }}
                                 </span>
                             </td>
                             <td class="px-4 py-3 text-left">
@@ -169,12 +169,13 @@
                                     $statusColors = [
                                         'aktif' => 'bg-green-100 text-green-800',
                                         'dalam perbaikan' => 'bg-yellow-100 text-yellow-800',
+                                        'tidak aktif' => 'bg-red-100 text-red-800'
                                     ];
                                 @endphp
 
                                 <span class="px-2 py-1 text-xs font-semibold rounded-md 
-                                    {{ $statusColors[$app->status] ?? 'bg-gray-100 text-gray-800' }}">
-                                    {{ $app->status }}
+                                    {{ $statusColors[$app->status]}}">
+                                    {{ ucfirst($app->status) }}
                                 </span>
                             </td>
                             <td class="px-4 py-3">

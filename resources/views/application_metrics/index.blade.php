@@ -55,7 +55,7 @@
                             <td class="px-4 py-3">{{ $m->uptime ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $m->response_time ?? '-' }}</td>
                             <td class="px-4 py-3">
-                                <span class="px-2 py-1 rounded
+                                <span class="px-3 py-1 rounded-md text-xs font-semibold
                                     @if ($m->status === 'normal') bg-green-100 text-green-700
                                     @elseif ($m->status === 'lambat') bg-yellow-100 text-yellow-700
                                     @elseif ($m->status === 'down') bg-red-100 text-red-700

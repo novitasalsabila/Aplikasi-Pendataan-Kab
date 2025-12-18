@@ -119,7 +119,7 @@
 
                                 <div class="flex justify-start">
                                     <span class="px-3 py-1 rounded-md text-xs font-semibold {{ $color }}">
-                                        {{ $srv->status }}
+                                        {{ ucfirst($srv->status) }}
                                     </span>
                                 </div>
                             </td>                                
