@@ -106,7 +106,7 @@
                 logoutButton.addEventListener('click', function(event) {
                     event.preventDefault(); // Mencegah submit form langsung
                     Swal.fire({
-                        title: 'Konfirmasi Log Out',
+                        title: 'Konfirmasi Keluar',
                         text: "Apakah Anda yakin ingin keluar?",
                         showCancelButton: true,
                         confirmButtonColor: '#000000', // Warna biru Tailwind (indigo-600)
