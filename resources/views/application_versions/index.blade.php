@@ -48,7 +48,7 @@
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3">Aplikasi</th>
                         <th class="px-4 py-3">Versi</th>
-                        <th class="px-4 py-3">Tanggal Rilis</th>
+                        <th class="px-4 py-3 min-w-[150px]">Tanggal Rilis</th>
                         <th class="px-4 py-3">Perubahan</th>
                         @if(auth()->user()->role === 'admin' || auth()->user()->role === 'diskominfo')
                         <th class="px-4 py-3 text-center">Aksi</th>
