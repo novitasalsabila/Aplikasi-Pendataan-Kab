@@ -27,13 +27,13 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label class="block font-medium mb-1">Tanggal Backup</label>
+                    <label class="block font-medium mb-1">Tanggal Pencadangan</label>
                     <input type="datetime-local" name="backup_date"
                            value="{{ \Carbon\Carbon::parse($backup->backup_date)->format('Y-m-d\TH:i') }}" required
                            class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-gray-600">
                 </div>
                 <div>
-                    <label class="block font-medium mb-1">Jenis Backup</label>
+                    <label class="block font-medium mb-1">Jenis Pencadangan</label>
                     <select name="backup_type" required
                             class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-gray-600">
                         @foreach (['harian', 'mingguan', 'bulanan', 'manual'] as $type)

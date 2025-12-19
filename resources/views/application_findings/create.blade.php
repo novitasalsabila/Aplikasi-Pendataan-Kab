@@ -74,7 +74,7 @@
 
             <div>
                 <label class="block font-medium mb-1">Tindak Lanjut (Opsional)</label>
-                <textarea name="follow_up_action" rows="2" placeholder="Contoh: Patch diterapkan dan diuji ulang."
+                <textarea name="follow_up_action" rows="2" placeholder="Contoh: sistem diuji ulang."
                           class="w-full border rounded p-2 text-sm text-gray-600"></textarea>
             </div>
 
