@@ -43,8 +43,8 @@
             {{-- Tambahkan @click="if(isMobile) open = false" agar menu tertutup setelah klik di mobile --}}
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group">
-                <img src="{{ asset('icons/dashboard.svg') }}" alt="Dashboard" class="w-5 h-5">
-                <span class="font-medium text-gray-700 group-hover:text-blue-600">Dashboard</span>
+                <img src="{{ asset('icons/dashboard.svg') }}" alt="Beranda" class="w-5 h-5">
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">Beranda</span>
             </x-nav-link>
 
             <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')" 
@@ -118,8 +118,8 @@
             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Menu Diskominfo</p>
 
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                <img src="{{ asset('icons/dashboard.svg') }}" alt="Dashboard" class="w-5 h-5">
-                <i class="fa-solid fa-gauge"></i> {{ __('Dashboard') }}
+                <img src="{{ asset('icons/dashboard.svg') }}" alt="Beranda" class="w-5 h-5">
+                <i class="fa-solid fa-gauge"></i> {{ __('Beranda') }}
             </x-nav-link>
 
             <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')">
@@ -156,8 +156,8 @@
             <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Menu OPD</p>
 
             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                <img src="{{ asset('icons/dashboard.svg') }}" alt="Dashboard" class="w-5 h-5">
-                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Dashboard') }}
+                <img src="{{ asset('icons/dashboard.svg') }}" alt="Beranda" class="w-5 h-5">
+                <i class="fa-solid fa-triangle-exclamation"></i> {{ __('Beranda') }}
             </x-nav-link>
 
             <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')">
