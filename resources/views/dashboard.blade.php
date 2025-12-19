@@ -18,7 +18,7 @@
                     color="blue"
                     title="Total Aplikasi"
                     :value="$totalApps"
-                    detail="{{ $activeApps }} aktif · {{ $maintenanceApps }} maintenance"
+                    detail="{{ $activeApps }} aktif · {{ $maintenanceApps }} perbaikan"
                     icon="aplikasi"
                 />
 
