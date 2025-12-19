@@ -111,7 +111,7 @@
                 <div>
                     <label class="block font-medium mb-1">Status Persetujuan</label>
                     <select name="approved_st" class="w-full border rounded p-2 text-sm text-gray-600">
-                        <option value="disetuji">Disetujui</option>
+                        <option value="disetujui">Disetujui</option>
                         <option value="diproses">Diproses</option>
                         <option value="ditolak">Ditolak</option>
                     </select>
