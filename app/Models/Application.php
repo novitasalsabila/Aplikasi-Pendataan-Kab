@@ -78,4 +78,11 @@ class Application extends Model
     {
         return $this->hasMany(ApplicationVersion::class);
     }
+
+    public function latestVersion()
+    {
+        return $this->hasOne(ApplicationVersion::class)
+                    ->latestOfMany('release_date');
+    }
+
 }

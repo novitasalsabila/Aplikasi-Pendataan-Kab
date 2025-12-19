@@ -23,7 +23,7 @@ class ApplicationController extends Controller
         $kategori      = $request->input('kategori');
         $sensitivitas  = $request->input('sensitivitas');
 
-        $applications = Application::with(['department', 'developer', 'server', 'versions'])
+        $applications = Application::with(['department', 'developer', 'server', 'versions', 'latestVersion'])
 
             // ROLE OPD → hanya data milik departemennya
             ->when($user->role === 'opd', function ($query) use ($user) {

@@ -182,19 +182,16 @@
                                 {{ $app->created_at ? \Carbon\Carbon::parse($app->created_at)->format('Y-m-d') : '-' }}
                             </td>
                             
-                            @php
-                                $latestVersion = $app->versions->sortByDesc('release_date')->first();
-                            @endphp
-
                             <td class="px-4 py-3">
-                                @if($latestVersion)
+                                @if($app->latestVersion)
                                     <span class="bg-gray-50 px-2 py-1 rounded border font-semibold">
-                                        {{ $latestVersion->version_code }}
+                                        {{ $app->latestVersion->version_code }}
                                     </span>
                                 @else
                                     <span class="text-gray-400 text-xs">Belum ada</span>
                                 @endif
                             </td>
+
 
                             <!-- Kolom Aksi -->
                             <td class="px-3 py-3 text-center">
