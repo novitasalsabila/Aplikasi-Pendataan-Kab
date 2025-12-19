@@ -1,4 +1,13 @@
 <x-app-layout>
+    @php
+        $colors = [
+            'manual'   => 'bg-green-100 text-green-700 border-green-300',
+            'mingguan' => 'bg-yellow-100 text-yellow-700 border-yellow-300',
+            'bulanan'  => 'bg-orange-100 text-orange-700 border-orange-300',
+            'harian'   => 'bg-blue-100 text-blue-700 border-blue-300',
+        ];
+    @endphp
+
     <div class="max-w-7xl mx-auto py-8 px-6">
         <div class="relative mb-6 md:mt-0 sm:mt-20">
             <!-- Kiri: Judul dan deskripsi -->
@@ -31,6 +40,7 @@
                     Daftar Backup ({{ $backups->count() }})
                 </h1>
             </div>
+            
             <table class="divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
                 <thead>
                     <tr>
