@@ -44,7 +44,7 @@
                 <div>
                     <label class="block font-medium mb-1">Sumber</label>
                     <select name="source" required class="w-full border rounded p-2 text-sm text-gray-600">
-                        <option value="user" {{ $finding->source == 'user' ? 'selected' : '' }}>Pengguna</option>
+                        <option value="pengguna" {{ $finding->source == 'pengguna' ? 'selected' : '' }}>Pengguna</option>
                         <option value="monitoring" {{ $finding->source == 'monitoring' ? 'selected' : '' }}>Monitoring</option>
                         <option value="audit" {{ $finding->source == 'audit' ? 'selected' : '' }}>Audit</option>
                         <option value="laporan_masyarakat" {{ $finding->source == 'laporan_masyarakat' ? 'selected' : '' }}>Laporan Masyarakat</option>
@@ -70,9 +70,9 @@
             <div>
                 <label class="block font-medium mb-1">Status</label>
                 <select name="status" class="w-full border rounded p-2 text-sm text-gray-600">
-                    <option value="open" {{ $finding->status == 'open' ? 'selected' : '' }}>Buka</option>
-                    <option value="in_progress" {{ $finding->status == 'in_progress' ? 'selected' : '' }}>Proses</option>
-                    <option value="resolved" {{ $finding->status == 'resolved' ? 'selected' : '' }}>Selesai</option>
+                    <option value="baru" {{ $finding->status == 'baru' ? 'selected' : '' }}>Baru</option>
+                    <option value="diproses" {{ $finding->status == 'diproses' ? 'selected' : '' }}>Diproses</option>
+                    <option value="selesai" {{ $finding->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
                 </select>
             </div>
 

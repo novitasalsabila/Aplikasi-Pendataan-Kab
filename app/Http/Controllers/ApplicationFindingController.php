@@ -17,6 +17,7 @@ class ApplicationFindingController extends Controller
         $type     = $request->type;
         $severity = $request->severity;
         $source   = $request->source;
+        $status   = $request->status;
 
         $findings = ApplicationFinding::with('application')
             ->when($search, function ($query) use ($search) {
@@ -38,6 +39,10 @@ class ApplicationFindingController extends Controller
             // 📌 FILTER SUMBER
             ->when($source, function ($query) use ($source) {
                 $query->where('source', $source);
+            })
+
+            ->when($status, function ($query) use ($status) {
+                $query->where('status', $status);
             })
 
             ->latest()
@@ -67,7 +72,7 @@ class ApplicationFindingController extends Controller
             'source' => 'required|in:pengguna,monitoring,audit,laporan_masyarakat',
             'severity' => 'required|in:rendah,sedang,tinggi',
             'description' => 'required|string',
-            'status' => 'required|in:open,in_progress,resolved',
+            'status' => 'required|in:baru,diproses,selesai',
             'follow_up_action' => 'nullable|string',
             'follow_up_date' => 'nullable|date',
         ]);
@@ -101,7 +106,7 @@ class ApplicationFindingController extends Controller
             'source' => 'required|in:pengguna,monitoring,audit,laporan_masyarakat',
             'severity' => 'required|in:rendah,sedang,tinggi',
             'description' => 'required|string',
-            'status' => 'required|in:open,in_progress,resolved',
+            'status' => 'required|in:baru,diproses,selesai',
             'follow_up_action' => 'nullable|string',
             'follow_up_date' => 'nullable|date',
         ]);

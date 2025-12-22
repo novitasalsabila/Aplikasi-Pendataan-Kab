@@ -66,9 +66,9 @@
             <div>
                 <label class="block font-medium mb-1">Status</label>
                 <select name="status" class="w-full border rounded p-2 text-sm text-gray-600">
-                    <option value="open">Buka</option>
-                    <option value="in_progress">Proses</option>
-                    <option value="resolved">Selesai</option>
+                    <option value="baru">Baru</option>
+                    <option value="diproses">Diproses</option>
+                    <option value="selesai">Selesai</option>
                 </select>
             </div>
 

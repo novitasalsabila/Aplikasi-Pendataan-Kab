@@ -41,69 +41,73 @@
             
             <!-- Search + Filter dalam 1 kotak -->
             <div class="p-4 bg-white shadow-sm rounded-lg border-gray-200 mb-6">
-                    <div class="flex flex-col sm:flex-row sm:items-center mb-6 gap-3 w-full">
-                        <!-- Form Search & Filter -->
-                        <form action="{{ route('application_findings.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
+                    <form action="{{ route('application_findings.index') }}" method="GET" class="w-full space-y-3">
 
-                            <!-- Input + Tombol Search -->
-                            <div class="relative flex-1">
-                                <input 
-                                    type="text" 
-                                    name="search"
-                                    value="{{ request('search') }}"
-                                    placeholder="Cari nama aplikasi"
-                                    class="w-full truncate px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10 overflow-hidden text-ellipsis whitespace-nowrap"/>
-                                <!-- Tombol Search -->
-                                <button 
-                                    type="submit"
-                                    class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-600 hover:text-blue-600 transition">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
-                                        class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
-                                    </svg>
-                                </button>
-                            </div> 
-                            
-                             <!-- Dropdown filter (turun di mobile) -->
-                            <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                        <!-- SEARCH -->
+                        <div class="relative w-full">
+                            <input 
+                                type="text" 
+                                name="search"
+                                value="{{ request('search') }}"
+                                placeholder="Cari nama aplikasi"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg 
+                                    focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"/>
+                            <button 
+                                type="submit"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 
+                                    text-gray-600 hover:text-blue-600 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                                    class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 21l-4.35-4.35m1.9-5.4a7.5 7.5 0 11-15 0 
+                                        7.5 7.5 0 0115 0z" />
+                                </svg>
+                            </button>
+                        </div>
 
-                                <!-- Filter Tipe -->
-                                <select name="type"
-                                    onchange="this.form.submit()"
-                                    class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
-                                    <option value="">Semua Tipe</option>
-                                    <option value="bug" {{ request('type') == 'bug' ? 'selected' : '' }}>Bug</option>
-                                    <option value="kerentanan" {{ request('type') == 'kerentanan' ? 'selected' : '' }}>Kerentanan</option>
-                                    <option value="peretasan" {{ request('type') == 'peretasan' ? 'selected' : '' }}>Peretasan</option>
-                                    <option value="lainnya" {{ request('type') == 'lainnya' ? 'selected' : '' }}>Lainnya</option>
-                                </select>
+                        <!-- FILTER (TEPAT DI BAWAH SEARCH) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
 
-                                <!-- Filter Tingkat -->
-                                <select name="severity"
-                                    onchange="this.form.submit()"
-                                    class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
-                                    <option value="">Semua Tingkat</option>
-                                    <option value="rendah" {{ request('severity') == 'rendah' ? 'selected' : '' }}>Rendah</option>
-                                    <option value="sedang" {{ request('severity') == 'sedang' ? 'selected' : '' }}>Sedang</option>
-                                    <option value="tinggi" {{ request('severity') == 'tinggi' ? 'selected' : '' }}>Tinggi</option>
-                                </select>
-                        
-                                <!-- Filter Sumber -->
-                                <select name="source" 
-                                    onchange="this.form.submit()"
-                                    class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
-                                    <option value="">Semua Sumber</option>
-                                    <option value="pengguna" {{ request('source') == 'pengguna' ? 'selected' : '' }}>Pengguna</option>
-                                    <option value="monitoring" {{ request('source') == 'monitoring' ? 'selected' : '' }}>Monitoring</option>
-                                    <option value="audit" {{ request('source') == 'audit' ? 'selected' : '' }}>Audit</option>
-                                    <option value="laporan_masyarakat" {{ request('source') == 'Laporan_masyarakat' ? 'selected' : '' }}>Laporan Masyarakat</option>
-                                </select>
-                            </div>
+                            <select name="type" onchange="this.form.submit()"
+                                class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-gray-600">
+                                <option value="">Semua Tipe</option>
+                                <option value="bug" {{ request('type') == 'bug' ? 'selected' : '' }}>Bug</option>
+                                <option value="kerentanan" {{ request('type') == 'kerentanan' ? 'selected' : '' }}>Kerentanan</option>
+                                <option value="peretasan" {{ request('type') == 'peretasan' ? 'selected' : '' }}>Peretasan</option>
+                                <option value="lainnya" {{ request('type') == 'lainnya' ? 'selected' : '' }}>Lainnya</option>
+                            </select>
 
-                        </form>
-                    </div>
+                            <select name="severity" onchange="this.form.submit()"
+                                class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-gray-600">
+                                <option value="">Semua Tingkat</option>
+                                <option value="rendah" {{ request('severity') == 'rendah' ? 'selected' : '' }}>Rendah</option>
+                                <option value="sedang" {{ request('severity') == 'sedang' ? 'selected' : '' }}>Sedang</option>
+                                <option value="tinggi" {{ request('severity') == 'tinggi' ? 'selected' : '' }}>Tinggi</option>
+                            </select>
+
+                            <select name="source" onchange="this.form.submit()"
+                                class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-gray-600">
+                                <option value="">Semua Sumber</option>
+                                <option value="pengguna" {{ request('source') == 'pengguna' ? 'selected' : '' }}>Pengguna</option>
+                                <option value="monitoring" {{ request('source') == 'monitoring' ? 'selected' : '' }}>Monitoring</option>
+                                <option value="audit" {{ request('source') == 'audit' ? 'selected' : '' }}>Audit</option>
+                                <option value="laporan_masyarakat" {{ request('source') == 'laporan_masyarakat' ? 'selected' : '' }}>
+                                    Laporan Masyarakat
+                                </option>
+                            </select>
+
+                            <select name="status" onchange="this.form.submit()"
+                                class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-sm text-gray-600">
+                                <option value="">Semua Status</option>
+                                <option value="baru" {{ request('status') == 'baru' ? 'selected' : '' }}>Baru</option>
+                                <option value="diproses" {{ request('status') == 'diproses' ? 'selected' : '' }}>Diproses</option>
+                                <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                            </select>
+
+                        </div>
+                    </form>
+
                 </div>
         </div>
 
@@ -118,15 +122,15 @@
                 <thead class="bg-white text-gray-800 border-b border-gray-200">
                     <tr>
                         <th class="px-4 py-3 text-center w-10">No</th>
-                        <th class="px-4 py-3 text-left   min-w-[200px]">Aplikasi</th>
+                        <th class="px-4 py-3 text-left   min-w-[250px]">Aplikasi</th>
                         <th class="px-4 py-3 text-left  min-w-[400px]">Deskripsi</th>
+                        <th class="px-4 py-3 text-center w-28">Status</th>
                         <th class="px-4 py-3 text-center w-20">Tipe</th>
                         <th class="px-4 py-3 text-center w-24">Tingkat</th>
-                        <th class="px-4 py-3 text-left  min-w-[190px]">Sumber</th>
-                        <th class="px-4 py-3 text-center w-28">Status</th>
-                        <th class="px-4 py-3 text-left   min-w-[300px]">Tindak Lanjut</th>
-                        <th class="px-4 py-3 text-left min-w-[300px]">Tanggal Ditemukan</th>
-                        <th class="px-4 py-3 text-center w-20">Aksi</th>
+                        <th class="px-4 py-3 text-left min-w-[180px]">Sumber</th>
+                        <th class="px-4 py-3 text-left   min-w-[180px]">Tindak Lanjut</th>
+                        <th class="px-4 py-3 text-left min-w-[180px]">Tanggal Ditemukan</th>
+                        <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
                 </thead>
 
@@ -146,6 +150,24 @@
                             </td>
 
                             <td class="px-4 py-3 text-center align-middle">
+                                @php
+                                    $status = strtolower($f->status);
+
+                                    $styles = [
+                                        'baru' => 'bg-red-100 text-red-600',
+                                        'diproses' => 'bg-yellow-100 text-yellow-600',
+                                        'selesai' => 'bg-blue-100 text-blue-600',
+                                    ];
+
+                                    $class = $styles[$status] ?? 'bg-gray-100 text-gray-600';
+                                @endphp
+
+                                <span class="px-3 py-1 rounded-md text-xs font-semibold {{ $class }}">
+                                    {{ ucfirst($status) }}
+                                </span>
+                            </td>
+
+                            <td class="px-4 py-3 text-center align-middle">
                             @php
                                 $type = strtolower($f->type);
 
@@ -153,7 +175,6 @@
                                     'bug' => 'bg-red-100 text-red-700',
                                     'kerentanan' => 'bg-yellow-100 text-yellow-600',
                                     'peretasan' => 'bg-purple-100 text-purple-600',
-                                    'lainnya' => 'bg-orange-100 text-orange-600',
                                 ];
                             @endphp
 
@@ -170,8 +191,8 @@
 
                                     $styles = [
                                         'tinggi' => 'bg-red-100 text-red-600',
-                                        'sedang' => 'bg-yellow-100 text-yellow-600',
-                                        'rendah' => 'bg-blue-100 text-blue-600',
+                                        'sedang' => 'bg-orange-100 text-orange-600',
+                                        'rendah' => 'bg-yellow-100 text-yellow-600',
                                     ];
 
                                     $class = $styles[$severity] ?? 'bg-gray-100 text-gray-600';
@@ -186,61 +207,6 @@
                             <td class="px-4 py-3 align-middle">
                                 {{ ucfirst(str_replace('_', ' ', $f->source)) }}
                             </td>
-
-                            <td class="px-4 py-3 text-center align-middle">
-                                @php
-                                    $statusText = [
-                                        'open' => 'buka',
-                                        'in_progress' => 'proses',
-                                        'resolved' => 'selesai'
-                                    ][$f->status] ?? $f->status;
-                                @endphp
-                                <span class="inline-flex items-center gap-1 text-sm font-medium whitespace-nowrap
-                                    @if($f->status == 'open') text-red-600
-                                    @elseif($f->status == 'in_progress') text-yellow-600
-                                    @else text-green-600 @endif">
-
-                                    {{-- Ikon sesuai status --}}
-                                    @if($f->status == 'open')
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="w-4 h-4 lucide lucide-circle-x"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <path d="m15 9-6 6"/>
-                                            <path d="m9 9 6 6"/>
-                                        </svg>
-
-                                    @elseif($f->status == 'in_progress')
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 6v6l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                        </svg>
-
-                                    @else {{-- resolved --}}
-                                        <svg xmlns="http://www.w3.org/2000/svg" 
-                                            class="w-4 h-4 lucide lucide-circle-check"
-                                            viewBox="0 0 24 24" 
-                                            fill="none" 
-                                            stroke="currentColor" 
-                                            stroke-width="2" 
-                                            stroke-linecap="round" 
-                                            stroke-linejoin="round" 
->
-                                            <circle cx="12" cy="12" r="10"/>
-                                            <path d="m9 12 2 2 4-4"/>
-                                        </svg>
-                                    @endif
-
-                                    {{ $statusText }}
-                                </span>
-                            </td>
-
 
                             <td class="px-4 py-3 align-middle">
                                 {{ $f->follow_up_action ?? '-' }}
