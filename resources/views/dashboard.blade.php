@@ -230,7 +230,8 @@
             <h1 class="font-bold text-2xl text-gray-800 leading-tight md:mt-0 sm:mt-20 mb-0">
                 {{ __('Dashboard') }} {{ auth()->user()->department->name ?? 'Tidak ada OPD' }}
             </h1>
-            <p class="text-md text-gray-500 mt-0">Daftar seluruh aplikasi yang dikelola Pemkab</p>
+            <p class="text-sm text-gray-500 mt-0">Daftar seluruh aplikasi yang dikelola Pemkab</p>
+            
 
             <div class="space-y-6 transition-all duration-300">
 
@@ -452,7 +453,7 @@
             <h1 class="font-bold text-2xl text-gray-800 leading-tight md:mt-0 sm:mt-20 mb-0">
                 {{ __('Dashboard') }} {{ auth()->user()->department->name ?? 'Tidak ada OPD' }}
             </h1>
-            <p class="text-md text-gray-500 mt-0">Manajemen Aplikasi Dinas Anda</p>
+            <p class="text-sm text-gray-500 mt-0">Manajemen Aplikasi Dinas Anda</p>
 
             <div class="space-y-6 transition-all duration-300">
 
