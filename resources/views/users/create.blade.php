@@ -24,7 +24,7 @@
 
             <div>
                 <label class="block font-medium mb-1">Email</label>
-                <input type="email" name="email" required
+                <input type="email" name="email" autocomplete="new-email" required 
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 
@@ -51,14 +51,14 @@
             </div>
             <div>
             <label class="block font-medium mb-1">Kata Sandi</label>
-            <input type="password" name="password" required 
+            <input type="password" name="password" autocomplete="new-password" required 
                 placeholder="Masukkan kata sandi"
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
         </div>
 
         <div>
             <label class="block font-medium mb-1">Konfirmasi Kata Sandi</label>
-            <input type="password" name="password_confirmation" required 
+            <input type="password" name="password_confirmation" autocomplete="new-password" required 
                 placeholder="Ulangi kata sandi"
                 class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
         </div>
