@@ -17,7 +17,7 @@
                 </h1>
 
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
-                    {{ __('Catatan backup dan verifikasi data') }} 
+                    {{ __('Catatan Pencadangan dan verifikasi data') }} 
                 </p>
 
             </div>

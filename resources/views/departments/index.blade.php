@@ -18,7 +18,7 @@
                 </h1>
 
                 <p class="text-sm text-gray-500 w-3/4 sm:w-auto">
-                    {{ __('Daftar Orgnisasi Perangkat Daerah') }} 
+                    {{ __('Daftar Organisasi Perangkat Daerah') }} 
                 </p>
 
             </div>
