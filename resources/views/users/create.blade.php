@@ -49,28 +49,64 @@
                     @endforeach
                 </select>
             </div>
+        
             <div>
-            <label class="block font-medium mb-1">Kata Sandi</label>
-            <input type="password" name="password" autocomplete="new-password" required 
-                placeholder="Masukkan kata sandi"
-                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
-        </div>
+                <label class="block font-medium mb-1">Kata Sandi</label>
 
-        <div>
-            <label class="block font-medium mb-1">Konfirmasi Kata Sandi</label>
-            <input type="password" name="password_confirmation" autocomplete="new-password" required 
-                placeholder="Ulangi kata sandi"
-                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
-        </div>
-        <div>
-            <label class="block font-medium mb-1">OPD</label>
-            <select name="department_id" required class="w-full border rounded p-2 text-sm text-gray-600">
-                <option value="">-- Pilih OPD --</option>
-                @foreach ($departments as $dept)
-                    <option value="{{ $dept->id }}">{{ $dept->name }}</option>
-                @endforeach
-            </select>
-        </div>
+                <div class="relative">
+                    <input type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="new-password"
+                        required
+                        placeholder="Masukkan kata sandi"
+                        class="w-full border rounded p-2 pr-10 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+
+                    <button type="button"
+                            onclick="togglePassword('password', this)"
+                            class="absolute inset-y-0 right-0 px-3 flex items-center">
+                        <img src="{{ asset('icons/eye.svg') }}"
+                            alt="Lihat password"
+                            class="w-5 h-5"
+                            data-eye="{{ asset('icons/eye.svg') }}"
+                            data-eye-off="{{ asset('icons/eye-off.svg') }}">
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <label class="block font-medium mb-1">Konfirmasi Kata Sandi</label>
+
+                <div class="relative">
+                    <input type="password"
+                        id="password_confirmation"
+                        name="password_confirmation"
+                        autocomplete="new-password"
+                        required
+                        placeholder="Ulangi kata sandi"
+                        class="w-full border rounded p-2 pr-10 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+
+                    <button type="button"
+                            onclick="togglePassword('password_confirmation', this)"
+                            class="absolute inset-y-0 right-0 px-3 flex items-center">
+                        <img src="{{ asset('icons/eye.svg') }}"
+                            alt="Lihat password"
+                            class="w-5 h-5"
+                            data-eye="{{ asset('icons/eye.svg') }}"
+                            data-eye-off="{{ asset('icons/eye-off.svg') }}">
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <label class="block font-medium mb-1">OPD</label>
+                <select name="department_id" required class="w-full border rounded p-2 text-sm text-gray-600">
+                    <option value="">-- Pilih OPD --</option>
+                    @foreach ($departments as $dept)
+                        <option value="{{ $dept->id }}">{{ $dept->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
             {{-- Tombol --}}
             <div class="flex justify-end space-x-3">
@@ -85,4 +121,23 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function togglePassword(inputId, button) {
+            const input = document.getElementById(inputId);
+            const icon = button.querySelector('img');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+
+                if (icon.dataset.eyeOff) {
+                    icon.src = icon.dataset.eyeOff;
+                }
+            } else {
+                input.type = 'password';
+                icon.src = icon.dataset.eye;
+            }
+        }
+    </script>
+
 </x-app-layout>
