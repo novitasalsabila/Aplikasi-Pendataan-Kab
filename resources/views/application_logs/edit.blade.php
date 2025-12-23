@@ -64,10 +64,11 @@
             {{-- Versi dan Tanggal --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label class="block font-medium mb-1">Versi</label>
-                    <input type="text" name="version" value="{{ $log->version }}"
-                        placeholder="Contoh: v2.3.1"
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+                    <label class="block font-medium mb-1">Versi Terakhir (Referensi)</label>
+                    <input type="text"
+                        value="{{ $latestVersion->version_code ?? 'Belum ada versi' }}"
+                        readonly
+                        class="w-full border rounded p-2 text-sm text-gray-600 cursor-not-allowed">
                 </div>
                 <div>
                     <label class="block font-medium mb-1">Tanggal Perubahan</label>

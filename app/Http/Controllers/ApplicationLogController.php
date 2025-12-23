@@ -102,16 +102,25 @@ class ApplicationLogController extends Controller
     /**
      * Form edit log.
      */
-    public function edit(ApplicationLog $application_log)
+        public function edit(ApplicationLog $application_log)
     {
         $applications = Application::all();
         $reviewers = User::whereIn('role', ['admin', 'diskominfo'])->get();
+
+        // Ambil versi TERBARU dari aplikasi terkait log
+        $latestVersion = $application_log->application
+            ->versions()
+            ->latest('release_date')
+            ->first();
+
         return view('application_logs.edit', [
             'log' => $application_log,
             'applications' => $applications,
             'reviewers' => $reviewers,
+            'latestVersion' => $latestVersion,
         ]);
     }
+
 
     /**
      * Update data log.

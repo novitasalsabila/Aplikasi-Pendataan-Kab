@@ -11,24 +11,34 @@ class ApplicationVersionController extends Controller
     /**
      * Tampilkan daftar versi aplikasi.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
 
-    // Jika role OPD → tampilkan hanya versi aplikasi milik departemen OPD
-    if ($user->role === 'opd') {
-        $versions = ApplicationVersion::with('application')
-            ->whereHas('application', function ($q) use ($user) {
+        $query = ApplicationVersion::with('application');
+
+        // Filter berdasarkan role OPD
+        if ($user->role === 'opd') {
+            $query->whereHas('application', function ($q) use ($user) {
                 $q->where('department_id', $user->department_id);
-            })
-            ->latest()
-            ->get();
-    } 
-    // Selain OPD → tampilkan semua
-    else {
-        $versions = ApplicationVersion::with('application')->latest()->get();
-    }
-        return view('application_versions.index', compact('versions'));
+            });
+        }
+
+        // Filter per aplikasi (jika dipilih)
+        if ($request->filled('application_id')) {
+            $query->where('application_id', $request->application_id);
+        }
+
+        $versions = $query->latest()->get();
+
+        // Data aplikasi untuk dropdown filter
+        $applications = Application::when($user->role === 'opd', function ($q) use ($user) {
+            $q->where('department_id', $user->department_id);
+        })
+        ->orderBy('name')
+        ->get();
+
+        return view('application_versions.index', compact('versions', 'applications'));
     }
 
     /**

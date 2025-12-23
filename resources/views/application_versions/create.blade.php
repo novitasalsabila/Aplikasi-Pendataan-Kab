@@ -30,7 +30,7 @@
 
             <div>
                 <label class="block font-medium mb-1">Kode Versi</label>
-                <input type="text" name="version_code" placeholder="Contoh: v1.2.3"
+                <input type="text" name="version_code" placeholder="Contoh: v1.0.0"
                        required class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
             </div>
 

@@ -24,16 +24,32 @@
         </div>
         
 
-@if (session('success'))
-    <div x-data="{ show: true }"
-         x-show="show"
-         x-transition
-         x-init="setTimeout(() => show = false, 2500)"
-         class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded mb-4">
-        {{ session('success') }}
-    </div>
-@endif
+        @if (session('success'))
+            <div x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 2500)"
+                class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
 
+        <form method="GET"
+            action="{{ route('application_versions.index') }}"
+            class="rounded-lg mb-6 flex flex-col sm:flex-row w-full sm:w-auto min-w-[300px]">
+
+            <select name="application_id"
+                    onchange="this.form.submit()"
+                    class="border rounded px-3 py-2 text-sm">
+                <option value="">Semua Aplikasi</option>
+                @foreach($applications as $app)
+                    <option value="{{ $app->id }}"
+                        {{ request('application_id') == $app->id ? 'selected' : '' }}>
+                        {{ $app->name }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
 
         <div class="overflow-x-auto bg-white shadow-md rounded-lg">
             <div class="px-4 py-3">

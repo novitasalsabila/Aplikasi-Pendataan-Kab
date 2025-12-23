@@ -77,25 +77,29 @@
                 </select>
             </div>
 
-            {{-- Versi dan Tanggal --}}
+           {{-- Versi dan Tanggal --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block font-medium mb-1">Versi Terakhir</label>
                     <input 
                         type="text" 
-                        id="version-input"
-                        name="version"
-                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600"
+                        id="latest-version"
+                        readonly
+                        class="w-full border rounded p-2 text-sm text-gray-600 cursor-not-allowed"
+                        placeholder="Pilih aplikasi terlebih dahulu"
                     >
-                    <p class="text-xs text-red-600">*Versi akan otomatis muncul setelah memilih aplikasi</p>
+                    <p class="text-xs text-gray-500 mt-1">
+                        Digunakan sebagai referensi versi terakhir aplikasi
+                    </p>
                 </div>
 
                 <div>
                     <label class="block font-medium mb-1">Tanggal Perubahan</label>
                     <input type="date" name="date"
-                           class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
+                        class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-500 text-sm text-gray-600">
                 </div>
             </div>
+
 
             {{-- Reviewer & Status Persetujuan --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -133,21 +137,21 @@
     </div>
     
     <script>
-    // Data versi terbaru dari controller (ubah ke JS object)
-    const latestVersions = @json($latestVersions);
+        // Data versi terbaru dari controller
+        const latestVersions = @json($latestVersions);
 
-    const appSelect = document.querySelector('select[name="application_id"]');
-    const versionInput = document.getElementById('version-input');
+        const appSelect = document.querySelector('select[name="application_id"]');
+        const latestVersionInput = document.getElementById('latest-version');
 
-    appSelect.addEventListener('change', function () {
-        let appId = this.value;
+        appSelect.addEventListener('change', function () {
+            const appId = this.value;
 
-        if (latestVersions[appId]) {
-            versionInput.value = latestVersions[appId].version_code;
-        } else {
-            versionInput.value = '';
-        }
-    });
-</script>
+            if (latestVersions[appId]) {
+                latestVersionInput.value = latestVersions[appId].version_code;
+            } else {
+                latestVersionInput.value = 'Belum ada versi';
+            }
+        });
+    </script>
 
 </x-app-layout>
