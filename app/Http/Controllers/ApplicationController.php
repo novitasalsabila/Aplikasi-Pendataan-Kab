@@ -96,7 +96,7 @@ class ApplicationController extends Controller
             'department_id' => 'required|exists:departments,id',
             'developer_id' => 'nullable|exists:developers,id',
             'server_id' => 'nullable|exists:servers,id',
-            'status' => 'required|in:aktif,nonaktif,dalam perbaikan',
+            'status' => 'required|in:aktif,tidak aktif,dalam perbaikan',
             'last_update' => 'nullable|date',
         ]);
 
@@ -169,7 +169,7 @@ class ApplicationController extends Controller
             'department_id' => 'required|exists:departments,id',
             'developer_id' => 'nullable|exists:developers,id',
             'server_id' => 'nullable|exists:servers,id',
-            'status' => 'required|in:aktif,nonaktif,dalam perbaikan',
+            'status' => 'required|in:aktif,tidak aktif,dalam perbaikan',
             'last_update' => 'nullable|date',
         ]);
 

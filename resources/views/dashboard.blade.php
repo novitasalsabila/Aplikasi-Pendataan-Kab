@@ -293,8 +293,11 @@
 
                                         {{-- Badge --}}
                                         <div class="mt-2 flex gap-2">
-                                            <span class="px-2 py-0.5 text-[10px] rounded-md bg-gray-100 text-gray-700 border">
+                                            {{-- <span class="px-2 py-0.5 text-[10px] rounded-md bg-gray-100 text-gray-700 border">
                                                 {{ $activity->version ?? '-' }}
+                                            </span> --}}
+                                            <span class="px-2 py-0.5 text-[10px] rounded-md bg-gray-100 text-gray-700 border">
+                                                {{ $activity->application->latestVersion->version_code ?? '-' }}
                                             </span>
 
                                             @php
