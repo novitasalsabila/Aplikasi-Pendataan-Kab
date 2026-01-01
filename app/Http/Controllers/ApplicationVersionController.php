@@ -38,6 +38,12 @@ class ApplicationVersionController extends Controller
         ->orderBy('name')
         ->get();
 
+        // AJAX untuk mengambil isi tabel
+        if ($request->ajax()) {
+            // Mengembalikan hanya potongan HTML tabel
+            return view('application_versions.partials.table', compact('versions'))->render();
+        }
+
         return view('application_versions.index', compact('versions', 'applications'));
     }
 
