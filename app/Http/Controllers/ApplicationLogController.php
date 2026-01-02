@@ -28,14 +28,14 @@ class ApplicationLogController extends Controller
                 'reviewer'
             ])
 
-            // 🔐 FILTER ROLE OPD (INI YANG DITAMBAHKAN)
+            // FILTER ROLE OPD (INI YANG DITAMBAHKAN)
             ->when($user->role === 'opd', function ($query) use ($user) {
                 $query->whereHas('application', function ($q) use ($user) {
                     $q->where('department_id', $user->department_id);
                 });
             })
 
-            // 🔍 SEARCH
+            // SEARCH
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
@@ -45,13 +45,19 @@ class ApplicationLogController extends Controller
                 });
             })
 
-            // ✅ FILTER STATUS
+            // FILTER STATUS
             ->when($status, function ($query) use ($status) {
                 $query->where('approved_st', $status);
             })
 
             ->latest()
-            ->paginate(10); // ⬅️ disarankan pakai paginate
+            ->paginate(10);
+            
+            // AJAX untuk mengambil isi tabel
+            if ($request->ajax()) {
+                // Mengembalikan hanya potongan HTML tabel
+                return view('application_logs.partials.table', compact('logs'))->render();
+            }
 
         return view('application_logs.index', compact('logs'));
     }
