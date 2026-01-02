@@ -36,6 +36,11 @@ class ServerController extends Controller
             ->latest()
             ->get();
 
+            // AJAX untuk mengambil isi tabel
+            if ($request->ajax()) {
+                // Mengembalikan hanya potongan HTML tabel
+                return view('servers.partials.table', compact('servers'))->render();
+            }
         return view('servers.index', compact('servers'));
     }
 
