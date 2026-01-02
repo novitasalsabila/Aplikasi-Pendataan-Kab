@@ -40,7 +40,7 @@
 
             <select name="application_id"
                     id="app-filter"
-                    class="border rounded px-3 py-2 text-sm w-[250px] truncate block outline-non">
+                    class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-sm text-gray-600 w-[250px] truncate block outline-non">
                 <option value="">Semua Aplikasi</option>
                 @foreach($applications as $app)
                     <option value="{{ $app->id }}"
@@ -64,46 +64,46 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const filter = document.getElementById('app-filter');
-        const tableContainer = document.getElementById('table-container');
+            document.addEventListener('DOMContentLoaded', function() {
+            const filter = document.getElementById('app-filter');
+            const tableContainer = document.getElementById('table-container');
 
-        filter.addEventListener('change', function() {
-            // ambil nilai yang dipilih
-            const appId = this.value;
-            
-            // URL dengan query string
-            const url = new URL(window.location.origin + window.location.pathname);
-            if (appId) {
-                url.searchParams.set('application_id', appId);
-            }
-
-            // efek visual data diproses
-            tableContainer.style.opacity = '0.5';
-
-            // update URL di browser tanpa reload (agar jika di-refresh filter tetap aktif)
-            window.history.pushState({}, '', url);
-
-            // ambil data dari server via AJAX
-            fetch(url, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+            filter.addEventListener('change', function() {
+                // ambil nilai yang dipilih
+                const appId = this.value;
+                
+                // URL dengan query string
+                const url = new URL(window.location.origin + window.location.pathname);
+                if (appId) {
+                    url.searchParams.set('application_id', appId);
                 }
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Respon jaringan tidak baik');
-                return response.text();
-            })
-            .then(html => {
-                // masukkan potongan HTML tabel ke container
-                tableContainer.innerHTML = html;
-                tableContainer.style.opacity = '1';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                tableContainer.style.opacity = '1';
+
+                // efek visual data diproses
+                tableContainer.style.opacity = '0.5';
+
+                // update URL di browser tanpa reload (agar jika di-refresh filter tetap aktif)
+                window.history.pushState({}, '', url);
+
+                // ambil data dari server via AJAX
+                fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('Respon jaringan tidak baik');
+                    return response.text();
+                })
+                .then(html => {
+                    // masukkan potongan HTML tabel ke container
+                    tableContainer.innerHTML = html;
+                    tableContainer.style.opacity = '1';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    tableContainer.style.opacity = '1';
+                });
             });
         });
-    });
     </script>
 </x-app-layout>

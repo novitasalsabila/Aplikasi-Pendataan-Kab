@@ -41,7 +41,7 @@
             
             <!-- Search + Filter dalam 1 kotak -->
             <div class="p-4 bg-white shadow-sm rounded-lg border-gray-200 mb-6">
-                    <form action="{{ route('application_findings.index') }}" method="GET" class="w-full space-y-3">
+                    <form id="filter-form" action="{{ route('application_findings.index') }}" method="GET" class="w-full space-y-3">
 
                         <!-- SEARCH -->
                         <div class="relative w-full">
@@ -66,11 +66,9 @@
                             </button>
                         </div>
 
-                        <!-- FILTER (TEPAT DI BAWAH SEARCH) -->
+                        <!-- FILTER DI BAWAH SEARCH -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-
-                            <select name="type" onchange="this.form.submit()"
-                                class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-gray-600">
+                            <select name="type" class="filter-select px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-gray-600">
                                 <option value="">Semua Tipe</option>
                                 <option value="bug" {{ request('type') == 'bug' ? 'selected' : '' }}>Bug</option>
                                 <option value="kerentanan" {{ request('type') == 'kerentanan' ? 'selected' : '' }}>Kerentanan</option>
@@ -78,16 +76,14 @@
                                 <option value="lainnya" {{ request('type') == 'lainnya' ? 'selected' : '' }}>Lainnya</option>
                             </select>
 
-                            <select name="severity" onchange="this.form.submit()"
-                                class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-gray-600">
+                            <select name="severity" class="filter-select px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-gray-600">
                                 <option value="">Semua Tingkat</option>
                                 <option value="rendah" {{ request('severity') == 'rendah' ? 'selected' : '' }}>Rendah</option>
                                 <option value="sedang" {{ request('severity') == 'sedang' ? 'selected' : '' }}>Sedang</option>
                                 <option value="tinggi" {{ request('severity') == 'tinggi' ? 'selected' : '' }}>Tinggi</option>
                             </select>
 
-                            <select name="source" onchange="this.form.submit()"
-                                class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-gray-600">
+                            <select name="source" class="filter-select px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-gray-600">
                                 <option value="">Semua Sumber</option>
                                 <option value="pengguna" {{ request('source') == 'pengguna' ? 'selected' : '' }}>Pengguna</option>
                                 <option value="monitoring" {{ request('source') == 'monitoring' ? 'selected' : '' }}>Monitoring</option>
@@ -97,17 +93,14 @@
                                 </option>
                             </select>
 
-                            <select name="status" onchange="this.form.submit()"
-                                class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-sm text-gray-600">
+                            <select name="status" class="filter-select px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-sm text-gray-600">
                                 <option value="">Semua Status</option>
                                 <option value="baru" {{ request('status') == 'baru' ? 'selected' : '' }}>Baru</option>
                                 <option value="diproses" {{ request('status') == 'diproses' ? 'selected' : '' }}>Diproses</option>
                                 <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
                             </select>
-
                         </div>
                     </form>
-
                 </div>
         </div>
 
@@ -116,126 +109,56 @@
                 <h1 class="text-xl font-bold">
                     Daftar Temuan ({{ $findings->count() }})
                 </h1>
-
             </div>
-            <table class="min-w-full divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
-                <thead class="bg-white text-gray-800 border-b border-gray-200">
-                    <tr>
-                        <th class="px-4 py-3 text-center w-10">No</th>
-                        <th class="px-4 py-3 text-left   min-w-[250px]">Aplikasi</th>
-                        <th class="px-4 py-3 text-left  min-w-[400px]">Deskripsi</th>
-                        <th class="px-4 py-3 text-center w-28">Status</th>
-                        <th class="px-4 py-3 text-center w-20">Tipe</th>
-                        <th class="px-4 py-3 text-center w-24">Tingkat</th>
-                        <th class="px-4 py-3 text-left min-w-[180px]">Sumber</th>
-                        <th class="px-4 py-3 text-left   min-w-[180px]">Tindak Lanjut</th>
-                        <th class="px-4 py-3 text-left min-w-[180px]">Tanggal Ditemukan</th>
-                        <th class="px-4 py-3 text-center">Aksi</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @forelse ($findings as $index => $f)
-                        <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <td class="px-3 py-3 text-center align-middle">
-                                {{ $index + 1 }}
-                            </td>
-
-                            <td class="px-4 py-3 align-middle">
-                                {{ $f->application->name ?? '-' }}
-                            </td>
-
-                            <td class="px-4 py-3 align-middle ">
-                                {{ Str::limit($f->description, 100) }}
-                            </td>
-
-                            <td class="px-4 py-3 text-center align-middle">
-                                @php
-                                    $status = strtolower($f->status);
-
-                                    $styles = [
-                                        'baru' => 'bg-red-100 text-red-600',
-                                        'diproses' => 'bg-yellow-100 text-yellow-600',
-                                        'selesai' => 'bg-blue-100 text-blue-600',
-                                    ];
-
-                                    $class = $styles[$status] ?? 'bg-gray-100 text-gray-600';
-                                @endphp
-
-                                <span class="px-3 py-1 rounded-md text-xs font-semibold {{ $class }}">
-                                    {{ ucfirst($status) }}
-                                </span>
-                            </td>
-
-                            <td class="px-4 py-3 text-center align-middle">
-                            @php
-                                $type = strtolower($f->type);
-
-                                $styles = [
-                                    'bug' => 'bg-red-100 text-red-700',
-                                    'kerentanan' => 'bg-yellow-100 text-yellow-600',
-                                    'peretasan' => 'bg-purple-100 text-purple-600',
-                                ];
-                            @endphp
-
-                            <span class="px-3 py-1 rounded-md text-xs font-semibold 
-                                {{ $styles[$type] ?? 'bg-gray-100 text-gray-600' }}">
-                                {{ ucfirst($type) }}
-                            </span>
-                        </td>
-
-
-                            <td class="px-4 py-3 text-center align-middle">
-                                @php
-                                    $severity = strtolower($f->severity);
-
-                                    $styles = [
-                                        'tinggi' => 'bg-red-100 text-red-600',
-                                        'sedang' => 'bg-orange-100 text-orange-600',
-                                        'rendah' => 'bg-yellow-100 text-yellow-600',
-                                    ];
-
-                                    $class = $styles[$severity] ?? 'bg-gray-100 text-gray-600';
-                                @endphp
-
-                                <span class="px-3 py-1 rounded-md text-xs font-semibold {{ $class }}">
-                                    {{ ucfirst($severity) }}
-                                </span>
-                            </td>
-
-
-                            <td class="px-4 py-3 align-middle">
-                                {{ ucfirst(str_replace('_', ' ', $f->source)) }}
-                            </td>
-
-                            <td class="px-4 py-3 align-middle">
-                                {{ $f->follow_up_action ?? '-' }}
-                            </td>
-
-                            <td class="px-4 py-3">
-                                {{ $f->follow_up_date
-                                    ? \Carbon\Carbon::parse($f->follow_up_date)->format('Y-m-d')
-                                    : '-' }}
-                            </td>
-
-                            <td class="px-4 py-3 text-center align-middle">
-                                <x-action-buttons
-                                    :id="$f->id"
-                                    :editRoute="route('application_findings.edit', $f->id)"
-                                    :deleteRoute="route('application_findings.destroy', $f->id)"
-                                    itemName="{{ $f->application->name }}"
-                                />
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="10" class="px-4 py-6 text-center text-gray-500">
-                                Belum ada data temuan aplikasi.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+            <div id="table-container">
+                @include('application_findings.partials.table')
+            </div>
         </div>
     </div>
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+        const filterForm = document.getElementById('filter-form');
+        const tableContainer = document.getElementById('table-container');
+
+        const updateTable = () => {
+            const formData = new FormData(filterForm);
+            const params = new URLSearchParams(formData).toString();
+            const url = `${window.location.pathname}?${params}`;
+
+            // Efek loading
+            tableContainer.style.opacity = '0.5';
+            
+            // Update URL di browser
+            window.history.pushState({}, '', url);
+
+            fetch(url, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+            .then(response => response.text())
+            .then(html => {
+                tableContainer.innerHTML = html;
+                tableContainer.style.opacity = '1';
+            })
+            .catch(error => console.error('Error:', error));
+        };
+
+        // Event untuk Select (Filter)
+        document.querySelectorAll('.filter-select').forEach(select => {
+            select.addEventListener('change', updateTable);
+        });
+
+        // Event untuk Search (dengan delay agar tidak terlalu berat)
+        let searchTimer;
+        document.getElementById('search-input').addEventListener('input', function() {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(updateTable, 500); // Update setelah 0.5 detik berhenti mengetik
+        });
+
+        // Cegah form reload saat tekan Enter
+        filterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            updateTable();
+        });
+    });
+    </script>
 </x-app-layout>

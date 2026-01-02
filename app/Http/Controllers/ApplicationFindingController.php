@@ -20,33 +20,40 @@ class ApplicationFindingController extends Controller
         $status   = $request->status;
 
         $findings = ApplicationFinding::with('application')
-            ->when($search, function ($query) use ($search) {
-                $query->whereHas('application', function ($app) use ($search) {
-                    $app->where('name', 'like', '%' . $search . '%');
-                });
-            })
-            
-            //FILTER TIPE (dari application_findings)
-            ->when($type, function ($query) use ($type) {
-                $query->where('type', $type);
-            })
+        ->when($search, function ($query) use ($search) {
+            $query->whereHas('application', function ($app) use ($search) {
+                $app->where('name', 'like', '%' . $search . '%');
+            });
+        })
+        
+        //FILTER TIPE (dari application_findings)
+        ->when($type, function ($query) use ($type) {
+            $query->where('type', $type);
+        })
 
-            // ⚠️ FILTER TINGKAT
-            ->when($severity, function ($query) use ($severity) {
-                $query->where('severity', $severity);
-            })
+        // ⚠️ FILTER TINGKAT
+        ->when($severity, function ($query) use ($severity) {
+            $query->where('severity', $severity);
+        })
 
-            // 📌 FILTER SUMBER
-            ->when($source, function ($query) use ($source) {
-                $query->where('source', $source);
-            })
+        // 📌 FILTER SUMBER
+        ->when($source, function ($query) use ($source) {
+            $query->where('source', $source);
+        })
 
-            ->when($status, function ($query) use ($status) {
-                $query->where('status', $status);
-            })
+        ->when($status, function ($query) use ($status) {
+            $query->where('status', $status);
+        })
 
-            ->latest()
-            ->get();
+        ->latest()
+        ->get();
+
+            // AJAX untuk mengambil isi tabel
+        if ($request->ajax()) {
+            // Mengembalikan hanya potongan HTML tabel
+            return view('application_findings.partials.table', compact('findings'))->render();
+        }
+
 
         return view('application_findings.index', compact('findings'));
     }
