@@ -29,6 +29,11 @@ class DeveloperController extends Controller
             ->orderBy('name')
             ->get();
 
+            // AJAX untuk mengambil isi tabel
+            if ($request->ajax()) {
+                // Mengembalikan hanya potongan HTML tabel
+                return view('developers.partials.table', compact('developers'))->render();
+            }
         return view('developers.index', compact('developers'));
     }
 

@@ -36,7 +36,7 @@
         <div class="p-4 bg-white shadow-sm rounded-lg border border-gray-200 mb-6">
                 <div class="flex flex-col sm:flex-row sm:items-center mb-6 gap-3 w-full">
                     <!-- Form Search & Filter -->
-                    <form action="{{ route('developers.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
+                    <form id="filter-form" action="{{ route('developers.index') }}" method="GET" class="flex flex-col sm:flex-row flex-wrap gap-2 w-full">
 
                         <!-- Input + Tombol Search -->
                         <div class="relative flex-1">
@@ -61,8 +61,8 @@
                         
                         <!--Tombol Search berdasarkan tipe-->
                     <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-                        <select name="tipe" onchange="this.form.submit()"
-                            class="sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
+                        <select name="tipe"
+                            class="filter-select sm:text-sm px-auto py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 w-full sm:w-auto max-w-[380px]">
                             <option value="">Semua Tipe</option>
                             <option value="internal"  {{ request('tipe') === 'internal' ? 'selected' : '' }}>Internal</option>
                             <option value="vendor"    {{ request('tipe') === 'vendor' ? 'selected' : '' }}>Vendor</option>
@@ -83,45 +83,14 @@
                     Daftar Pengembang ({{ $developers->count() }})
                 </h1>
             </div>
-            <table class="min-w-full divide-y divide-gray-100 border-t border-b border-gray-100 bg-white text-sm">
-                <thead>
-                    <tr>
-                        <th class="px-4 py-3 text-left">No</th>
-                        <th class="px-4 py-3 text-left">Nama</th>
-                        <th class="px-4 py-3 text-left">Tipe</th>
-                        <th class="px-4 py-3 text-left">Email</th>
-                        <th class="px-4 py-3 text-left">Telepon</th>
-                        <th class="px-4 py-3 text-center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100">
-                    @forelse ($developers as $index => $dev)
-                        <tr class="hover:bg-gray-50 transition">
-                            <td class="px-4 py-3">{{ $index + 1 }}</td>
-                            <td class="px-4 py-3">{{ $dev->name }}</td>
-                            <td class="px-4 py-3">{{ $dev->developer_type }}</td>
-                            <td class="px-4 py-3">{{ $dev->contact_email ?? '-' }}</td>
-                            <td class="px-4 py-3">{{ $dev->contact_phone ?? '-' }}</td>             
-                            <td class="px-4 py-3 text-center">
-                                <x-action-buttons
-                                    :id="$dev->id"
-                                    :showRoute="route('developers.show', $dev->id)"
-                                    :editRoute="route('developers.edit', $dev->id)"
-                                    :deleteRoute="route('developers.destroy', $dev->id)"
-                                    itemName="{{ $dev->name }}"
-                                />
-                            </td>
-
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="text-center py-4 text-gray-500">
-                                Belum ada data pengembang.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+            <div id="table-container">
+                @include('developers.partials.table')
+            </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initFilterAjax('filter-form', 'table-container');
+        });
+    </script>
 </x-app-layout>

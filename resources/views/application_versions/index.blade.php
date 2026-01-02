@@ -34,13 +34,12 @@
             </div>
         @endif
 
-        <form method="GET"
+        <form method="GET" id="filter-form"
             action="{{ route('application_versions.index') }}"
             class="rounded-lg mb-6 flex flex-col sm:flex-row w-full sm:w-auto">
 
             <select name="application_id"
-                    id="app-filter"
-                    class="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-sm text-gray-600 w-[250px] truncate block outline-non">
+                    class="filter-select px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-300 text-sm text-gray-600 w-[250px] truncate block outline-non">
                 <option value="">Semua Aplikasi</option>
                 @foreach($applications as $app)
                     <option value="{{ $app->id }}"
@@ -63,47 +62,11 @@
             </div>
         </div>
     </div>
+    @push('scripts')
     <script>
-            document.addEventListener('DOMContentLoaded', function() {
-            const filter = document.getElementById('app-filter');
-            const tableContainer = document.getElementById('table-container');
-
-            filter.addEventListener('change', function() {
-                // ambil nilai yang dipilih
-                const appId = this.value;
-                
-                // URL dengan query string
-                const url = new URL(window.location.origin + window.location.pathname);
-                if (appId) {
-                    url.searchParams.set('application_id', appId);
-                }
-
-                // efek visual data diproses
-                tableContainer.style.opacity = '0.5';
-
-                // update URL di browser tanpa reload (agar jika di-refresh filter tetap aktif)
-                window.history.pushState({}, '', url);
-
-                // ambil data dari server via AJAX
-                fetch(url, {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('Respon jaringan tidak baik');
-                    return response.text();
-                })
-                .then(html => {
-                    // masukkan potongan HTML tabel ke container
-                    tableContainer.innerHTML = html;
-                    tableContainer.style.opacity = '1';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    tableContainer.style.opacity = '1';
-                });
-            });
+        document.addEventListener('DOMContentLoaded', function() {
+            initFilterAjax('filter-form', 'table-container');
         });
     </script>
+    @endpush
 </x-app-layout>

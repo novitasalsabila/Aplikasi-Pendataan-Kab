@@ -86,50 +86,11 @@
             </div>
         </div>
     </div>
+     @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const filterForm = document.getElementById('filter-form');
-            const tableContainer = document.getElementById('table-container');
-
-            const updateTable = () => {
-                const formData = new FormData(filterForm);
-                const params = new URLSearchParams(formData).toString();
-                const url = `${window.location.pathname}?${params}`;
-
-                // Efek loading
-                tableContainer.style.opacity = '0.5';
-                
-                // Update URL di browser
-                window.history.pushState({}, '', url);
-
-                fetch(url, {
-                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
-                })
-                .then(response => response.text())
-                .then(html => {
-                    tableContainer.innerHTML = html;
-                    tableContainer.style.opacity = '1';
-                })
-                .catch(error => console.error('Error:', error));
-            };
-
-            // Event untuk Select (Filter)
-            document.querySelectorAll('.filter-select').forEach(select => {
-                select.addEventListener('change', updateTable);
-            });
-
-            // Event untuk Search (dengan delay agar tidak terlalu berat)
-            let searchTimer;
-            document.getElementById('search-input').addEventListener('input', function() {
-                clearTimeout(searchTimer);
-                searchTimer = setTimeout(updateTable, 500); // Update setelah 0.5 detik berhenti mengetik
-            });
-
-            // Cegah form reload saat tekan Enter
-            filterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                updateTable();
-            });
+            initFilterAjax('filter-form', 'table-container');
         });
     </script>
+    @endpush
 </x-app-layout>
