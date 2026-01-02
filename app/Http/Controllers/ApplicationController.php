@@ -56,6 +56,11 @@ class ApplicationController extends Controller
             ->latest()
             ->get();
 
+            // AJAX untuk mengambil isi tabel
+            if ($request->ajax()) {
+                // Mengembalikan hanya potongan HTML tabel
+                return view('applications.partials.table', compact('applications'))->render();
+            }
         return view('applications.index', compact('applications'));
     }
 
