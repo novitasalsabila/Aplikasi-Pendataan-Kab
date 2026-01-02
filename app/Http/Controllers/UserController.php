@@ -31,6 +31,11 @@ class UserController extends Controller
             ->orderBy('name')
             ->get();
 
+           // AJAX untuk mengambil isi tabel
+            if ($request->ajax()) {
+                // Mengembalikan hanya potongan HTML tabel
+                return view('users.partials.table', compact('users'))->render();
+            } 
         return view('users.index', compact('users'));
     }
 
