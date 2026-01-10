@@ -50,7 +50,7 @@
             <x-nav-link :href="route('applications.index')" :active="request()->routeIs('applications.*')" 
                 class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 transition group">
                 <img src="{{ asset('icons/aplikasi.svg') }}" alt="Aplikasi" class="w-5 h-5">
-                <span class="font-medium text-gray-700 group-hover:text-blue-600">Aplikasi Saya</span>
+                <span class="font-medium text-gray-700 group-hover:text-blue-600">Manajemen Aplikasi</span>
             </x-nav-link>
 
             <x-nav-link :href="route('developers.index')" :active="request()->routeIs('developers.*')" 
