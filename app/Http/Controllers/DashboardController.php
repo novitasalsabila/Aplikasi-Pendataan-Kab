@@ -124,7 +124,7 @@ class DashboardController extends Controller
         }
 
         // Aktivitas terbaru
-        $recentActivities = ApplicationLog::with('application')
+        $recentActivities = ApplicationLog::with('application.latestVersion')
             ->when($user->role === 'opd', function ($q) use ($user) {
                 // OPD hanya lihat aktivitas aplikasi miliknya
                 $q->whereHas('application', fn ($app) =>
@@ -132,8 +132,9 @@ class DashboardController extends Controller
                 );
             })
             // admin & diskominfo → lihat semua
+            ->whereHas('application')
             ->latest()
-            ->take(4) // ⬅️ SELALU 3 TERBARU
+            ->take(4) // SELALU 3 TERBARU
             ->get();
 
 

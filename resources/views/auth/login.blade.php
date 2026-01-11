@@ -10,7 +10,7 @@
             class="mx-auto w-24 h-auto md:w-32 lg:w-40 object-contain" />
 
         <h1 class="text-xl md:text-2xl font-bold text-gray-900 text-center" font-poppins>
-            Sistem Manajemen Aplikasi
+            Sistem Pendataan Aplikasi OPD
         </h1>
 
 
@@ -71,7 +71,7 @@
             const isPassword = passwordInput.getAttribute('type') === 'password';
             passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
             this.src = isPassword 
-                ? '{{ asset('icons/eye-off.svg') }}'  // ganti dengan ikon mata tertutup jika ada
+                ? '{{ asset('icons/eye-off.svg') }}'  
                 : '{{ asset('icons/eye.svg') }}';
         });
     });
